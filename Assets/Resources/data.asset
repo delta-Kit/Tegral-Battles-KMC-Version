@@ -17,4 +17,5 @@ MonoBehaviour:
     list:
     - time: 0
       type: 1
+      x: 60
       y: 0

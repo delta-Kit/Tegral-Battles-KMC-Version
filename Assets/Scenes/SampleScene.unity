@@ -121,6 +121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 143803354}
+  - component: {fileID: 143803355}
   m_Layer: 0
   m_Name: EnemyManager
   m_TagString: Untagged
@@ -142,6 +143,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &143803355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143803353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f34f2b6bd128b5841b73554534e8b8dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemy: {fileID: 766434338268023303, guid: 3ca2a5ed249f4c14abbbcc57718cc325, type: 3}
 --- !u!1 &401963463
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,11 +462,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 6407479619480030722, guid: 82d75277fdef6b84192d909fc3cb53e3, type: 3}
-  type: 0
-  v: 0
-  rad: 0
-  r: 0
-  isCircle: 0
 --- !u!1 &2113605941
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stage: 0
+  game: {fileID: 0}
 --- !u!4 &2113605943
 Transform:
   m_ObjectHideFlags: 0
