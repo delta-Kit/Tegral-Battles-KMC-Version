@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     {
         for(int i=0;i<data.sheets[stage-1].list.Count;i++){
             if(data.sheets[stage-1].list[i].time==cnt){
-                game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().EnemyAppear(data.sheets[stage-1].list[i].type,new Vector3(data.sheets[stage-1].list[i].x,data.sheets[stage-1].list[i].y,0));
+                game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().EnemyAppear(data.sheets[stage-1].list[i].type,new Vector3(data.sheets[stage-1].list[i].x,data.sheets[stage-1].list[i].y,0),data.sheets[stage-1].list[i].vx,data.sheets[stage-1].list[i].vy);
             }
         }
         cnt++;

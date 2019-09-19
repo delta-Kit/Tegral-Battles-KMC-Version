@@ -21,6 +21,8 @@ public class Entity_Sheet1 : ScriptableObject
 		public int type;
 		public int x;
 		public int y;
+		public int vx;
+		public int vy;
 	}
 }
 

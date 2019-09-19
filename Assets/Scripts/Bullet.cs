@@ -15,11 +15,11 @@ public class Bullet : MonoBehaviour
     SpriteRenderer  bulletSpriteRenderer;
     private bool isAdditive;
     Quaternion rot;
+    public GameObject game;
     // Start is called before the first frame update
     void Start()
     {
         rg=this.gameObject.GetComponent<Rigidbody2D>();
-        rg.velocity=new Vector2(v*Mathf.Cos(rad),v*Mathf.Sin(rad));
         bulletSpriteRenderer=gameObject.GetComponent<SpriteRenderer>();
         isAdditive=true;
         transform.rotation=Quaternion.Euler(0,0,rad/Mathf.Deg2Rad);
@@ -52,6 +52,7 @@ public class Bullet : MonoBehaviour
         }else{
             gameObject.GetComponent<Renderer>().material.shader=Shader.Find("Unlit/Texture");
         }
+        game=GameObject.Find("Game");
     }
 
     // Update is called once per frame
@@ -66,6 +67,19 @@ public class Bullet : MonoBehaviour
         if(!isCircle){
             transform.rotation=Quaternion.Euler(0,0,rad/Mathf.Deg2Rad);
         }
+        switch(type){
+            case 1:
+            if(game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().x>0){
+                if(rad>Mathf.Atan2(game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().y-this.gameObject.transform.position.y,game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().x-this.gameObject.transform.position.x)){
+                    rad-=Mathf.Deg2Rad*2;
+                }
+                if(rad<Mathf.Atan2(game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().y-this.gameObject.transform.position.y,game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().x-this.gameObject.transform.position.x)){
+                    rad+=Mathf.Deg2Rad*2;
+                }
+            }
+            break;
+        }
+        rg.velocity=new Vector2(v*Mathf.Cos(rad),v*Mathf.Sin(rad));
     }
     private void Delete(float size){
         if(this.gameObject.transform.position.x<-55*size || this.gameObject.transform.position.x>55*size || this.gameObject.transform.position.y<-25*size || this.gameObject.transform.position.y>25*size){

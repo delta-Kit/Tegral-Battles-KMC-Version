@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemy: {fileID: 766434338268023303, guid: 3ca2a5ed249f4c14abbbcc57718cc325, type: 3}
+  enemy: []
 --- !u!1 &401963463
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,8 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51c1e30358face74882088642a989356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 0}
-  enemy: {fileID: 0}
+  bullet: {fileID: 6407479619480030722, guid: 82d75277fdef6b84192d909fc3cb53e3, type: 3}
+  enemy: {fileID: 766434338268023303, guid: 3ca2a5ed249f4c14abbbcc57718cc325, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
