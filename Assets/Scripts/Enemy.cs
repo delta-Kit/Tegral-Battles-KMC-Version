@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     private bool isBlue;
     private int blueCnt;
     public GameObject enemyManager;
+    public GameObject game;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +35,7 @@ public class Enemy : MonoBehaviour
         }
         blueCnt=10;
         enemyManager=GameObject.Find("EnemyManager");
+        game=GameObject.Find("Game");
     }
 
     // Update is called once per frame
@@ -41,11 +43,9 @@ public class Enemy : MonoBehaviour
     {
         switch(type){
             case 1:
-            if(cnt<180){
-                rg.velocity=new Vector2(-10,0);
-            }else{
-                rg.velocity=new Vector2(0,0);
-                animator.SetTrigger("Stop");
+            Move(1);
+            if(cnt>=180 && cnt%30==0){
+                game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(4,10f,Mathf.Deg2Rad*180,2f,true,this.gameObject.transform.position);
             }
             break;
         }
@@ -57,11 +57,23 @@ public class Enemy : MonoBehaviour
         cnt++;
         blueCnt++;
     }
-    public void OnTriggerEnter2D(Collider2D col){
-        if(col.gameObject.tag=="Bullet"){
+    public void OnTriggerStay2D(Collider2D col){
+        if(col.gameObject.tag=="JBullet"){
             hp--;
             GetComponent<Renderer>().material.shader=Shader.Find("Particles/Standard Unlit");
             blueCnt=0;
+        }
+    }
+    private void Move(int typeM){
+        switch(typeM){
+            case 1:
+            if(cnt<180){
+                rg.velocity=new Vector2(-10,0);
+            }else{
+                rg.velocity=new Vector2(0,0);
+                animator.SetTrigger("Stop");
+            }
+            break;
         }
     }
 }

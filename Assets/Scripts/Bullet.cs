@@ -10,12 +10,14 @@ public class Bullet : MonoBehaviour
     public float rad;
     public float r;
     public bool isCircle;
-    public Sprite jBullet;
     public Sprite jBullet2;
+    public Sprite jBullet3;
+    public Sprite[] bullet=new Sprite[4];
     SpriteRenderer  bulletSpriteRenderer;
     private bool isAdditive;
     Quaternion rot;
     public GameObject game;
+    private int cnt;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,10 +43,26 @@ public class Bullet : MonoBehaviour
         }
         switch(type){
             case 1:
-            bulletSpriteRenderer.sprite=jBullet;
+            bulletSpriteRenderer.sprite=bullet[0];
             break;
             case 2:
             bulletSpriteRenderer.sprite=jBullet2;
+            break;
+            case 3:
+            bulletSpriteRenderer.sprite=jBullet3;
+            break;
+            case 4:
+            bulletSpriteRenderer.sprite=bullet[3];
+            break;
+        }
+        switch(type){
+            case 1:
+            case 2:
+            case 3:
+            this.gameObject.tag="JBullet";
+            break;
+            case 4:
+            this.gameObject.tag="Bullet";
             break;
         }
         if(isAdditive){
@@ -61,6 +79,7 @@ public class Bullet : MonoBehaviour
         switch(type){
             case 1:
             case 2:
+            case 4:
             Delete(1);
             break;
         }
@@ -69,7 +88,7 @@ public class Bullet : MonoBehaviour
         }
         switch(type){
             case 1:
-            if(game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().x>0){
+            if(game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().x>-60){
                 if(rad>Mathf.Atan2(game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().y-this.gameObject.transform.position.y,game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().x-this.gameObject.transform.position.x)){
                     rad-=Mathf.Deg2Rad*2;
                 }
@@ -78,12 +97,28 @@ public class Bullet : MonoBehaviour
                 }
             }
             break;
+            case 3:
+            if(cnt>60){
+                r=Mathf.Pow(2f,(float)cnt/15);
+                if(r>2000)Destroy(this.gameObject);
+            }
+            break;
         }
         rg.velocity=new Vector2(v*Mathf.Cos(rad),v*Mathf.Sin(rad));
+        if(isCircle)this.gameObject.GetComponent<CircleCollider2D>().radius=r;
+        switch(type){
+            case 3:
+            this.transform.localScale=new Vector3(r/16,r/16,1);
+            break;
+        }
+        cnt++;
     }
     private void Delete(float size){
         if(this.gameObject.transform.position.x<-55*size || this.gameObject.transform.position.x>55*size || this.gameObject.transform.position.y<-25*size || this.gameObject.transform.position.y>25*size){
             Destroy(this.gameObject);
         }
+    }
+    public void OnTriggerStay2D(Collider2D col){
+        if(col.gameObject.tag=="Enemy" && type!=3 && this.gameObject.tag=="JBullet")Destroy(this.gameObject);
     }
 }

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6407479619480030723}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Bullet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,6 +163,11 @@ MonoBehaviour:
   rad: 0
   r: 0
   isCircle: 0
-  jBullet: {fileID: 21300000, guid: 04c54a7e83df71a40bbfb5286152a6a3, type: 3}
   jBullet2: {fileID: 21300000, guid: ce7bf66e05d29dc418074c7bc687ca49, type: 3}
+  jBullet3: {fileID: 21300000, guid: b1e6d2674b810d24191ffa5bdfb3f2c4, type: 3}
+  bullet:
+  - {fileID: 21300000, guid: 8dfbcee35f6e62b4894118487df89681, type: 3}
+  - {fileID: 21300002, guid: 8dfbcee35f6e62b4894118487df89681, type: 3}
+  - {fileID: 21300004, guid: 8dfbcee35f6e62b4894118487df89681, type: 3}
+  - {fileID: 21300006, guid: 8dfbcee35f6e62b4894118487df89681, type: 3}
   game: {fileID: 0}

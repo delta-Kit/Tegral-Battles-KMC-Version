@@ -29,7 +29,7 @@ public class EnemyManager : MonoBehaviour
         if(enemy.Count>0){
             return new Vector2(enemy.First().GetComponent<Enemy>().transform.position.x,enemy.First().GetComponent<Enemy>().transform.position.y);
         }else{
-            return new Vector2(-1,-1);
+            return new Vector2(-100,-100);
         }
     }
 }
