@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BulletManager : MonoBehaviour
 {   public GameObject Bullet;
+    public List<GameObject> bullet;
+    public int j;
+    public GameObject jiki;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,11 +19,27 @@ public class BulletManager : MonoBehaviour
         
     }
     public void BulletAppear(int type,float v,float rad,float r,bool isCircle,Vector3 pos){
-        GameObject bullet=Instantiate(Bullet,pos,Quaternion.identity);
-        bullet.GetComponent<Bullet>().type=type;
-        bullet.GetComponent<Bullet>().v=v;
-        bullet.GetComponent<Bullet>().rad=rad;
-        bullet.GetComponent<Bullet>().r=r;
-        bullet.GetComponent<Bullet>().isCircle=isCircle;
+        if(jiki.GetComponent<Jiki>().bombCnt>=180 || type<=3){
+            GameObject b=Instantiate(Bullet,pos,Quaternion.identity);
+            bullet.Add(b);
+            b.GetComponent<Bullet>().type=type;
+            b.GetComponent<Bullet>().v=v;
+            b.GetComponent<Bullet>().rad=rad;
+            b.GetComponent<Bullet>().r=r;
+            b.GetComponent<Bullet>().isCircle=isCircle;
+        }
+    }
+    public void BulletDelete(){
+        int bulletNum=bullet.Count;
+        j=0;
+        for(int i=0;i<bulletNum;i++){
+            GameObject box=bullet[j];
+            if(box.tag=="Bullet"){
+                bullet.RemoveAt(j);
+                Destroy(box);
+            }else{
+                j++;
+            }
+        }
     }
 }

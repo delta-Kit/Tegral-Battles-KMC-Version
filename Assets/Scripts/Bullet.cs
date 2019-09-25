@@ -66,9 +66,9 @@ public class Bullet : MonoBehaviour
             break;
         }
         if(isAdditive){
-            gameObject.GetComponent<Renderer>().material.shader=Shader.Find("Particles/Standard Unlit");
+            gameObject.GetComponent<Renderer>().material.shader=Shader.Find("Particles/Standard Surface");
         }else{
-            gameObject.GetComponent<Renderer>().material.shader=Shader.Find("Unlit/Texture");
+            gameObject.GetComponent<Renderer>().material.shader=Shader.Find("Unlit/Transparent Cutout");
         }
         game=GameObject.Find("Game");
     }
@@ -76,6 +76,11 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isAdditive){
+            gameObject.GetComponent<Renderer>().material.shader=Shader.Find("Particles/Standard Surface");
+        }else{
+            gameObject.GetComponent<Renderer>().material.shader=Shader.Find("Unlit/Transparent Cutout");
+        }
         switch(type){
             case 1:
             case 2:

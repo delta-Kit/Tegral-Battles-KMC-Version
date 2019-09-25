@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Jiki : MonoBehaviour
 {
@@ -12,11 +13,15 @@ public class Jiki : MonoBehaviour
     private Animator animator;
     private bool flag=false;
     private int cnt;
-    private int bombCnt;
+    public int bombCnt;
     private Vector3 bombPosition;
     private int bomb;
-    GameObject[] bombImage= new GameObject[3];
+    GameObject[] bombImage=new GameObject[3];
     public GameObject hitCircle;
+    public int life;
+    private int hitCnt;
+    public GameObject hitEffect;
+    GameObject[] lifeImage=new GameObject[5];
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +34,13 @@ public class Jiki : MonoBehaviour
         bombImage[0]=GameObject.Find("Bomb1");
         bombImage[1]=GameObject.Find("Bomb2");
         bombImage[2]=GameObject.Find("Bomb3");
+        life=6;
+        hitCnt=200;
+        lifeImage[0]=GameObject.Find("Life1");
+        lifeImage[1]=GameObject.Find("Life2");
+        lifeImage[2]=GameObject.Find("Life3");
+        lifeImage[3]=GameObject.Find("Life4");
+        lifeImage[4]=GameObject.Find("Life5");
     }
 
     // Update is called once per frame
@@ -66,11 +78,12 @@ public class Jiki : MonoBehaviour
         if(Input.GetKey(KeyCode.Z) && cnt%10==0){
             game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(2,120f,0,0,false,this.gameObject.transform.position+new Vector3(4,0,0));
         }
-        if(Input.GetKeyDown(KeyCode.X) && bomb>0 && bombCnt>180){
+        if(Input.GetKeyDown(KeyCode.X) && bomb>0 && bombCnt>=180){
             bombCnt=0;
             bombPosition=this.gameObject.transform.position;
             bomb--;
             bombImage[bomb].GetComponent<Image>().enabled=false;
+            game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletDelete();
         }
         if(bombCnt<60 && bombCnt%5==0)game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(3,0,0,16,true,bombPosition);
         if(this.gameObject.transform.position.x<-43)this.gameObject.transform.position=new Vector3(-43,this.gameObject.transform.position.y,0);
@@ -78,7 +91,30 @@ public class Jiki : MonoBehaviour
         if(this.gameObject.transform.position.y<-17)this.gameObject.transform.position=new Vector3(this.gameObject.transform.position.x,-17,0);
         if(this.gameObject.transform.position.y>17)this.gameObject.transform.position=new Vector3(this.gameObject.transform.position.x,17,0);
         hitCircle.transform.position=this.gameObject.transform.position;
+        if(hitCnt<60){
+            hitEffect.SetActive(true);
+        }else{
+            hitEffect.SetActive(false);
+        }
         bombCnt++;
         cnt++;
+        hitCnt++;
+    }
+    public void OnTriggerEnter2D(Collider2D col){
+        if(col.gameObject.tag=="Bullet" && hitCnt>180){
+            life--;
+            game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletDelete();
+            hitCnt=0;
+            if(life>0){
+                lifeImage[life-1].GetComponent<Image>().enabled=false;
+            }else{
+                Invoke("ChangeScene",1f);
+            }
+            bomb=3;
+            for(int i=0;i<3;i++)bombImage[i].GetComponent<Image>().enabled=true;
+        }
+    }
+    void ChangeScene(){
+        SceneManager.LoadScene("GameOver");
     }
 }
