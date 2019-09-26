@@ -52,7 +52,7 @@ public class Bullet : MonoBehaviour
             bulletSpriteRenderer.sprite=jBullet3;
             break;
             case 4:
-            bulletSpriteRenderer.sprite=bullet[3];
+            bulletSpriteRenderer.sprite=bullet[2];
             break;
         }
         switch(type){
@@ -68,7 +68,7 @@ public class Bullet : MonoBehaviour
         if(isAdditive){
             gameObject.GetComponent<Renderer>().material.shader=Shader.Find("Particles/Standard Surface");
         }else{
-            gameObject.GetComponent<Renderer>().material.shader=Shader.Find("Unlit/Transparent Cutout");
+            gameObject.GetComponent<Renderer>().material.shader=Shader.Find("Standard");
         }
         game=GameObject.Find("Game");
     }
@@ -79,7 +79,7 @@ public class Bullet : MonoBehaviour
         if(isAdditive){
             gameObject.GetComponent<Renderer>().material.shader=Shader.Find("Particles/Standard Surface");
         }else{
-            gameObject.GetComponent<Renderer>().material.shader=Shader.Find("Unlit/Transparent Cutout");
+            gameObject.GetComponent<Renderer>().material.shader=Shader.Find("Standard");
         }
         switch(type){
             case 1:

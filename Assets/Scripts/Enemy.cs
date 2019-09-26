@@ -17,15 +17,16 @@ public class Enemy : MonoBehaviour
     private int blueCnt;
     public GameObject enemyManager;
     public GameObject game;
+    private int explodeCnt;
     // Start is called before the first frame update
     void Start()
     {
         rg=this.gameObject.GetComponent<Rigidbody2D>();
         enemySpriteRenderer=gameObject.GetComponent<SpriteRenderer>();
         if(type<100){
-            this.gameObject.GetComponent<CircleCollider2D>().radius=3;
+            this.gameObject.GetComponent<CircleCollider2D>().radius=2;
         }else{
-            this.gameObject.GetComponent<CircleCollider2D>().radius=6;
+            this.gameObject.GetComponent<CircleCollider2D>().radius=4;
         }
         animator=GetComponent<Animator>();
         switch(type){
@@ -36,26 +37,36 @@ public class Enemy : MonoBehaviour
         blueCnt=10;
         enemyManager=GameObject.Find("EnemyManager");
         game=GameObject.Find("Game");
+        explodeCnt=100;
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch(type){
-            case 1:
-            Move(1);
-            if(cnt>=180 && cnt%30==0){
-                game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(4,10f,Mathf.Deg2Rad*180,2f,true,this.gameObject.transform.position);
+        if(explodeCnt>100){
+            switch(type){
+                case 1:
+                Move(1);
+                if(cnt>=180 && cnt%30==0){
+                    game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(4,10f,Mathf.Deg2Rad*180,2f,true,this.gameObject.transform.position);
+                }
+                break;
             }
-            break;
         }
-        if(blueCnt>5)GetComponent<Renderer>().material.shader=Shader.Find("Unlit/Transparent");
-        if(hp<=0){
+        if(blueCnt>5)GetComponent<Renderer>().material.shader=Shader.Find("Unlit/Transparent Cutout");
+        if(hp<=0 && explodeCnt>=100){
+            explodeCnt=0;
+            animator.SetTrigger("Explode");
+            GetComponent<Renderer>().material.shader=Shader.Find("Particles/Standard Unlit");
+            GetComponent<Renderer>().material.color=Color.white;
+        }
+        if(explodeCnt==48){
             enemyManager.GetComponent<EnemyManager>().enemy.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
         cnt++;
         blueCnt++;
+        explodeCnt++;
     }
     public void OnTriggerStay2D(Collider2D col){
         if(col.gameObject.tag=="JBullet"){
@@ -71,7 +82,7 @@ public class Enemy : MonoBehaviour
                 rg.velocity=new Vector2(-10,0);
             }else{
                 rg.velocity=new Vector2(0,0);
-                animator.SetTrigger("Stop");
+                if(explodeCnt>=100)animator.SetTrigger("Stop");
             }
             break;
         }

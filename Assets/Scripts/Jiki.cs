@@ -18,7 +18,7 @@ public class Jiki : MonoBehaviour
     private int bomb;
     GameObject[] bombImage=new GameObject[3];
     public GameObject hitCircle;
-    public int life;
+    private int life;
     private int hitCnt;
     public GameObject hitEffect;
     GameObject[] lifeImage=new GameObject[5];
@@ -84,6 +84,7 @@ public class Jiki : MonoBehaviour
             bomb--;
             bombImage[bomb].GetComponent<Image>().enabled=false;
             game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletDelete();
+            if(hitCnt<8)hitCnt=200;
         }
         if(bombCnt<60 && bombCnt%5==0)game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(3,0,0,16,true,bombPosition);
         if(this.gameObject.transform.position.x<-43)this.gameObject.transform.position=new Vector3(-43,this.gameObject.transform.position.y,0);
@@ -96,22 +97,24 @@ public class Jiki : MonoBehaviour
         }else{
             hitEffect.SetActive(false);
         }
+        if(hitCnt==8){
+            life--;
+            if(life>0){
+                lifeImage[life-1].GetComponent<Image>().enabled=false;
+            }else{
+                Invoke("ChangeScene",0);
+            }
+            bomb=3;
+            for(int i=0;i<3;i++)bombImage[i].GetComponent<Image>().enabled=true;
+        }
         bombCnt++;
         cnt++;
         hitCnt++;
     }
     public void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.tag=="Bullet" && hitCnt>180){
-            life--;
             game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletDelete();
             hitCnt=0;
-            if(life>0){
-                lifeImage[life-1].GetComponent<Image>().enabled=false;
-            }else{
-                Invoke("ChangeScene",1f);
-            }
-            bomb=3;
-            for(int i=0;i<3;i++)bombImage[i].GetComponent<Image>().enabled=true;
         }
     }
     void ChangeScene(){
