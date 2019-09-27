@@ -71,13 +71,7 @@ public class Jiki : MonoBehaviour
             animator.SetTrigger("Stop");
             flag=false;
         }
-        if(Input.GetKey(KeyCode.Z) && cnt%5==0){
-            game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(1,100f,Mathf.Deg2Rad*30,0,false,this.gameObject.transform.position+new Vector3(4,2,0));
-            game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(1,100f,Mathf.Deg2Rad*(-30),0,false,this.gameObject.transform.position+new Vector3(4,-2,0));
-        }
-        if(Input.GetKey(KeyCode.Z) && cnt%10==0){
-            game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(2,120f,0,0,false,this.gameObject.transform.position+new Vector3(4,0,0));
-        }
+        if(Input.GetKey(KeyCode.Z))game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,1,5,100f,0);
         if(Input.GetKeyDown(KeyCode.X) && bomb>0 && bombCnt>=180){
             bombCnt=0;
             bombPosition=this.gameObject.transform.position;
@@ -86,7 +80,7 @@ public class Jiki : MonoBehaviour
             game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletDelete();
             if(hitCnt<8)hitCnt=200;
         }
-        if(bombCnt<60 && bombCnt%5==0)game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(3,0,0,16,true,bombPosition);
+        if(bombCnt<60)game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(bombPosition,2,5,0,103);
         if(this.gameObject.transform.position.x<-43)this.gameObject.transform.position=new Vector3(-43,this.gameObject.transform.position.y,0);
         if(this.gameObject.transform.position.x>43)this.gameObject.transform.position=new Vector3(43,this.gameObject.transform.position.y,0);
         if(this.gameObject.transform.position.y<-17)this.gameObject.transform.position=new Vector3(this.gameObject.transform.position.x,-17,0);

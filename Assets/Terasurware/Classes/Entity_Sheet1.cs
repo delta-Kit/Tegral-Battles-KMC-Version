@@ -16,7 +16,7 @@ public class Entity_Sheet1 : ScriptableObject
 	[System.SerializableAttribute]
 	public class Param
 	{
-		
+
 		public int time;
 		public int type;
 		public int x;

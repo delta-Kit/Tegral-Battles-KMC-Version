@@ -25,8 +25,10 @@ public class Enemy : MonoBehaviour
         enemySpriteRenderer=gameObject.GetComponent<SpriteRenderer>();
         if(type<100){
             this.gameObject.GetComponent<CircleCollider2D>().radius=2;
-        }else{
+        }else if(type<200){
             this.gameObject.GetComponent<CircleCollider2D>().radius=4;
+        }else{
+            this.gameObject.GetComponent<CircleCollider2D>().radius=6;
         }
         animator=GetComponent<Animator>();
         switch(type){
@@ -38,6 +40,7 @@ public class Enemy : MonoBehaviour
         enemyManager=GameObject.Find("EnemyManager");
         game=GameObject.Find("Game");
         explodeCnt=100;
+        cnt=0;
     }
 
     // Update is called once per frame
@@ -47,9 +50,10 @@ public class Enemy : MonoBehaviour
             switch(type){
                 case 1:
                 Move(1);
-                if(cnt>=180 && cnt%30==0){
-                    game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(4,10f,Mathf.Deg2Rad*180,2f,true,this.gameObject.transform.position);
+                if(cnt==210){
+                    game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,3,1,30f,1);
                 }
+                if(cnt>240)rg.velocity=new Vector2(10,0);
                 break;
             }
         }

@@ -18,6 +18,8 @@ public class Bullet : MonoBehaviour
     Quaternion rot;
     public GameObject game;
     private int cnt;
+    public int color;
+    public GameObject bulletManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,19 +43,17 @@ public class Bullet : MonoBehaviour
                 break;
             }
         }
-        switch(type){
-            case 1:
-            bulletSpriteRenderer.sprite=bullet[0];
-            break;
-            case 2:
-            bulletSpriteRenderer.sprite=jBullet2;
-            break;
-            case 3:
-            bulletSpriteRenderer.sprite=jBullet3;
-            break;
-            case 4:
-            bulletSpriteRenderer.sprite=bullet[2];
-            break;
+        if(color>100){
+            switch(type){
+                case 101:
+                bulletSpriteRenderer.sprite=jBullet2;
+                break;
+                case 102:
+                bulletSpriteRenderer.sprite=jBullet3;
+                break;
+            }
+        }else{
+            bulletSpriteRenderer.sprite=bullet[color];
         }
         switch(type){
             case 1:
@@ -71,6 +71,15 @@ public class Bullet : MonoBehaviour
             gameObject.GetComponent<Renderer>().material.shader=Shader.Find("Standard");
         }
         game=GameObject.Find("Game");
+        switch(type){
+            case 3:
+            this.transform.localScale=new Vector3(r/16,r/16,1);
+            break;
+            case 4:
+            this.transform.localScale=new Vector3(r/2,r/2,1);
+            break;
+        }
+        bulletManager=GameObject.Find("BulletManager");
     }
 
     // Update is called once per frame
@@ -88,9 +97,7 @@ public class Bullet : MonoBehaviour
             Delete(1);
             break;
         }
-        if(!isCircle){
-            transform.rotation=Quaternion.Euler(0,0,rad/Mathf.Deg2Rad);
-        }
+        if(!isCircle)transform.rotation=Quaternion.Euler(0,0,rad/Mathf.Deg2Rad);
         switch(type){
             case 1:
             if(game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().x>-60){
@@ -105,8 +112,13 @@ public class Bullet : MonoBehaviour
             case 3:
             if(cnt>60){
                 r=Mathf.Pow(2f,(float)cnt/15);
-                if(r>2000)Destroy(this.gameObject);
+                if(cnt>120){
+                    bulletManager.GetComponent<BulletManager>().bullet.Remove(this.gameObject);
+                    Destroy(this.gameObject);
+                }
             }
+            break;
+            case 4:
             break;
         }
         rg.velocity=new Vector2(v*Mathf.Cos(rad),v*Mathf.Sin(rad));
@@ -120,10 +132,14 @@ public class Bullet : MonoBehaviour
     }
     private void Delete(float size){
         if(this.gameObject.transform.position.x<-55*size || this.gameObject.transform.position.x>55*size || this.gameObject.transform.position.y<-25*size || this.gameObject.transform.position.y>25*size){
+            bulletManager.GetComponent<BulletManager>().bullet.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
     }
     public void OnTriggerStay2D(Collider2D col){
-        if(col.gameObject.tag=="Enemy" && type!=3 && this.gameObject.tag=="JBullet")Destroy(this.gameObject);
+        if(col.gameObject.tag=="Enemy" && type!=3 && this.gameObject.tag=="JBullet"){
+            bulletManager.GetComponent<BulletManager>().bullet.Remove(this.gameObject);
+            Destroy(this.gameObject);
+        }
     }
 }

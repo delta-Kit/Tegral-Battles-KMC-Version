@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 98efe40b375ed5e47b31d7bf75f89161
+guid: e0791d80702522943841e3f0f854bd04
 TextureImporter:
   fileIDToRecycleName:
     21300000: sigmas_0
@@ -111,7 +111,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b36608cb7f84dec44b388e824ce289a6
+      spriteID: d27b130f5dd471348a1645bd45bf5c79
       vertices: []
       indices: 
       edges: []
@@ -131,7 +131,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f02077fef691a40418c4cb54de39ea38
+      spriteID: 8c0735c0ba0b7164e96c93ba6be2e28c
       vertices: []
       indices: 
       edges: []
@@ -139,7 +139,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: ebd46b94d67d693409412ea9257f9624
+    spriteID: e910212a38166314682bcf116d8cd621
     vertices: []
     indices: 
     edges: []
