@@ -23,6 +23,7 @@ public class Entity_Sheet1 : ScriptableObject
 		public int y;
 		public int vx;
 		public int vy;
+		public int note;
 	}
 }
 

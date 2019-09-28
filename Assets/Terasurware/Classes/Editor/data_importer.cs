@@ -57,6 +57,7 @@ public class data_importer : AssetPostprocessor {
 					cell = row.GetCell(3); p.y = (int)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(4); p.vx = (int)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(5); p.vy = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(6); p.note = (int)(cell == null ? 0 : cell.NumericCellValue);
 						s.list.Add (p);
 					}
 					data.sheets.Add(s);

@@ -12,12 +12,13 @@ public class Enemy : MonoBehaviour
     private Animator animator;
     public int vx;
     public int vy;
-    private int hp;
+    public int hp;
     private bool isBlue;
     private int blueCnt;
     public GameObject enemyManager;
     public GameObject game;
     private int explodeCnt;
+    public int note;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +34,10 @@ public class Enemy : MonoBehaviour
         animator=GetComponent<Animator>();
         switch(type){
             case 1:
-            hp=5;
+            hp=15;
+            break;
+            case 2:
+            hp=10;
             break;
         }
         blueCnt=10;
@@ -46,25 +50,33 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(explodeCnt>100){
+        if(hp>0){
             switch(type){
                 case 1:
                 Move(1);
                 if(cnt==210){
-                    game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,3,1,30f,1);
+                    game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,3,1,30f,1,0);
                 }
-                if(cnt>240)rg.velocity=new Vector2(10,0);
+                break;
+                case 2:
+                Move(2);
+                if(cnt>=150 && this.gameObject.transform.position.y>=-15 && this.gameObject.transform.position.y<=15)game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,4,120,30f,2,note);
                 break;
             }
         }
-        if(blueCnt>5)GetComponent<Renderer>().material.shader=Shader.Find("Unlit/Transparent Cutout");
+        if(blueCnt>5){
+            GetComponent<Renderer>().material.shader=Shader.Find("Unlit/Transparent Cutout");
+        }else{
+            GetComponent<Renderer>().material.shader=Shader.Find("Particles/Standard Unlit");
+        }
         if(hp<=0 && explodeCnt>=100){
             explodeCnt=0;
             animator.SetTrigger("Explode");
             GetComponent<Renderer>().material.shader=Shader.Find("Particles/Standard Unlit");
             GetComponent<Renderer>().material.color=Color.white;
+            GetComponent<AudioSource>().Play();
         }
-        if(explodeCnt==48){
+        if(explodeCnt==48 || this.gameObject.transform.position.x<-50 || this.gameObject.transform.position.y>25 || this.gameObject.transform.position.y<-25){
             enemyManager.GetComponent<EnemyManager>().enemy.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
@@ -73,20 +85,32 @@ public class Enemy : MonoBehaviour
         explodeCnt++;
     }
     public void OnTriggerStay2D(Collider2D col){
-        if(col.gameObject.tag=="JBullet"){
+        if(col.gameObject.tag=="JBullet" && this.gameObject.transform.position.x<=45 && this.gameObject.transform.position.x>=-45 && this.gameObject.transform.position.y>=-20 && this.gameObject.transform.position.y<=20 && hp>0){
             hp--;
-            GetComponent<Renderer>().material.shader=Shader.Find("Particles/Standard Unlit");
             blueCnt=0;
+            if(col.gameObject.GetComponent<Bullet>().type!=3){
+                game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().bullet.Remove(col.gameObject);
+                Destroy(col.gameObject);
+            }
         }
     }
     private void Move(int typeM){
         switch(typeM){
             case 1:
             if(cnt<180){
-                rg.velocity=new Vector2(-10,0);
-            }else{
+                rg.velocity=new Vector2(-8,0);
+            }else if(cnt<240){
                 rg.velocity=new Vector2(0,0);
                 if(explodeCnt>=100)animator.SetTrigger("Stop");
+            }else{
+                rg.velocity=new Vector2(10,0);
+            }
+            break;
+            case 2:
+            if(cnt<150){
+                rg.velocity=new Vector2(-10,0);
+            }else{
+                rg.velocity=new Vector2(-10,vy);
             }
             break;
         }

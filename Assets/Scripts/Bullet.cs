@@ -30,7 +30,14 @@ public class Bullet : MonoBehaviour
         if(isCircle){
             this.gameObject.GetComponent<CircleCollider2D>().enabled=true;
             this.gameObject.GetComponent<BoxCollider2D>().enabled=false;
-            this.gameObject.GetComponent<CircleCollider2D>().radius=r;
+            switch(type){
+                case 3:
+                this.gameObject.GetComponent<CircleCollider2D>().radius=16;
+                break;
+                case 4:
+                this.gameObject.GetComponent<CircleCollider2D>().radius=2;
+                break;
+            }
         }else{
             this.gameObject.GetComponent<CircleCollider2D>().enabled=false;
             this.gameObject.GetComponent<BoxCollider2D>().enabled=true;
@@ -44,7 +51,7 @@ public class Bullet : MonoBehaviour
             }
         }
         if(color>100){
-            switch(type){
+            switch(color){
                 case 101:
                 bulletSpriteRenderer.sprite=jBullet2;
                 break;
@@ -73,10 +80,10 @@ public class Bullet : MonoBehaviour
         game=GameObject.Find("Game");
         switch(type){
             case 3:
-            this.transform.localScale=new Vector3(r/16,r/16,1);
+            this.transform.localScale=new Vector3(r/16,r/16,1f);
             break;
             case 4:
-            this.transform.localScale=new Vector3(r/2,r/2,1);
+            this.transform.localScale=new Vector3(r/2,r/2,1f);
             break;
         }
         bulletManager=GameObject.Find("BulletManager");
@@ -102,17 +109,17 @@ public class Bullet : MonoBehaviour
             case 1:
             if(game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().x>-60){
                 if(rad>Mathf.Atan2(game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().y-this.gameObject.transform.position.y,game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().x-this.gameObject.transform.position.x)){
-                    rad-=Mathf.Deg2Rad*2;
+                    rad-=Mathf.Deg2Rad*3;
                 }
                 if(rad<Mathf.Atan2(game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().y-this.gameObject.transform.position.y,game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().x-this.gameObject.transform.position.x)){
-                    rad+=Mathf.Deg2Rad*2;
+                    rad+=Mathf.Deg2Rad*3;
                 }
             }
             break;
             case 3:
             if(cnt>60){
                 r=Mathf.Pow(2f,(float)cnt/15);
-                if(cnt>120){
+                if(r>2000){
                     bulletManager.GetComponent<BulletManager>().bullet.Remove(this.gameObject);
                     Destroy(this.gameObject);
                 }
@@ -122,22 +129,15 @@ public class Bullet : MonoBehaviour
             break;
         }
         rg.velocity=new Vector2(v*Mathf.Cos(rad),v*Mathf.Sin(rad));
-        if(isCircle)this.gameObject.GetComponent<CircleCollider2D>().radius=r;
         switch(type){
             case 3:
-            this.transform.localScale=new Vector3(r/16,r/16,1);
+            this.transform.localScale=new Vector3(r/16,r/16,1f);
             break;
         }
         cnt++;
     }
     private void Delete(float size){
-        if(this.gameObject.transform.position.x<-55*size || this.gameObject.transform.position.x>55*size || this.gameObject.transform.position.y<-25*size || this.gameObject.transform.position.y>25*size){
-            bulletManager.GetComponent<BulletManager>().bullet.Remove(this.gameObject);
-            Destroy(this.gameObject);
-        }
-    }
-    public void OnTriggerStay2D(Collider2D col){
-        if(col.gameObject.tag=="Enemy" && type!=3 && this.gameObject.tag=="JBullet"){
+        if(this.gameObject.transform.position.x<-45*size || this.gameObject.transform.position.x>45*size || this.gameObject.transform.position.y<-21*size || this.gameObject.transform.position.y>21*size){
             bulletManager.GetComponent<BulletManager>().bullet.Remove(this.gameObject);
             Destroy(this.gameObject);
         }

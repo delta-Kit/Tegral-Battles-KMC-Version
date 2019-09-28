@@ -172,3 +172,4 @@ MonoBehaviour:
   - {fileID: 21300006, guid: 2694cc7efb1635244ba99a6db9973e9b, type: 3}
   game: {fileID: 0}
   color: 0
+  bulletManager: {fileID: 0}

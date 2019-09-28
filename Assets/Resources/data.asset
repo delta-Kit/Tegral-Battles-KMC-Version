@@ -21,15 +21,235 @@ MonoBehaviour:
       y: -10
       vx: 5
       vy: 5
+      note: 0
     - time: 0
       type: 1
       x: 60
       y: 0
       vx: 5
       vy: 5
+      note: 0
     - time: 0
       type: 1
       x: 60
       y: 10
       vx: 5
       vy: 5
+      note: 0
+    - time: 120
+      type: 1
+      x: 60
+      y: -5
+      vx: 5
+      vy: 5
+      note: 0
+    - time: 120
+      type: 1
+      x: 60
+      y: 5
+      vx: 5
+      vy: 5
+      note: 0
+    - time: 240
+      type: 1
+      x: 60
+      y: -10
+      vx: 5
+      vy: 5
+      note: 0
+    - time: 240
+      type: 1
+      x: 60
+      y: 0
+      vx: 5
+      vy: 5
+      note: 0
+    - time: 240
+      type: 1
+      x: 60
+      y: 10
+      vx: 5
+      vy: 5
+      note: 0
+    - time: 360
+      type: 1
+      x: 60
+      y: -5
+      vx: 5
+      vy: 5
+      note: 0
+    - time: 360
+      type: 1
+      x: 60
+      y: 5
+      vx: 5
+      vy: 5
+      note: 0
+    - time: 480
+      type: 1
+      x: 60
+      y: -10
+      vx: 5
+      vy: 5
+      note: 0
+    - time: 480
+      type: 1
+      x: 60
+      y: 0
+      vx: 5
+      vy: 5
+      note: 0
+    - time: 480
+      type: 1
+      x: 60
+      y: 10
+      vx: 5
+      vy: 5
+      note: 0
+    - time: 600
+      type: 1
+      x: 60
+      y: -5
+      vx: 5
+      vy: 5
+      note: 0
+    - time: 600
+      type: 1
+      x: 60
+      y: 5
+      vx: 5
+      vy: 5
+      note: 0
+    - time: 720
+      type: 1
+      x: 60
+      y: -10
+      vx: 5
+      vy: 5
+      note: 0
+    - time: 720
+      type: 1
+      x: 60
+      y: 0
+      vx: 5
+      vy: 5
+      note: 0
+    - time: 720
+      type: 1
+      x: 60
+      y: 10
+      vx: 5
+      vy: 5
+      note: 0
+    - time: 879
+      type: 2
+      x: 60
+      y: 7
+      vx: 5
+      vy: 7
+      note: 0
+    - time: 879
+      type: 2
+      x: 60
+      y: 10
+      vx: 5
+      vy: 7
+      note: 0
+    - time: 879
+      type: 2
+      x: 60
+      y: -7
+      vx: 5
+      vy: -7
+      note: 0
+    - time: 879
+      type: 2
+      x: 60
+      y: -10
+      vx: 5
+      vy: -7
+      note: 0
+    - time: 909
+      type: 2
+      x: 60
+      y: 7
+      vx: 5
+      vy: 7
+      note: 30
+    - time: 909
+      type: 2
+      x: 60
+      y: 10
+      vx: 5
+      vy: 7
+      note: 30
+    - time: 909
+      type: 2
+      x: 60
+      y: -7
+      vx: 5
+      vy: -7
+      note: 30
+    - time: 909
+      type: 2
+      x: 60
+      y: -10
+      vx: 5
+      vy: -7
+      note: 30
+    - time: 939
+      type: 2
+      x: 60
+      y: 7
+      vx: 5
+      vy: 7
+      note: 60
+    - time: 939
+      type: 2
+      x: 60
+      y: 10
+      vx: 5
+      vy: 7
+      note: 60
+    - time: 939
+      type: 2
+      x: 60
+      y: -7
+      vx: 5
+      vy: -7
+      note: 60
+    - time: 939
+      type: 2
+      x: 60
+      y: -10
+      vx: 5
+      vy: -7
+      note: 60
+    - time: 969
+      type: 2
+      x: 60
+      y: 7
+      vx: 5
+      vy: 7
+      note: 90
+    - time: 969
+      type: 2
+      x: 60
+      y: 10
+      vx: 5
+      vy: 7
+      note: 90
+    - time: 969
+      type: 2
+      x: 60
+      y: -7
+      vx: 5
+      vy: -7
+      note: 90
+    - time: 969
+      type: 2
+      x: 60
+      y: -10
+      vx: 5
+      vy: -7
+      note: 90

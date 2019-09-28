@@ -22,6 +22,7 @@ public class Jiki : MonoBehaviour
     private int hitCnt;
     public GameObject hitEffect;
     GameObject[] lifeImage=new GameObject[5];
+    public AudioClip hit,bombSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,7 +72,7 @@ public class Jiki : MonoBehaviour
             animator.SetTrigger("Stop");
             flag=false;
         }
-        if(Input.GetKey(KeyCode.Z))game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,1,5,100f,0);
+        if(Input.GetKey(KeyCode.Z))game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,1,5,100f,0,0);
         if(Input.GetKeyDown(KeyCode.X) && bomb>0 && bombCnt>=180){
             bombCnt=0;
             bombPosition=this.gameObject.transform.position;
@@ -79,8 +80,11 @@ public class Jiki : MonoBehaviour
             bombImage[bomb].GetComponent<Image>().enabled=false;
             game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletDelete();
             if(hitCnt<8)hitCnt=200;
+            gameObject.GetComponent<AudioSource>().clip=bombSound;
+            GetComponent<AudioSource>().Play();
         }
-        if(bombCnt<60)game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(bombPosition,2,5,0,103);
+        if(bombCnt<60)game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(bombPosition,2,5,0,102,0);
+        if(bombCnt==180)game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletDelete();
         if(this.gameObject.transform.position.x<-43)this.gameObject.transform.position=new Vector3(-43,this.gameObject.transform.position.y,0);
         if(this.gameObject.transform.position.x>43)this.gameObject.transform.position=new Vector3(43,this.gameObject.transform.position.y,0);
         if(this.gameObject.transform.position.y<-17)this.gameObject.transform.position=new Vector3(this.gameObject.transform.position.x,-17,0);
@@ -106,9 +110,11 @@ public class Jiki : MonoBehaviour
         hitCnt++;
     }
     public void OnTriggerEnter2D(Collider2D col){
-        if(col.gameObject.tag=="Bullet" && hitCnt>180){
+        if(col.gameObject.tag=="Bullet" && hitCnt>180 && bombCnt>=180){
             game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletDelete();
             hitCnt=0;
+            gameObject.GetComponent<AudioSource>().clip=hit;
+            GetComponent<AudioSource>().Play();
         }
     }
     void ChangeScene(){
