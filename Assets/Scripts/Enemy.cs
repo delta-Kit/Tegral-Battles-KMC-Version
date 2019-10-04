@@ -34,10 +34,13 @@ public class Enemy : MonoBehaviour
         animator=GetComponent<Animator>();
         switch(type){
             case 1:
-            hp=15;
+            hp=20;
             break;
             case 2:
             hp=10;
+            break;
+            case 3:
+            hp=30;
             break;
         }
         blueCnt=10;
@@ -60,7 +63,13 @@ public class Enemy : MonoBehaviour
                 break;
                 case 2:
                 Move(2);
-                if(cnt>=150 && this.gameObject.transform.position.y>=-15 && this.gameObject.transform.position.y<=15)game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,4,120,30f,2,note);
+                if(cnt>=150 && this.gameObject.transform.position.y>=-20 && this.gameObject.transform.position.y<=20)game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,4,120,30f,2,note);
+                break;
+                case 3:
+                Move(3);
+                if(cnt==210){
+                    game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,5,1,30f,3,0);
+                }
                 break;
             }
         }
@@ -76,7 +85,11 @@ public class Enemy : MonoBehaviour
             GetComponent<Renderer>().material.color=Color.white;
             GetComponent<AudioSource>().Play();
         }
-        if(explodeCnt==48 || this.gameObject.transform.position.x<-50 || this.gameObject.transform.position.y>25 || this.gameObject.transform.position.y<-25){
+        if((this.gameObject.transform.position.x<-50 || this.gameObject.transform.position.y>25 || this.gameObject.transform.position.y<-25) && cnt>200){
+            enemyManager.GetComponent<EnemyManager>().enemy.Remove(this.gameObject);
+            Destroy(this.gameObject);
+        }
+        if(explodeCnt==48){
             enemyManager.GetComponent<EnemyManager>().enemy.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
@@ -107,10 +120,20 @@ public class Enemy : MonoBehaviour
             }
             break;
             case 2:
-            if(cnt<150){
+            if(cnt<200){
                 rg.velocity=new Vector2(-10,0);
             }else{
                 rg.velocity=new Vector2(-10,vy);
+            }
+            break;
+            case 3:
+            if(cnt<180){
+                rg.velocity=new Vector2(-vx,-vy);
+            }else if(cnt<240){
+                rg.velocity=new Vector2(0,0);
+                if(explodeCnt>=100)animator.SetTrigger("Stop");
+            }else{
+                rg.velocity=new Vector2(vx,vy);
             }
             break;
         }

@@ -253,3 +253,311 @@ MonoBehaviour:
       vx: 5
       vy: -7
       note: 90
+    - time: 1100
+      type: 2
+      x: 60
+      y: 7
+      vx: 5
+      vy: 7
+      note: 0
+    - time: 1100
+      type: 2
+      x: 60
+      y: 10
+      vx: 5
+      vy: 7
+      note: 0
+    - time: 1100
+      type: 2
+      x: 60
+      y: -7
+      vx: 5
+      vy: -7
+      note: 0
+    - time: 1100
+      type: 2
+      x: 60
+      y: -10
+      vx: 5
+      vy: -7
+      note: 0
+    - time: 1130
+      type: 2
+      x: 60
+      y: 7
+      vx: 5
+      vy: 7
+      note: 30
+    - time: 1130
+      type: 2
+      x: 60
+      y: 10
+      vx: 5
+      vy: 7
+      note: 30
+    - time: 1130
+      type: 2
+      x: 60
+      y: -7
+      vx: 5
+      vy: -7
+      note: 30
+    - time: 1130
+      type: 2
+      x: 60
+      y: -10
+      vx: 5
+      vy: -7
+      note: 30
+    - time: 1160
+      type: 2
+      x: 60
+      y: 7
+      vx: 5
+      vy: 7
+      note: 60
+    - time: 1160
+      type: 2
+      x: 60
+      y: 10
+      vx: 5
+      vy: 7
+      note: 60
+    - time: 1160
+      type: 2
+      x: 60
+      y: -7
+      vx: 5
+      vy: -7
+      note: 60
+    - time: 1160
+      type: 2
+      x: 60
+      y: -10
+      vx: 5
+      vy: -7
+      note: 60
+    - time: 1190
+      type: 2
+      x: 60
+      y: 7
+      vx: 5
+      vy: 7
+      note: 90
+    - time: 1190
+      type: 2
+      x: 60
+      y: 10
+      vx: 5
+      vy: 7
+      note: 90
+    - time: 1190
+      type: 2
+      x: 60
+      y: -7
+      vx: 5
+      vy: -7
+      note: 90
+    - time: 1190
+      type: 2
+      x: 60
+      y: -10
+      vx: 5
+      vy: -7
+      note: 90
+    - time: 1300
+      type: 2
+      x: 60
+      y: 7
+      vx: 5
+      vy: 7
+      note: 0
+    - time: 1300
+      type: 2
+      x: 60
+      y: 10
+      vx: 5
+      vy: 7
+      note: 0
+    - time: 1300
+      type: 2
+      x: 60
+      y: -7
+      vx: 5
+      vy: -7
+      note: 0
+    - time: 1300
+      type: 2
+      x: 60
+      y: -10
+      vx: 5
+      vy: -7
+      note: 0
+    - time: 1330
+      type: 2
+      x: 60
+      y: 7
+      vx: 5
+      vy: 7
+      note: 30
+    - time: 1330
+      type: 2
+      x: 60
+      y: 10
+      vx: 5
+      vy: 7
+      note: 30
+    - time: 1330
+      type: 2
+      x: 60
+      y: -7
+      vx: 5
+      vy: -7
+      note: 30
+    - time: 1330
+      type: 2
+      x: 60
+      y: -10
+      vx: 5
+      vy: -7
+      note: 30
+    - time: 1360
+      type: 2
+      x: 60
+      y: 7
+      vx: 5
+      vy: 7
+      note: 60
+    - time: 1360
+      type: 2
+      x: 60
+      y: 10
+      vx: 5
+      vy: 7
+      note: 60
+    - time: 1360
+      type: 2
+      x: 60
+      y: -7
+      vx: 5
+      vy: -7
+      note: 60
+    - time: 1360
+      type: 2
+      x: 60
+      y: -10
+      vx: 5
+      vy: -7
+      note: 60
+    - time: 1390
+      type: 2
+      x: 60
+      y: 7
+      vx: 5
+      vy: 7
+      note: 90
+    - time: 1390
+      type: 2
+      x: 60
+      y: 10
+      vx: 5
+      vy: 7
+      note: 90
+    - time: 1390
+      type: 2
+      x: 60
+      y: -7
+      vx: 5
+      vy: -7
+      note: 90
+    - time: 1390
+      type: 2
+      x: 60
+      y: -10
+      vx: 5
+      vy: -7
+      note: 90
+    - time: 1647
+      type: 3
+      x: 35
+      y: 30
+      vx: 0
+      vy: 7
+      note: 0
+    - time: 1647
+      type: 3
+      x: 35
+      y: -30
+      vx: 0
+      vy: -7
+      note: 0
+    - time: 1800
+      type: 3
+      x: 60
+      y: 5
+      vx: 8
+      vy: 0
+      note: 0
+    - time: 1800
+      type: 3
+      x: 60
+      y: -5
+      vx: 8
+      vy: 0
+      note: 0
+    - time: 1920
+      type: 3
+      x: 35
+      y: 30
+      vx: 0
+      vy: 7
+      note: 0
+    - time: 1920
+      type: 3
+      x: 35
+      y: -30
+      vx: 0
+      vy: -7
+      note: 0
+    - time: 2040
+      type: 3
+      x: 60
+      y: 5
+      vx: 8
+      vy: 0
+      note: 0
+    - time: 2040
+      type: 3
+      x: 60
+      y: -5
+      vx: 8
+      vy: 0
+      note: 0
+    - time: 2160
+      type: 3
+      x: 35
+      y: 30
+      vx: 0
+      vy: 7
+      note: 0
+    - time: 2160
+      type: 3
+      x: 35
+      y: -30
+      vx: 0
+      vy: -7
+      note: 0
+    - time: 2280
+      type: 3
+      x: 60
+      y: 5
+      vx: 8
+      vy: 0
+      note: 0
+    - time: 2280
+      type: 3
+      x: 60
+      y: -5
+      vx: 8
+      vy: 0
+      note: 0

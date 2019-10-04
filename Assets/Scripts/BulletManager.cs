@@ -11,6 +11,7 @@ public class BulletManager : MonoBehaviour
     public GameObject game;
     public GameObject effect;
     public AudioClip[] spawn=new AudioClip[2];
+    
     public void BulletCreate(Vector3 pos,int type,float v,int color,float rad,float r,bool isCircle){
         GameObject b=Instantiate(Bullet,pos,Quaternion.identity);
         bullet.Add(b);
@@ -61,6 +62,14 @@ public class BulletManager : MonoBehaviour
                 case 4:
                 if(cnt%interval==note){
                     BulletCreate(pos,4,v,color,Mathf.Atan2(jiki.transform.position.y-pos.y,jiki.transform.position.x-pos.x),0.5f,true);
+                    GetComponent<AudioSource>().PlayOneShot(spawn[1]);
+                }
+                break;
+                case 5:
+                if(cnt%interval==0){
+                    for(int i=0;i<360;i+=30){
+                        BulletCreate(pos,5,v,color,Mathf.Atan2(jiki.transform.position.y-pos.y,jiki.transform.position.x-pos.x)+Mathf.Deg2Rad*i,0.5f,true);
+                    }
                     GetComponent<AudioSource>().PlayOneShot(spawn[1]);
                 }
                 break;

@@ -35,6 +35,7 @@ public class Bullet : MonoBehaviour
                 this.gameObject.GetComponent<CircleCollider2D>().radius=16;
                 break;
                 case 4:
+                case 5:
                 this.gameObject.GetComponent<CircleCollider2D>().radius=2;
                 break;
             }
@@ -46,7 +47,7 @@ public class Bullet : MonoBehaviour
                 this.gameObject.GetComponent<BoxCollider2D>().size=new Vector2(4,2);
                 break;
                 case 2:
-                this.gameObject.GetComponent<BoxCollider2D>().size=new Vector2(16,16);
+                this.gameObject.GetComponent<BoxCollider2D>().size=new Vector2(12,16);
                 break;
             }
         }
@@ -69,6 +70,7 @@ public class Bullet : MonoBehaviour
             this.gameObject.tag="JBullet";
             break;
             case 4:
+            case 5:
             this.gameObject.tag="Bullet";
             break;
         }
@@ -83,6 +85,7 @@ public class Bullet : MonoBehaviour
             this.transform.localScale=new Vector3(r/16,r/16,1f);
             break;
             case 4:
+            case 5:
             this.transform.localScale=new Vector3(r/2,r/2,1f);
             break;
         }
@@ -101,6 +104,7 @@ public class Bullet : MonoBehaviour
             case 1:
             case 2:
             case 4:
+            case 5:
             Delete(1);
             break;
         }
@@ -126,6 +130,9 @@ public class Bullet : MonoBehaviour
             }
             break;
             case 4:
+            break;
+            case 5:
+            if(v<40)v--;
             break;
         }
         rg.velocity=new Vector2(v*Mathf.Cos(rad),v*Mathf.Sin(rad));
