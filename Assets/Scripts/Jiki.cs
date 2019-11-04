@@ -19,7 +19,7 @@ public class Jiki : MonoBehaviour
     GameObject[] bombImage=new GameObject[3];
     public GameObject hitCircle;
     private int life;
-    private int hitCnt;
+    public int hitCnt;
     public GameObject hitEffect;
     GameObject[] lifeImage=new GameObject[5];
     public AudioClip hit,bombSound;
@@ -110,7 +110,7 @@ public class Jiki : MonoBehaviour
         hitCnt++;
     }
     public void OnTriggerEnter2D(Collider2D col){
-        if(col.gameObject.tag=="Bullet" && hitCnt>180 && bombCnt>=180){
+        if(col.gameObject.tag=="Bullet" && hitCnt>180 && bombCnt>180){
             game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletDelete();
             hitCnt=0;
             gameObject.GetComponent<AudioSource>().clip=hit;

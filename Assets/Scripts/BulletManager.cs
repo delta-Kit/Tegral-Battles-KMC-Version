@@ -8,11 +8,11 @@ public class BulletManager : MonoBehaviour
     public int j;
     public GameObject jiki;
     private int cnt;
-    public GameObject game;
     public GameObject effect;
     public AudioClip[] spawn=new AudioClip[2];
-    
-    public void BulletCreate(Vector3 pos,int type,float v,int color,float rad,float r,bool isCircle){
+    public GameObject enemyManager;
+    public List<GameObject> bulletSpawner;
+    public void BulletCreate(Vector3 pos,int type,float v,int color,float rad,float r,bool isCircle,int note){
         GameObject b=Instantiate(Bullet,pos,Quaternion.identity);
         bullet.Add(b);
         b.GetComponent<Bullet>().type=type;
@@ -21,12 +21,12 @@ public class BulletManager : MonoBehaviour
         b.GetComponent<Bullet>().rad=rad;
         b.GetComponent<Bullet>().r=r;
         b.GetComponent<Bullet>().isCircle=isCircle;
+        b.GetComponent<Bullet>().note=note;
     }
     // Start is called before the first frame update
     void Start()
     {
         cnt=0;
-        game=GameObject.Find("Game");
     }
 
     // Update is called once per frame
@@ -44,32 +44,38 @@ public class BulletManager : MonoBehaviour
             switch(type){
                 case 1:
                 if(cnt%interval==0){
-                    BulletCreate(pos+new Vector3(4,2,0),1,v,color,Mathf.Deg2Rad*30,0,false);
-                    BulletCreate(pos+new Vector3(4,-2,0),1,v,color,Mathf.Deg2Rad*(-30),0,false);
+                    BulletCreate(pos+new Vector3(4,2,0),1,v,color,Mathf.Deg2Rad*30,0,false,0);
+                    BulletCreate(pos+new Vector3(4,-2,0),1,v,color,Mathf.Deg2Rad*(-30),0,false,0);
                     GetComponent<AudioSource>().PlayOneShot(spawn[0]);
                 }
-                if(cnt%(interval*2)==0)BulletCreate(pos+new Vector3(4,0,0),2,v,101,0,0,false);
+                if(cnt%(interval*2)==0)BulletCreate(pos+new Vector3(4,0,0),2,v,101,0,0,false,0);
                 break;
                 case 2:
-                if(cnt%interval==0)BulletCreate(pos,3,0,color,0,16f,true);
+                if(cnt%interval==0)BulletCreate(pos,3,0,color,0,16f,true,0);
                 break;
                 case 3:
                 if(cnt%interval==0){
-                    for(int i=-1;i<=1;i++)BulletCreate(pos,4,v,color,Mathf.Atan2(jiki.transform.position.y-pos.y,jiki.transform.position.x-pos.x)+Mathf.Deg2Rad*30*i,0.5f,true);
+                    for(int i=-1;i<=1;i++)BulletCreate(pos,4,v,color,Mathf.Atan2(jiki.transform.position.y-pos.y,jiki.transform.position.x-pos.x)+Mathf.Deg2Rad*30*i,0.5f,true,0);
                     GetComponent<AudioSource>().PlayOneShot(spawn[1]);
                 }
                 break;
                 case 4:
                 if(cnt%interval==note){
-                    BulletCreate(pos,4,v,color,Mathf.Atan2(jiki.transform.position.y-pos.y,jiki.transform.position.x-pos.x),0.5f,true);
+                    BulletCreate(pos,4,v,color,Mathf.Atan2(jiki.transform.position.y-pos.y,jiki.transform.position.x-pos.x),0.5f,true,0);
                     GetComponent<AudioSource>().PlayOneShot(spawn[1]);
                 }
                 break;
                 case 5:
                 if(cnt%interval==0){
                     for(int i=0;i<360;i+=30){
-                        BulletCreate(pos,5,v,color,Mathf.Atan2(jiki.transform.position.y-pos.y,jiki.transform.position.x-pos.x)+Mathf.Deg2Rad*i,0.5f,true);
+                        BulletCreate(pos,5,v,color,Mathf.Atan2(jiki.transform.position.y-pos.y,jiki.transform.position.x-pos.x)+Mathf.Deg2Rad*i,0.5f,true,0);
                     }
+                    GetComponent<AudioSource>().PlayOneShot(spawn[1]);
+                }
+                break;
+                case 6:
+                if(cnt%interval==0){
+                    BulletCreate(pos,6,0,1,0,0.5f,true,note);
                     GetComponent<AudioSource>().PlayOneShot(spawn[1]);
                 }
                 break;
@@ -78,6 +84,7 @@ public class BulletManager : MonoBehaviour
     }
     public void BulletDelete(){
         int bulletNum=bullet.Count;
+        int bulletSpawnerNum=bulletSpawner.Count;
         j=0;
         for(int i=0;i<bulletNum;i++){
             GameObject box=bullet[j];
@@ -88,6 +95,21 @@ public class BulletManager : MonoBehaviour
             }else{
                 j++;
             }
+        }
+        for(int i=0;i<bulletSpawnerNum;i++){
+            GameObject box=bulletSpawner[0];
+            bulletSpawner.RemoveAt(0);
+            Destroy(box);
+        }
+    }
+    public void BulletMove(int type){;
+        switch(type){
+            case 1:
+            for(int i=0;i<bullet.Count;i++){
+                if(bullet[i].GetComponent<Bullet>().note==1)bullet[i].transform.RotateAround(enemyManager.GetComponent<EnemyManager>().GetEnemyPosition(),new Vector3(0,0,1),40*Mathf.Deg2Rad);
+                if(bullet[i].GetComponent<Bullet>().note==2)bullet[i].transform.RotateAround(enemyManager.GetComponent<EnemyManager>().GetEnemyPosition(),new Vector3(0,0,1),-40*Mathf.Deg2Rad);
+            }
+            break;
         }
     }
 }

@@ -703,7 +703,7 @@ GameObject:
   - component: {fileID: 530944911}
   - component: {fileID: 530944912}
   m_Layer: 0
-  m_Name: tegralK1
+  m_Name: TegralK1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -805,6 +805,7 @@ MonoBehaviour:
   game: {fileID: 0}
   bombCnt: 0
   hitCircle: {fileID: 1590220860}
+  hitCnt: 0
   hitEffect: {fileID: 761792497}
   hit: {fileID: 8300000, guid: 06ce409e65694cd4993931a59cbea630, type: 3}
   bombSound: {fileID: 8300000, guid: 4143026d8c98e544d8297cef77829fbb, type: 3}
@@ -989,11 +990,11 @@ MonoBehaviour:
   bullet: []
   j: 0
   jiki: {fileID: 530944905}
-  game: {fileID: 0}
   effect: {fileID: 3767500257566148616, guid: 8eecf3eb1f7e3264bae94288ba65f532, type: 3}
   spawn:
   - {fileID: 8300000, guid: e1e265bece6f6524d820e5c41235034c, type: 3}
   - {fileID: 8300000, guid: 0b0b639ced39d104d984fa571111ba81, type: 3}
+  enemyManager: {fileID: 143803353}
 --- !u!82 &757946766
 AudioSource:
   m_ObjectHideFlags: 0

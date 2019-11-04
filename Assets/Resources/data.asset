@@ -561,3 +561,10 @@ MonoBehaviour:
       vx: 8
       vy: 0
       note: 0
+    - time: 2615
+      type: 201
+      x: 60
+      y: 0
+      vx: 10
+      vy: 0
+      note: 0

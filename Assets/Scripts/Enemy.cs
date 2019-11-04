@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour
     public GameObject game;
     private int explodeCnt;
     public int note;
+    public GameObject BulletSpawner;
+    public GameObject jiki;
+    private bool resetFlag;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,9 +30,10 @@ public class Enemy : MonoBehaviour
         if(type<100){
             this.gameObject.GetComponent<CircleCollider2D>().radius=2;
         }else if(type<200){
-            this.gameObject.GetComponent<CircleCollider2D>().radius=4;
+            this.gameObject.GetComponent<CircleCollider2D>().radius=2.5f;
         }else{
-            this.gameObject.GetComponent<CircleCollider2D>().radius=6;
+            this.gameObject.GetComponent<CircleCollider2D>().radius=3;
+            this.transform.localScale=new Vector3(1.5f,1.5f,1f);
         }
         animator=GetComponent<Animator>();
         switch(type){
@@ -42,12 +46,17 @@ public class Enemy : MonoBehaviour
             case 3:
             hp=30;
             break;
+            case 201:
+            hp=500;
+            break;
         }
         blueCnt=10;
         enemyManager=GameObject.Find("EnemyManager");
         game=GameObject.Find("Game");
         explodeCnt=100;
         cnt=0;
+        jiki=GameObject.Find("TegralK1");
+        resetFlag=false;
     }
 
     // Update is called once per frame
@@ -71,6 +80,50 @@ public class Enemy : MonoBehaviour
                     game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,5,1,30f,3,0);
                 }
                 break;
+                case 201:
+                Move(4);
+                if(cnt>=300){
+                    if(hp>250){
+                        if(cnt==300){
+                            GameObject b1=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
+                            game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().bulletSpawner.Add(b1);
+                            b1.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
+                            b1.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
+                            b1.GetComponent<BulletSpawner>().type=1;
+                            b1.GetComponent<BulletSpawner>().interval=2;
+                            b1.GetComponent<BulletSpawner>().note=1;
+                            GameObject b2=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
+                            game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().bulletSpawner.Add(b2);
+                            b2.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
+                            b2.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
+                            b2.GetComponent<BulletSpawner>().type=1;
+                            b2.GetComponent<BulletSpawner>().interval=2;
+                            b2.GetComponent<BulletSpawner>().note=2;
+                            GameObject b3=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
+                            game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().bulletSpawner.Add(b3);
+                            b3.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
+                            b3.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
+                            b3.GetComponent<BulletSpawner>().type=1;
+                            b3.GetComponent<BulletSpawner>().interval=2;
+                            b3.GetComponent<BulletSpawner>().note=3;
+                            GameObject b4=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
+                            game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().bulletSpawner.Add(b4);
+                            b4.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
+                            b4.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
+                            b4.GetComponent<BulletSpawner>().type=1;
+                            b4.GetComponent<BulletSpawner>().interval=2;
+                            b4.GetComponent<BulletSpawner>().note=4;
+                        }else if(cnt>600){
+                            game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletMove(1);
+                        }
+                        if(jiki.GetComponent<Jiki>().hitCnt<60 || jiki.GetComponent<Jiki>().bombCnt<180)resetFlag=true;
+                        if(resetFlag && jiki.GetComponent<Jiki>().hitCnt>=60 && jiki.GetComponent<Jiki>().bombCnt>=180){
+                            cnt=299;
+                            resetFlag=false;
+                        }
+                    }
+                }
+                break;
             }
         }
         if(blueCnt>5){
@@ -85,7 +138,7 @@ public class Enemy : MonoBehaviour
             GetComponent<Renderer>().material.color=Color.white;
             GetComponent<AudioSource>().Play();
         }
-        if((this.gameObject.transform.position.x<-50 || this.gameObject.transform.position.y>25 || this.gameObject.transform.position.y<-25) && cnt>200){
+        if((this.gameObject.transform.position.x<-80 || this.gameObject.transform.position.y>25 || this.gameObject.transform.position.y<-25 || this.gameObject.transform.position.x>80) && cnt>200){
             enemyManager.GetComponent<EnemyManager>().enemy.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
@@ -99,7 +152,7 @@ public class Enemy : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D col){
         if(col.gameObject.tag=="JBullet" && this.gameObject.transform.position.x<=45 && this.gameObject.transform.position.x>=-45 && this.gameObject.transform.position.y>=-20 && this.gameObject.transform.position.y<=20 && hp>0){
-            hp--;
+            if(cnt%10==0)hp--;
             blueCnt=0;
             if(col.gameObject.GetComponent<Bullet>().type!=3){
                 game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().bullet.Remove(col.gameObject);
@@ -134,6 +187,14 @@ public class Enemy : MonoBehaviour
                 if(explodeCnt>=100)animator.SetTrigger("Stop");
             }else{
                 rg.velocity=new Vector2(vx,vy);
+            }
+            break;
+            case 4:
+            if(cnt<300){
+                rg.velocity=new Vector2(-vx,0);
+            }else{
+                rg.velocity=new Vector2(0,0);
+                if(explodeCnt>=100)animator.SetTrigger("Stop");
             }
             break;
         }

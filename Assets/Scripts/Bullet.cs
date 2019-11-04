@@ -20,6 +20,7 @@ public class Bullet : MonoBehaviour
     private int cnt;
     public int color;
     public GameObject bulletManager;
+    public int note;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +37,7 @@ public class Bullet : MonoBehaviour
                 break;
                 case 4:
                 case 5:
+                case 6:
                 this.gameObject.GetComponent<CircleCollider2D>().radius=2;
                 break;
             }
@@ -71,6 +73,7 @@ public class Bullet : MonoBehaviour
             break;
             case 4:
             case 5:
+            case 6:
             this.gameObject.tag="Bullet";
             break;
         }
@@ -86,6 +89,7 @@ public class Bullet : MonoBehaviour
             break;
             case 4:
             case 5:
+            case 6:
             this.transform.localScale=new Vector3(r/2,r/2,1f);
             break;
         }
@@ -106,6 +110,9 @@ public class Bullet : MonoBehaviour
             case 4:
             case 5:
             Delete(1);
+            break;
+            case 6:
+            Delete(3);
             break;
         }
         if(!isCircle)transform.rotation=Quaternion.Euler(0,0,rad/Mathf.Deg2Rad);
@@ -133,6 +140,8 @@ public class Bullet : MonoBehaviour
             break;
             case 5:
             if(v<40)v--;
+            break;
+            case 6:
             break;
         }
         rg.velocity=new Vector2(v*Mathf.Cos(rad),v*Mathf.Sin(rad));
