@@ -34,7 +34,7 @@ public class BulletManager : MonoBehaviour
     {
         cnt++;   
     }
-    public void BulletAppear(Vector3 pos,int type,int interval,float v,int color,int note){
+    public void BulletAppear(Vector3 pos,int type,int interval,float v,int color,int note,float rad){
         if(type==1){
             gameObject.GetComponent<AudioSource>().clip=spawn[0];
         }else{
@@ -75,7 +75,13 @@ public class BulletManager : MonoBehaviour
                 break;
                 case 6:
                 if(cnt%interval==0){
-                    BulletCreate(pos,6,0,1,0,0.5f,true,note);
+                    BulletCreate(pos,6,0,color,0,0.5f,true,note);
+                    GetComponent<AudioSource>().PlayOneShot(spawn[1]);
+                }
+                break;
+                case 7:
+                if(cnt%interval==0){
+                    BulletCreate(pos,7,0,color,rad,0.5f,true,0);
                     GetComponent<AudioSource>().PlayOneShot(spawn[1]);
                 }
                 break;

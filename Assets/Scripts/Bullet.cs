@@ -38,6 +38,7 @@ public class Bullet : MonoBehaviour
                 case 4:
                 case 5:
                 case 6:
+                case 7:
                 this.gameObject.GetComponent<CircleCollider2D>().radius=2;
                 break;
             }
@@ -74,6 +75,7 @@ public class Bullet : MonoBehaviour
             case 4:
             case 5:
             case 6:
+            case 7:
             this.gameObject.tag="Bullet";
             break;
         }
@@ -90,6 +92,7 @@ public class Bullet : MonoBehaviour
             case 4:
             case 5:
             case 6:
+            case 7:
             this.transform.localScale=new Vector3(r/2,r/2,1f);
             break;
         }
@@ -109,6 +112,7 @@ public class Bullet : MonoBehaviour
             case 2:
             case 4:
             case 5:
+            case 7:
             Delete(1);
             break;
             case 6:
@@ -142,6 +146,9 @@ public class Bullet : MonoBehaviour
             if(v<40)v--;
             break;
             case 6:
+            break;
+            case 7:
+            if(cnt>=120)v=8f;
             break;
         }
         rg.velocity=new Vector2(v*Mathf.Cos(rad),v*Mathf.Sin(rad));

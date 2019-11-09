@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
     public GameObject BulletSpawner;
     public GameObject jiki;
     private bool resetFlag;
+    private bool changeFlag;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +49,7 @@ public class Enemy : MonoBehaviour
             hp=30;
             break;
             case 201:
-            hp=500;
+            hp=700;
             break;
         }
         blueCnt=10;
@@ -57,6 +59,7 @@ public class Enemy : MonoBehaviour
         cnt=0;
         jiki=GameObject.Find("TegralK1");
         resetFlag=false;
+        changeFlag=false;
     }
 
     // Update is called once per frame
@@ -67,23 +70,23 @@ public class Enemy : MonoBehaviour
                 case 1:
                 Move(1);
                 if(cnt==210){
-                    game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,3,1,30f,1,0);
+                    game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,3,1,30f,1,0,0);
                 }
                 break;
                 case 2:
                 Move(2);
-                if(cnt>=150 && this.gameObject.transform.position.y>=-20 && this.gameObject.transform.position.y<=20)game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,4,120,30f,2,note);
+                if(cnt>=150 && this.gameObject.transform.position.y>=-20 && this.gameObject.transform.position.y<=20)game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,4,120,30f,2,note,0);
                 break;
                 case 3:
                 Move(3);
                 if(cnt==210){
-                    game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,5,1,30f,3,0);
+                    game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,5,1,30f,3,0,0);
                 }
                 break;
                 case 201:
                 Move(4);
                 if(cnt>=300){
-                    if(hp>250){
+                    if(hp>350){
                         if(cnt==300){
                             GameObject b1=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
                             game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().bulletSpawner.Add(b1);
@@ -121,6 +124,22 @@ public class Enemy : MonoBehaviour
                             cnt=299;
                             resetFlag=false;
                         }
+                    }else{
+                        if(!changeFlag){
+                            game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletDelete();
+                            GameObject b=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
+                            game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().bulletSpawner.Add(b);
+                            b.GetComponent<BulletSpawner>().boxX=this.gameObject.transform.position.x-1.7696286f;
+                            b.GetComponent<BulletSpawner>().boxY=this.gameObject.transform.position.y+17.489627f;
+                            b.GetComponent<BulletSpawner>().type=2;
+                            b.GetComponent<BulletSpawner>().interval=2;
+                            changeFlag=true;
+                        }
+                        if(jiki.GetComponent<Jiki>().hitCnt<60 || jiki.GetComponent<Jiki>().bombCnt<180)resetFlag=true;
+                        if(resetFlag && jiki.GetComponent<Jiki>().hitCnt>=60 && jiki.GetComponent<Jiki>().bombCnt>=180){
+                            changeFlag=false;
+                            resetFlag=false;
+                        }
                     }
                 }
                 break;
@@ -133,7 +152,13 @@ public class Enemy : MonoBehaviour
         }
         if(hp<=0 && explodeCnt>=100){
             explodeCnt=0;
-            animator.SetTrigger("Explode");
+            if(type>200){
+                animator.SetTrigger("BossExplode");
+                this.transform.localScale=new Vector3(30f,30f,1f);
+                Invoke("ChangeScene",1f);
+            }else{
+                animator.SetTrigger("Explode");
+            }
             GetComponent<Renderer>().material.shader=Shader.Find("Particles/Standard Unlit");
             GetComponent<Renderer>().material.color=Color.white;
             GetComponent<AudioSource>().Play();
@@ -152,7 +177,11 @@ public class Enemy : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D col){
         if(col.gameObject.tag=="JBullet" && this.gameObject.transform.position.x<=45 && this.gameObject.transform.position.x>=-45 && this.gameObject.transform.position.y>=-20 && this.gameObject.transform.position.y<=20 && hp>0){
-            if(cnt%10==0)hp--;
+            if(jiki.GetComponent<Jiki>().bombCnt<180){
+                if(cnt%10==0)hp--;
+            }else{
+                hp--;
+            }
             blueCnt=0;
             if(col.gameObject.GetComponent<Bullet>().type!=3){
                 game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().bullet.Remove(col.gameObject);
@@ -198,5 +227,8 @@ public class Enemy : MonoBehaviour
             }
             break;
         }
+    }
+    void ChangeScene(){
+        SceneManager.LoadScene("Clear");
     }
 }
