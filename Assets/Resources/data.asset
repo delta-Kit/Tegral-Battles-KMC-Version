@@ -146,336 +146,336 @@ MonoBehaviour:
       x: 60
       y: 7
       vx: 5
-      vy: 7
+      vy: 1
       note: 0
     - time: 879
       type: 2
       x: 60
       y: 10
       vx: 5
-      vy: 7
+      vy: 1
       note: 0
     - time: 879
       type: 2
       x: 60
       y: -7
       vx: 5
-      vy: -7
+      vy: -1
       note: 0
     - time: 879
       type: 2
       x: 60
       y: -10
       vx: 5
-      vy: -7
+      vy: -1
       note: 0
     - time: 909
       type: 2
       x: 60
       y: 7
       vx: 5
-      vy: 7
+      vy: 1
       note: 30
     - time: 909
       type: 2
       x: 60
       y: 10
       vx: 5
-      vy: 7
+      vy: 1
       note: 30
     - time: 909
       type: 2
       x: 60
       y: -7
       vx: 5
-      vy: -7
+      vy: -1
       note: 30
     - time: 909
       type: 2
       x: 60
       y: -10
       vx: 5
-      vy: -7
+      vy: -1
       note: 30
     - time: 939
       type: 2
       x: 60
       y: 7
       vx: 5
-      vy: 7
+      vy: 1
       note: 60
     - time: 939
       type: 2
       x: 60
       y: 10
       vx: 5
-      vy: 7
+      vy: 1
       note: 60
     - time: 939
       type: 2
       x: 60
       y: -7
       vx: 5
-      vy: -7
+      vy: -1
       note: 60
     - time: 939
       type: 2
       x: 60
       y: -10
       vx: 5
-      vy: -7
+      vy: -1
       note: 60
     - time: 969
       type: 2
       x: 60
       y: 7
       vx: 5
-      vy: 7
+      vy: 1
       note: 90
     - time: 969
       type: 2
       x: 60
       y: 10
       vx: 5
-      vy: 7
+      vy: 1
       note: 90
     - time: 969
       type: 2
       x: 60
       y: -7
       vx: 5
-      vy: -7
+      vy: -1
       note: 90
     - time: 969
       type: 2
       x: 60
       y: -10
       vx: 5
-      vy: -7
+      vy: -1
       note: 90
     - time: 1100
       type: 2
       x: 60
       y: 7
       vx: 5
-      vy: 7
+      vy: 1
       note: 0
     - time: 1100
       type: 2
       x: 60
       y: 10
       vx: 5
-      vy: 7
+      vy: 1
       note: 0
     - time: 1100
       type: 2
       x: 60
       y: -7
       vx: 5
-      vy: -7
+      vy: -1
       note: 0
     - time: 1100
       type: 2
       x: 60
       y: -10
       vx: 5
-      vy: -7
+      vy: -1
       note: 0
     - time: 1130
       type: 2
       x: 60
       y: 7
       vx: 5
-      vy: 7
+      vy: 1
       note: 30
     - time: 1130
       type: 2
       x: 60
       y: 10
       vx: 5
-      vy: 7
+      vy: 1
       note: 30
     - time: 1130
       type: 2
       x: 60
       y: -7
       vx: 5
-      vy: -7
+      vy: -1
       note: 30
     - time: 1130
       type: 2
       x: 60
       y: -10
       vx: 5
-      vy: -7
+      vy: -1
       note: 30
     - time: 1160
       type: 2
       x: 60
       y: 7
       vx: 5
-      vy: 7
+      vy: 1
       note: 60
     - time: 1160
       type: 2
       x: 60
       y: 10
       vx: 5
-      vy: 7
+      vy: 1
       note: 60
     - time: 1160
       type: 2
       x: 60
       y: -7
       vx: 5
-      vy: -7
+      vy: -1
       note: 60
     - time: 1160
       type: 2
       x: 60
       y: -10
       vx: 5
-      vy: -7
+      vy: -1
       note: 60
     - time: 1190
       type: 2
       x: 60
       y: 7
       vx: 5
-      vy: 7
+      vy: 1
       note: 90
     - time: 1190
       type: 2
       x: 60
       y: 10
       vx: 5
-      vy: 7
+      vy: 1
       note: 90
     - time: 1190
       type: 2
       x: 60
       y: -7
       vx: 5
-      vy: -7
+      vy: -1
       note: 90
     - time: 1190
       type: 2
       x: 60
       y: -10
       vx: 5
-      vy: -7
+      vy: -1
       note: 90
     - time: 1300
       type: 2
       x: 60
       y: 7
       vx: 5
-      vy: 7
+      vy: 1
       note: 0
     - time: 1300
       type: 2
       x: 60
       y: 10
       vx: 5
-      vy: 7
+      vy: 1
       note: 0
     - time: 1300
       type: 2
       x: 60
       y: -7
       vx: 5
-      vy: -7
+      vy: -1
       note: 0
     - time: 1300
       type: 2
       x: 60
       y: -10
       vx: 5
-      vy: -7
+      vy: -1
       note: 0
     - time: 1330
       type: 2
       x: 60
       y: 7
       vx: 5
-      vy: 7
+      vy: 1
       note: 30
     - time: 1330
       type: 2
       x: 60
       y: 10
       vx: 5
-      vy: 7
+      vy: 1
       note: 30
     - time: 1330
       type: 2
       x: 60
       y: -7
       vx: 5
-      vy: -7
+      vy: -1
       note: 30
     - time: 1330
       type: 2
       x: 60
       y: -10
       vx: 5
-      vy: -7
+      vy: -1
       note: 30
     - time: 1360
       type: 2
       x: 60
       y: 7
       vx: 5
-      vy: 7
+      vy: 1
       note: 60
     - time: 1360
       type: 2
       x: 60
       y: 10
       vx: 5
-      vy: 7
+      vy: 1
       note: 60
     - time: 1360
       type: 2
       x: 60
       y: -7
       vx: 5
-      vy: -7
+      vy: -1
       note: 60
     - time: 1360
       type: 2
       x: 60
       y: -10
       vx: 5
-      vy: -7
+      vy: -1
       note: 60
     - time: 1390
       type: 2
       x: 60
       y: 7
       vx: 5
-      vy: 7
+      vy: 1
       note: 90
     - time: 1390
       type: 2
       x: 60
       y: 10
       vx: 5
-      vy: 7
+      vy: 1
       note: 90
     - time: 1390
       type: 2
       x: 60
       y: -7
       vx: 5
-      vy: -7
+      vy: -1
       note: 90
     - time: 1390
       type: 2
       x: 60
       y: -10
       vx: 5
-      vy: -7
+      vy: -1
       note: 90
     - time: 1647
       type: 3
@@ -561,7 +561,7 @@ MonoBehaviour:
       vx: 8
       vy: 0
       note: 0
-    - time: 2615
+    - time: 2568
       type: 201
       x: 60
       y: 0

@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
     public GameObject jiki;
     private bool resetFlag;
     private bool changeFlag;
+    private float rad;
+    private int cnt2;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +62,8 @@ public class Enemy : MonoBehaviour
         jiki=GameObject.Find("TegralK1");
         resetFlag=false;
         changeFlag=false;
+        rad=180*Mathf.Deg2Rad;
+        cnt2=0;
     }
 
     // Update is called once per frame
@@ -87,34 +91,35 @@ public class Enemy : MonoBehaviour
                 Move(4);
                 if(cnt>=300){
                     if(hp>350){
+                        if(cnt2<600)hp=700;
                         if(cnt==300){
                             GameObject b1=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
                             game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().bulletSpawner.Add(b1);
                             b1.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
                             b1.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
                             b1.GetComponent<BulletSpawner>().type=1;
-                            b1.GetComponent<BulletSpawner>().interval=2;
+                            b1.GetComponent<BulletSpawner>().interval=3;
                             b1.GetComponent<BulletSpawner>().note=1;
                             GameObject b2=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
                             game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().bulletSpawner.Add(b2);
                             b2.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
                             b2.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
                             b2.GetComponent<BulletSpawner>().type=1;
-                            b2.GetComponent<BulletSpawner>().interval=2;
+                            b2.GetComponent<BulletSpawner>().interval=3;
                             b2.GetComponent<BulletSpawner>().note=2;
                             GameObject b3=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
                             game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().bulletSpawner.Add(b3);
                             b3.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
                             b3.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
                             b3.GetComponent<BulletSpawner>().type=1;
-                            b3.GetComponent<BulletSpawner>().interval=2;
+                            b3.GetComponent<BulletSpawner>().interval=3;
                             b3.GetComponent<BulletSpawner>().note=3;
                             GameObject b4=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
                             game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().bulletSpawner.Add(b4);
                             b4.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
                             b4.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
                             b4.GetComponent<BulletSpawner>().type=1;
-                            b4.GetComponent<BulletSpawner>().interval=2;
+                            b4.GetComponent<BulletSpawner>().interval=3;
                             b4.GetComponent<BulletSpawner>().note=4;
                         }else if(cnt>600){
                             game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletMove(1);
@@ -132,9 +137,11 @@ public class Enemy : MonoBehaviour
                             b.GetComponent<BulletSpawner>().boxX=this.gameObject.transform.position.x-1.7696286f;
                             b.GetComponent<BulletSpawner>().boxY=this.gameObject.transform.position.y+17.489627f;
                             b.GetComponent<BulletSpawner>().type=2;
-                            b.GetComponent<BulletSpawner>().interval=2;
+                            b.GetComponent<BulletSpawner>().interval=3;
                             changeFlag=true;
+                            cnt2=0;
                         }
+                        if(cnt2<300)hp=350;
                         if(jiki.GetComponent<Jiki>().hitCnt<60 || jiki.GetComponent<Jiki>().bombCnt<180)resetFlag=true;
                         if(resetFlag && jiki.GetComponent<Jiki>().hitCnt>=60 && jiki.GetComponent<Jiki>().bombCnt>=180){
                             changeFlag=false;
@@ -172,6 +179,7 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject);
         }
         cnt++;
+        cnt2++;
         blueCnt++;
         explodeCnt++;
     }
@@ -204,8 +212,9 @@ public class Enemy : MonoBehaviour
             case 2:
             if(cnt<200){
                 rg.velocity=new Vector2(-10,0);
-            }else{
-                rg.velocity=new Vector2(-10,vy);
+            }else if(cnt<380){
+                rad+=Mathf.Deg2Rad/2;
+                rg.velocity=new Vector2(10*Mathf.Cos(rad),vy*10*Mathf.Sin(rad));
             }
             break;
             case 3:

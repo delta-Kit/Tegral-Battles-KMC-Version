@@ -75,7 +75,7 @@ public class BulletManager : MonoBehaviour
                 break;
                 case 6:
                 if(cnt%interval==0){
-                    BulletCreate(pos,6,0,color,0,0.5f,true,note);
+                    BulletCreate(pos,6,0,color,0,1.1f,true,note);
                     GetComponent<AudioSource>().PlayOneShot(spawn[1]);
                 }
                 break;

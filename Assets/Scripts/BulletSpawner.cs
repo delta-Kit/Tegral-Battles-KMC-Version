@@ -42,7 +42,7 @@ public class BulletSpawner : MonoBehaviour
             if(cnt%(interval*2)==interval)game.GetComponent<Game>().GetBulletManager().GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,6,5,0,2,2,0);
             if(cnt>300)Destroy(this.gameObject);
             break;
-            case 2:
+            case 2:                    //ローレンツ・アトラクター
             boxX+=(boxY-boxX)/5;
             boxY+=(28f*boxX-boxY-boxX*vertialZ)/50;
             vertialZ+=(boxX*boxY-8f/3*vertialZ)/50;
