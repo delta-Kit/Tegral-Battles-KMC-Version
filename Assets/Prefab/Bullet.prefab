@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6407479619480030733}
   - component: {fileID: 6407479619480030732}
   - component: {fileID: 6407479619480030723}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,3 +173,4 @@ MonoBehaviour:
   game: {fileID: 0}
   color: 0
   bulletManager: {fileID: 0}
+  note: 0

@@ -53,9 +53,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Ruccho\Water-RW\Sample\ForceMovement.cs" />
+     <Compile Include="Assets\Ruccho\Water-RW\Scripts\WaterRWaver.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\BulletManager.cs" />
      <Compile Include="Assets\Scripts\BulletSpawner.cs" />
+     <Compile Include="Assets\Scripts\Clear.cs" />
      <Compile Include="Assets\Scripts\Effect.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\EnemyManager.cs" />
@@ -63,15 +66,28 @@
      <Compile Include="Assets\Scripts\Jiki.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Title.cs" />
-     <Compile Include="Assets\Sprites\Terasurware\Classes\Entity_Sheet1.cs" />
+     <Compile Include="Assets\Terasurware\Classes\Entity_Sheet1.cs" />
+     <None Include="Assets\Ruccho\Water-RW\Shaders\Water-RW.shader" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/fukik/Tegral Battles KMC Version/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Burst">
+ <HintPath>C:/Users/fukik/Tegral Battles KMC Version/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
  <HintPath>C:/Users/fukik/Tegral Battles KMC Version/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
  <HintPath>C:/Users/fukik/Tegral Battles KMC Version/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Mathematics">
+ <HintPath>C:/Users/fukik/Tegral Battles KMC Version/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Burst.Editor">
+ <HintPath>C:/Users/fukik/Tegral Battles KMC Version/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Mathematics.Editor">
+ <HintPath>C:/Users/fukik/Tegral Battles KMC Version/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
  <HintPath>C:/Users/fukik/Tegral Battles KMC Version/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
