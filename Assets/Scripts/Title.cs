@@ -17,6 +17,7 @@ public class Title : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Z))Invoke("ChangeScene",0);
     }
     void ChangeScene(){
+        Player.ChangeStage(1);
         SceneManager.LoadScene("Game");
     }
 }

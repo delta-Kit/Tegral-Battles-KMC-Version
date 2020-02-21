@@ -19,11 +19,11 @@ public class Clear : MonoBehaviour
     }
     void ChangeScene(){
         if(stageC<6){
+            Player.ChangeStage(stageC + 1);
             SceneManager.LoadScene("Game");
-            Player.ChangeStage(1);
         }else{
+            Player.ChangeStage(1);
             SceneManager.LoadScene("Title");
-            Player.ChangeStage(2);
         }
     }
 }

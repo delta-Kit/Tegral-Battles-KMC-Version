@@ -994,6 +994,7 @@ MonoBehaviour:
   spawn:
   - {fileID: 8300000, guid: e1e265bece6f6524d820e5c41235034c, type: 3}
   - {fileID: 8300000, guid: 0b0b639ced39d104d984fa571111ba81, type: 3}
+  - {fileID: 8300000, guid: 30589bc465513a048b3a95baafe629fa, type: 3}
   enemyManager: {fileID: 143803353}
   bulletSpawner: []
 --- !u!82 &757946766

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6407479619480030733}
   - component: {fileID: 6407479619480030732}
   - component: {fileID: 6407479619480030723}
+  - component: {fileID: 2984998997915162714}
   m_Layer: 8
   m_Name: Bullet
   m_TagString: Untagged
@@ -170,7 +171,26 @@ MonoBehaviour:
   - {fileID: 21300002, guid: 2694cc7efb1635244ba99a6db9973e9b, type: 3}
   - {fileID: 21300004, guid: 2694cc7efb1635244ba99a6db9973e9b, type: 3}
   - {fileID: 21300006, guid: 2694cc7efb1635244ba99a6db9973e9b, type: 3}
+  laser:
+  - {fileID: 21300000, guid: e7364c2794055714890aac895f9a1bdb, type: 3}
+  - {fileID: 21300002, guid: e7364c2794055714890aac895f9a1bdb, type: 3}
   game: {fileID: 0}
   color: 0
   bulletManager: {fileID: 0}
   note: 0
+--- !u!70 &2984998997915162714
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6407479619480030722}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 1

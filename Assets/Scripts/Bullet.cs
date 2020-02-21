@@ -12,11 +12,11 @@ public class Bullet : MonoBehaviour
     public bool isCircle;
     public Sprite jBullet2;
     public Sprite jBullet3;
-    public Sprite[] bullet=new Sprite[4];
+    public Sprite[] bullet=new Sprite[4], laser = new Sprite[2];
     SpriteRenderer  bulletSpriteRenderer;
     private bool isAdditive;
     Quaternion rot;
-    public GameObject game;
+    public GameObject enemyManager;
     private int cnt;
     public int color;
     public GameObject bulletManager;
@@ -28,9 +28,16 @@ public class Bullet : MonoBehaviour
         bulletSpriteRenderer=gameObject.GetComponent<SpriteRenderer>();
         isAdditive=true;
         transform.rotation=Quaternion.Euler(0,0,rad/Mathf.Deg2Rad);
-        if(isCircle){
+        if(type > 200){
+            this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            this.gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
+            this.gameObject.GetComponent<CapsuleCollider2D>().size = new Vector2(24, 2);
+        }
+        else if(isCircle){
             this.gameObject.GetComponent<CircleCollider2D>().enabled=true;
             this.gameObject.GetComponent<BoxCollider2D>().enabled=false;
+            this.gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
             switch(type){
                 case 3:
                 this.gameObject.GetComponent<CircleCollider2D>().radius=16;
@@ -45,6 +52,7 @@ public class Bullet : MonoBehaviour
         }else{
             this.gameObject.GetComponent<CircleCollider2D>().enabled=false;
             this.gameObject.GetComponent<BoxCollider2D>().enabled=true;
+            this.gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
             switch(type){
                 case 1:
                 this.gameObject.GetComponent<BoxCollider2D>().size=new Vector2(4,2);
@@ -54,7 +62,10 @@ public class Bullet : MonoBehaviour
                 break;
             }
         }
-        if(color>100){
+        if(type>200){
+                bulletSpriteRenderer.sprite = laser[color];
+        }
+        else if(color>100){
             switch(color){
                 case 101:
                 bulletSpriteRenderer.sprite=jBullet2;
@@ -76,6 +87,7 @@ public class Bullet : MonoBehaviour
             case 5:
             case 6:
             case 7:
+            case 201:
             this.gameObject.tag="Bullet";
             break;
         }
@@ -84,7 +96,7 @@ public class Bullet : MonoBehaviour
         }else{
             gameObject.GetComponent<Renderer>().material.shader=Shader.Find("Standard");
         }
-        game=GameObject.Find("Game");
+        enemyManager = GameObject.Find("EnemyManager");
         switch(type){
             case 3:
             this.transform.localScale=new Vector3(r/16,r/16,1f);
@@ -94,6 +106,9 @@ public class Bullet : MonoBehaviour
             case 6:
             case 7:
             this.transform.localScale=new Vector3(r/2,r/2,1f);
+            break;
+            case 201:
+            this.transform.localScale = new Vector3(1 / this.gameObject.GetComponent<CapsuleCollider2D>().size.x, 0.5f, 1f);
             break;
         }
         bulletManager=GameObject.Find("BulletManager");
@@ -118,15 +133,18 @@ public class Bullet : MonoBehaviour
             case 6:
             Delete(3);
             break;
+            case 201:
+            Delete(1.3f);
+            break;
         }
         if(!isCircle)transform.rotation=Quaternion.Euler(0,0,rad/Mathf.Deg2Rad);
         switch(type){
             case 1:
-            if(game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().x>-60){
-                if(rad>Mathf.Atan2(game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().y-this.gameObject.transform.position.y,game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().x-this.gameObject.transform.position.x)){
+            if(enemyManager.GetComponent<EnemyManager>().GetEnemyPosition().x>-60){
+                if(rad>Mathf.Atan2(enemyManager.GetComponent<EnemyManager>().GetEnemyPosition().y-this.gameObject.transform.position.y,enemyManager.GetComponent<EnemyManager>().GetEnemyPosition().x-this.gameObject.transform.position.x)){
                     rad-=Mathf.Deg2Rad*3;
                 }
-                if(rad<Mathf.Atan2(game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().y-this.gameObject.transform.position.y,game.GetComponent<Game>().GetEnemyManager().GetComponent<EnemyManager>().GetEnemyPosition().x-this.gameObject.transform.position.x)){
+                if(rad<Mathf.Atan2(enemyManager.GetComponent<EnemyManager>().GetEnemyPosition().y-this.gameObject.transform.position.y,enemyManager.GetComponent<EnemyManager>().GetEnemyPosition().x-this.gameObject.transform.position.x)){
                     rad+=Mathf.Deg2Rad*3;
                 }
             }
@@ -140,8 +158,6 @@ public class Bullet : MonoBehaviour
                 }
             }
             break;
-            case 4:
-            break;
             case 5:
             if(v<40)v--;
             break;
@@ -150,11 +166,17 @@ public class Bullet : MonoBehaviour
             case 7:
             if(cnt>=120)v=8f;
             break;
+            case 201:
+            //if(cnt < 60)this.gameObject.GetComponent<CapsuleCollider2D>().size += new Vector2(v / 2, 0);
+            break;
         }
         rg.velocity=new Vector2(v*Mathf.Cos(rad),v*Mathf.Sin(rad));
         switch(type){
             case 3:
             this.transform.localScale=new Vector3(r/16,r/16,1f);
+            break;
+            case 201:
+            if(cnt < 30)this.transform.localScale += new Vector3(v / 1000, 0, 0);
             break;
         }
         cnt++;
