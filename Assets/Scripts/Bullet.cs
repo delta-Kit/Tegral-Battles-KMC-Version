@@ -46,6 +46,7 @@ public class Bullet : MonoBehaviour
                 case 5:
                 case 6:
                 case 7:
+                case 8:
                 this.gameObject.GetComponent<CircleCollider2D>().radius=2;
                 break;
             }
@@ -87,6 +88,7 @@ public class Bullet : MonoBehaviour
             case 5:
             case 6:
             case 7:
+            case 8:
             case 201:
             this.gameObject.tag="Bullet";
             break;
@@ -105,6 +107,7 @@ public class Bullet : MonoBehaviour
             case 5:
             case 6:
             case 7:
+            case 8:
             this.transform.localScale=new Vector3(r/2,r/2,1f);
             break;
             case 201:
@@ -128,6 +131,7 @@ public class Bullet : MonoBehaviour
             case 4:
             case 5:
             case 7:
+            case 8:
             Delete(1);
             break;
             case 6:
@@ -162,12 +166,20 @@ public class Bullet : MonoBehaviour
             if(v<40)v--;
             break;
             case 6:
+            if(cnt < 60)rad += note * Mathf.Deg2Rad;
+            if(cnt == 40){
+                for(int i = -3; i <= 3; i ++){
+                    bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position, 9, 1, v, 2, 0, rad + Mathf.Deg2Rad * (180 + i * 8) + Random.Range(-0.1f, 0.1f));
+                }
+                bulletManager.GetComponent<BulletManager>().bullet.Remove(this.gameObject);
+                Destroy(this.gameObject);
+            }
             break;
             case 7:
             if(cnt>=120)v=8f;
             break;
-            case 201:
-            //if(cnt < 60)this.gameObject.GetComponent<CapsuleCollider2D>().size += new Vector2(v / 2, 0);
+            case 8:
+            if(cnt < 60)rad += Mathf.Deg2Rad * note * 1.5f;
             break;
         }
         rg.velocity=new Vector2(v*Mathf.Cos(rad),v*Mathf.Sin(rad));
