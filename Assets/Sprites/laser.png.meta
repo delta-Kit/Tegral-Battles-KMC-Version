@@ -4,6 +4,7 @@ TextureImporter:
   fileIDToRecycleName:
     21300000: laser_0
     21300002: laser_1
+    21300004: laser_2
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -101,6 +102,26 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 400
+        width: 2400
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2c5018d3ee51084fb7e65d6c724e742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: laser_1
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 200
         width: 2400
         height: 200
@@ -111,13 +132,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c932654464deb141b9afa11aea141f0
+      spriteID: cf64d7f34066ae34d8450543086080cc
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: laser_1
+      name: laser_2
       rect:
         serializedVersion: 2
         x: 0
@@ -131,7 +152,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 79aed4c8159c2ee438ba2e9b9a695c97
+      spriteID: 71a9ca413f6a19145a8a6b30eb2fa70e
       vertices: []
       indices: 
       edges: []
@@ -139,7 +160,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: f4a7f274414606d4db261d9903c035ef
+    spriteID: 7e295fce9a88cec40a36b11f2b8440c1
     vertices: []
     indices: 
     edges: []

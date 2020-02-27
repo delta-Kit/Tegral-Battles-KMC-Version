@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     public bool isCircle;
     public Sprite jBullet2;
     public Sprite jBullet3;
-    public Sprite[] bullet=new Sprite[4], laser = new Sprite[2];
+    public Sprite[] bullet=new Sprite[5], laser = new Sprite[3];
     SpriteRenderer  bulletSpriteRenderer;
     private bool isAdditive;
     Quaternion rot;
@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
             this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
             this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             this.gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
-            this.gameObject.GetComponent<CapsuleCollider2D>().size = new Vector2(24, 2);
+            this.gameObject.GetComponent<CapsuleCollider2D>().size = new Vector2(24, 1);
         }
         else if(isCircle){
             this.gameObject.GetComponent<CircleCollider2D>().enabled=true;
@@ -111,7 +111,7 @@ public class Bullet : MonoBehaviour
             this.transform.localScale=new Vector3(r/2,r/2,1f);
             break;
             case 201:
-            this.transform.localScale = new Vector3(1 / this.gameObject.GetComponent<CapsuleCollider2D>().size.x, 0.5f, 1f);
+            this.transform.localScale = new Vector3(1 / this.gameObject.GetComponent<CapsuleCollider2D>().size.x, 0.3f, 1f);
             break;
         }
         bulletManager=GameObject.Find("BulletManager");
@@ -169,7 +169,7 @@ public class Bullet : MonoBehaviour
             if(cnt < 60)rad += note * Mathf.Deg2Rad;
             if(cnt == 40){
                 for(int i = -3; i <= 3; i ++){
-                    bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position, 9, 1, v, 2, 0, rad + Mathf.Deg2Rad * (180 + i * 8) + Random.Range(-0.1f, 0.1f));
+                    bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position, 9, 1, v, 2, 0, rad + Mathf.Deg2Rad * (180 + i * 8) + Random.Range(-0.1f, 0.1f), 0.5f);
                 }
                 bulletManager.GetComponent<BulletManager>().bullet.Remove(this.gameObject);
                 Destroy(this.gameObject);
@@ -188,7 +188,7 @@ public class Bullet : MonoBehaviour
             this.transform.localScale=new Vector3(r/16,r/16,1f);
             break;
             case 201:
-            if(cnt < 30)this.transform.localScale += new Vector3(v / 1000, 0, 0);
+            if(cnt < r)this.transform.localScale += new Vector3(v / 1000, 0, 0);
             break;
         }
         cnt++;

@@ -4,6 +4,8 @@ TextureImporter:
   fileIDToRecycleName:
     21300000: sigmas_0
     21300002: sigmas_1
+    21300004: sigmas_2
+    21300006: sigmas_3
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -101,6 +103,46 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 600
+        width: 600
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b49954df67efa0e4ab258479e34cfae0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sigmas_1
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 600
+        width: 600
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f5ca788db67c2c4fa2378e0c6d0fa31
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sigmas_2
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
         width: 600
         height: 600
@@ -111,13 +153,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d27b130f5dd471348a1645bd45bf5c79
+      spriteID: 46be76a70e7045249b13fc62d373ab28
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sigmas_1
+      name: sigmas_3
       rect:
         serializedVersion: 2
         x: 600
@@ -131,7 +173,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c0735c0ba0b7164e96c93ba6be2e28c
+      spriteID: 2af84889f5b0acf488efa2dc73491652
       vertices: []
       indices: 
       edges: []
@@ -139,7 +181,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: e910212a38166314682bcf116d8cd621
+    spriteID: b85c767b4495772418370084bd9c61e0
     vertices: []
     indices: 
     edges: []

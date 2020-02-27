@@ -34,7 +34,7 @@ public class BulletManager : MonoBehaviour
     {
         cnt++;   
     }
-    public void BulletAppear(Vector3 pos,int type,int interval,float v,int color,int note,float rad){
+    public void BulletAppear(Vector3 pos,int type,int interval,float v,int color,int note,float rad, float r){
         if(type==1){
             gameObject.GetComponent<AudioSource>().clip=spawn[0];
         }else if(type <= 200){
@@ -95,7 +95,7 @@ public class BulletManager : MonoBehaviour
                 break;
                 case 9:
                 if(cnt % interval == 0){
-                    BulletCreate(pos, 4, v, color, rad, 0.5f, true, note);
+                    BulletCreate(pos, 4, v, color, rad, r, true, note);
                     GetComponent<AudioSource>().PlayOneShot(spawn[1]);
                 }
                 break;
@@ -107,7 +107,7 @@ public class BulletManager : MonoBehaviour
                 break;
                 case 201:
                 if(cnt % interval == 0){
-                    BulletCreate(pos, 201, v, color, rad, 0, false, 0);
+                    BulletCreate(pos, 201, v, color, rad, r, false, 0);
                     GetComponent<AudioSource>().PlayOneShot(spawn[2]);
                 }
                 break;
@@ -140,6 +140,11 @@ public class BulletManager : MonoBehaviour
             for(int i=0;i<bullet.Count;i++){
                 if(bullet[i].GetComponent<Bullet>().note==1)bullet[i].transform.RotateAround(enemyManager.GetComponent<EnemyManager>().GetEnemyPosition(),new Vector3(0,0,1),40*Mathf.Deg2Rad);
                 if(bullet[i].GetComponent<Bullet>().note==2)bullet[i].transform.RotateAround(enemyManager.GetComponent<EnemyManager>().GetEnemyPosition(),new Vector3(0,0,1),-40*Mathf.Deg2Rad);
+            }
+            break;
+            case 2:
+            for(int i = 0; i < bullet.Count; i ++){
+                if(bullet[i].GetComponent<Rigidbody2D>().velocity == new Vector2(0, 0))bullet[i].GetComponent<Bullet>().v = 20f;
             }
             break;
         }

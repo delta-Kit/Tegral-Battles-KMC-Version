@@ -49,9 +49,9 @@ public class Jiki : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)){
             if(Input.GetAxisRaw("Horizontal")!=0 && Input.GetAxisRaw("Vertical")!=0){
-                walkSpeed=(float)0.5/(float)Math.Sqrt(2);
+                walkSpeed=(float)0.3/(float)Math.Sqrt(2);
             }else{
-                walkSpeed=0.5f;
+                walkSpeed=0.3f;
             }
             hitCircle.SetActive(true);
         }else{
@@ -72,7 +72,7 @@ public class Jiki : MonoBehaviour
             animator.SetTrigger("Stop");
             flag=false;
         }
-        if(Input.GetKey(KeyCode.Z))bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,1,5,100f,0,0,0);
+        if(Input.GetKey(KeyCode.Z))bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,1,5,100f,0,0,0, 0);
         if(Input.GetKeyDown(KeyCode.X) && bomb>0 && bombCnt>=180 && hitCnt>=180){
             bombCnt=0;
             bombPosition=this.gameObject.transform.position;
@@ -83,7 +83,7 @@ public class Jiki : MonoBehaviour
             gameObject.GetComponent<AudioSource>().clip=bombSound;
             GetComponent<AudioSource>().Play();
         }
-        if(bombCnt<60)bulletManager.GetComponent<BulletManager>().BulletAppear(bombPosition,2,5,0,102,0,0);
+        if(bombCnt<60)bulletManager.GetComponent<BulletManager>().BulletAppear(bombPosition,2,5,0,102,0,0, 0);
         if(bombCnt==180)bulletManager.GetComponent<BulletManager>().BulletDelete();
         if(this.gameObject.transform.position.x<-43)this.gameObject.transform.position=new Vector3(-43,this.gameObject.transform.position.y,0);
         if(this.gameObject.transform.position.x>43)this.gameObject.transform.position=new Vector3(43,this.gameObject.transform.position.y,0);

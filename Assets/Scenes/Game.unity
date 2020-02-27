@@ -529,8 +529,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51c1e30358face74882088642a989356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 6407479619480030722, guid: 82d75277fdef6b84192d909fc3cb53e3, type: 3}
-  enemy: {fileID: 766434338268023303, guid: 3ca2a5ed249f4c14abbbcc57718cc325, type: 3}
 --- !u!1 &456958842
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,7 +800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4b1018624ad3641ad93320ffb66502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game: {fileID: 0}
+  bulletManager: {fileID: 0}
   bombCnt: 0
   hitCircle: {fileID: 1590220860}
   hitCnt: 0
@@ -1814,7 +1812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1021e38c93b905c44aecb28b4a7db87b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game: {fileID: 0}
+  enemyManager: {fileID: 0}
   bgm:
   - {fileID: 0}
   - {fileID: 8300000, guid: a04b65a05a66a6a47b5a20bf4db68cd4, type: 3}
