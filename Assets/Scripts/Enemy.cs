@@ -217,6 +217,7 @@ public class Enemy : MonoBehaviour
                             cnt=299;
                             resetFlag=false;
                         }
+                        if(cnt2 > 1200)hp =350;
                     }else{
                         if(!changeFlag){
                             bulletManager.GetComponent<BulletManager>().BulletDelete();
@@ -235,6 +236,7 @@ public class Enemy : MonoBehaviour
                             changeFlag=false;
                             resetFlag=false;
                         }
+                        if(cnt2 > 1200)hp =0;
                     }
                 }
                 break;

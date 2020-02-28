@@ -128,13 +128,13 @@ public class Bullet : MonoBehaviour
         switch(type){
             case 1:
             case 2:
-            case 4:
             case 5:
+            case 6:
             case 7:
             case 8:
             Delete(1);
             break;
-            case 6:
+            case 4:
             Delete(3);
             break;
             case 201:
@@ -163,7 +163,7 @@ public class Bullet : MonoBehaviour
             }
             break;
             case 5:
-            if(v<40)v--;
+            if(v>-40)v--;
             break;
             case 6:
             if(cnt < 60)rad += note * Mathf.Deg2Rad;

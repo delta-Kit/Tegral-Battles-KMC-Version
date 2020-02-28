@@ -533,35 +533,7 @@ MonoBehaviour:
       vx: 8
       vy: 0
       note: 0
-    - time: 2160
-      type: 3
-      x: 35
-      y: 30
-      vx: 0
-      vy: 7
-      note: 0
-    - time: 2160
-      type: 3
-      x: 35
-      y: -30
-      vx: 0
-      vy: -7
-      note: 0
-    - time: 2280
-      type: 3
-      x: 60
-      y: 5
-      vx: 8
-      vy: 0
-      note: 0
-    - time: 2280
-      type: 3
-      x: 60
-      y: -5
-      vx: 8
-      vy: 0
-      note: 0
-    - time: 2615
+    - time: 2300
       type: 201
       x: 60
       y: 0
