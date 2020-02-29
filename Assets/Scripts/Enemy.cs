@@ -217,7 +217,7 @@ public class Enemy : MonoBehaviour
                             cnt=299;
                             resetFlag=false;
                         }
-                        if(cnt2 > 1200)hp =350;
+                        if(cnt2 > 2400)hp =350;
                     }else{
                         if(!changeFlag){
                             bulletManager.GetComponent<BulletManager>().BulletDelete();
@@ -236,7 +236,7 @@ public class Enemy : MonoBehaviour
                             changeFlag=false;
                             resetFlag=false;
                         }
-                        if(cnt2 > 1200)hp =0;
+                        if(cnt2 > 2100)hp = 0;
                     }
                 }
                 break;
@@ -245,7 +245,7 @@ public class Enemy : MonoBehaviour
                 if(cnt >= 300){
                     if(hp > 2100){
                         if(cnt2 < 600)hp = 2450;
-                        if(cnt == 300){
+                        if(cnt % 600 == 300){
                             GameObject b1=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
                             bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b1);
                             b1.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
@@ -274,6 +274,36 @@ public class Enemy : MonoBehaviour
                             b4.GetComponent<BulletSpawner>().type=3;
                             b4.GetComponent<BulletSpawner>().interval=3;
                             b4.GetComponent<BulletSpawner>().note=4;   
+                        }
+                        if(cnt % 600 == 0){
+                            GameObject b1=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
+                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b1);
+                            b1.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
+                            b1.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
+                            b1.GetComponent<BulletSpawner>().type=3;
+                            b1.GetComponent<BulletSpawner>().interval=3;
+                            b1.GetComponent<BulletSpawner>().note=5;
+                            GameObject b2=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
+                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b2);
+                            b2.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
+                            b2.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
+                            b2.GetComponent<BulletSpawner>().type=3;
+                            b2.GetComponent<BulletSpawner>().interval=3;
+                            b2.GetComponent<BulletSpawner>().note=6;
+                            GameObject b3=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
+                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b3);
+                            b3.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
+                            b3.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
+                            b3.GetComponent<BulletSpawner>().type=3;
+                            b3.GetComponent<BulletSpawner>().interval=3;
+                            b3.GetComponent<BulletSpawner>().note=7;
+                            GameObject b4=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
+                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b4);
+                            b4.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
+                            b4.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
+                            b4.GetComponent<BulletSpawner>().type=3;
+                            b4.GetComponent<BulletSpawner>().interval=3;
+                            b4.GetComponent<BulletSpawner>().note=8;
                         }
                     }
                 }

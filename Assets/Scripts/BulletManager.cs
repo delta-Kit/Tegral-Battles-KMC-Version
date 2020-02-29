@@ -35,13 +35,6 @@ public class BulletManager : MonoBehaviour
         cnt++;   
     }
     public void BulletAppear(Vector3 pos,int type,int interval,float v,int color,int note,float rad, float r){
-        if(type==1){
-            gameObject.GetComponent<AudioSource>().clip=spawn[0];
-        }else if(type <= 200){
-            gameObject.GetComponent<AudioSource>().clip=spawn[1];
-        }else{
-            gameObject.GetComponent<AudioSource>().clip = spawn[2];
-        }
         if(jiki.GetComponent<Jiki>().bombCnt>=180 || type==2){
             switch(type){
                 case 1:
@@ -77,13 +70,13 @@ public class BulletManager : MonoBehaviour
                 break;
                 case 6:
                 if(cnt%interval==0){
-                    BulletCreate(pos, 4,0,color,0,1.1f,true,note);
+                    BulletCreate(pos, 9,0,color,0,1.1f,true,note);
                     GetComponent<AudioSource>().PlayOneShot(spawn[1]);
                 }
                 break;
                 case 7:
                 if(cnt%interval==0){
-                    BulletCreate(pos,7,0,color,rad,0.5f,true,0);
+                    BulletCreate(pos,7,0,color,rad,0.5f,true, note);
                     GetComponent<AudioSource>().PlayOneShot(spawn[1]);
                 }
                 break;
