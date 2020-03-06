@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class Jiki : MonoBehaviour
 {
-    public GameObject bulletManager;
+    public BulletManager bulletManager;
     private Rigidbody2D rg;
     private float walkSpeed=1f;
     private Animator animator;
@@ -16,32 +16,32 @@ public class Jiki : MonoBehaviour
     public int bombCnt;
     private Vector3 bombPosition;
     private int bomb;
-    GameObject[] bombImage=new GameObject[3];
+    Image[] bombImage=new Image[3];
     public GameObject hitCircle;
     private int life;
     public int hitCnt;
     public GameObject hitEffect;
-    GameObject[] lifeImage=new GameObject[5];
+    Image[] lifeImage=new Image[5];
     public AudioClip hit,bombSound;
     // Start is called before the first frame update
     void Start()
     {
         rg=GetComponent<Rigidbody2D>();
         animator=GetComponent<Animator>();
-        bulletManager = GameObject.Find("BulletManager");
+        bulletManager = GameObject.Find("BulletManager").GetComponent<BulletManager>();
         cnt=0;
         bombCnt=300;
         bomb=3;
-        bombImage[0]=GameObject.Find("Bomb1");
-        bombImage[1]=GameObject.Find("Bomb2");
-        bombImage[2]=GameObject.Find("Bomb3");
+        bombImage[0]=GameObject.Find("Bomb1").GetComponent<Image>();
+        bombImage[1]=GameObject.Find("Bomb2").GetComponent<Image>();
+        bombImage[2]=GameObject.Find("Bomb3").GetComponent<Image>();
         life=6;
         hitCnt=200;
-        lifeImage[0]=GameObject.Find("Life1");
-        lifeImage[1]=GameObject.Find("Life2");
-        lifeImage[2]=GameObject.Find("Life3");
-        lifeImage[3]=GameObject.Find("Life4");
-        lifeImage[4]=GameObject.Find("Life5");
+        lifeImage[0]=GameObject.Find("Life1").GetComponent<Image>();
+        lifeImage[1]=GameObject.Find("Life2").GetComponent<Image>();
+        lifeImage[2]=GameObject.Find("Life3").GetComponent<Image>();
+        lifeImage[3]=GameObject.Find("Life4").GetComponent<Image>();
+        lifeImage[4]=GameObject.Find("Life5").GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -51,7 +51,7 @@ public class Jiki : MonoBehaviour
             if(Input.GetAxisRaw("Horizontal")!=0 && Input.GetAxisRaw("Vertical")!=0){
                 walkSpeed=(float)0.3/(float)Math.Sqrt(2);
             }else{
-                walkSpeed=0.3f;
+                walkSpeed=0.2f;
             }
             hitCircle.SetActive(true);
         }else{
@@ -72,19 +72,19 @@ public class Jiki : MonoBehaviour
             animator.SetTrigger("Stop");
             flag=false;
         }
-        if(Input.GetKey(KeyCode.Z))bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,1,5,100f,0,0,0, 0);
+        if(Input.GetKey(KeyCode.Z))bulletManager.BulletAppear(this.gameObject.transform.position,1,5,100f,0,0,0, 0);
         if(Input.GetKeyDown(KeyCode.X) && bomb>0 && bombCnt>=180 && hitCnt>=180){
             bombCnt=0;
             bombPosition=this.gameObject.transform.position;
             bomb--;
-            bombImage[bomb].GetComponent<Image>().enabled=false;
-            bulletManager.GetComponent<BulletManager>().BulletDelete();
+            bombImage[bomb].enabled=false;
+            bulletManager.BulletDelete();
             if(hitCnt<8)hitCnt=200;
             gameObject.GetComponent<AudioSource>().clip=bombSound;
             GetComponent<AudioSource>().Play();
         }
-        if(bombCnt<60)bulletManager.GetComponent<BulletManager>().BulletAppear(bombPosition,2,5,0,102,0,0, 0);
-        if(bombCnt==180)bulletManager.GetComponent<BulletManager>().BulletDelete();
+        if(bombCnt<60)bulletManager.BulletAppear(bombPosition,2,5,0,102,0,0, 0);
+        if(bombCnt==180)bulletManager.BulletDelete();
         if(this.gameObject.transform.position.x<-43)this.gameObject.transform.position=new Vector3(-43,this.gameObject.transform.position.y,0);
         if(this.gameObject.transform.position.x>43)this.gameObject.transform.position=new Vector3(43,this.gameObject.transform.position.y,0);
         if(this.gameObject.transform.position.y<-17)this.gameObject.transform.position=new Vector3(this.gameObject.transform.position.x,-17,0);
@@ -98,20 +98,20 @@ public class Jiki : MonoBehaviour
         if(hitCnt==8){
             life--;
             if(life>0){
-                lifeImage[life-1].GetComponent<Image>().enabled=false;
+                lifeImage[life-1].enabled=false;
             }else{
                 Invoke("ChangeScene",0);
             }
             bomb=3;
-            for(int i=0;i<3;i++)bombImage[i].GetComponent<Image>().enabled=true;
+            for(int i=0;i<3;i++)bombImage[i].enabled=true;
         }
         bombCnt++;
         cnt++;
         hitCnt++;
     }
     public void OnTriggerEnter2D(Collider2D col){
-        if(col.gameObject.tag=="Bullet" && hitCnt>180 && bombCnt>180){
-            bulletManager.GetComponent<BulletManager>().BulletDelete();
+        if(col.gameObject.tag=="Bullet" && hitCnt>180 && bombCnt>180 && !Input.GetKey(KeyCode.I)){
+            bulletManager.BulletDelete();
             hitCnt=0;
             gameObject.GetComponent<AudioSource>().clip=hit;
             GetComponent<AudioSource>().Play();

@@ -65,7 +65,7 @@ public class Bullet : MonoBehaviour
             }
         }
         if(type>200){
-                bulletSpriteRenderer.sprite = laser[color];
+            bulletSpriteRenderer.sprite = laser[color];
         }
         else if(color>100){
             switch(color){

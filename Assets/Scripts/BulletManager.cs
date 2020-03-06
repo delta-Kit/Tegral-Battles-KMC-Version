@@ -70,7 +70,7 @@ public class BulletManager : MonoBehaviour
                 break;
                 case 6:
                 if(cnt%interval==0){
-                    BulletCreate(pos, 9,0,color,0,1.1f,true,note);
+                    BulletCreate(pos, 9,0,color,0, 1,true,note);
                     GetComponent<AudioSource>().PlayOneShot(spawn[1]);
                 }
                 break;
@@ -131,8 +131,8 @@ public class BulletManager : MonoBehaviour
         switch(type){
             case 1:
             for(int i=0;i<bullet.Count;i++){
-                if(bullet[i].GetComponent<Bullet>().note==1)bullet[i].transform.RotateAround(enemyManager.GetComponent<EnemyManager>().GetEnemyPosition(),new Vector3(0,0,1),40*Mathf.Deg2Rad);
-                if(bullet[i].GetComponent<Bullet>().note==2)bullet[i].transform.RotateAround(enemyManager.GetComponent<EnemyManager>().GetEnemyPosition(),new Vector3(0,0,1),-40*Mathf.Deg2Rad);
+                if(bullet[i].GetComponent<Bullet>().note==1)bullet[i].transform.RotateAround(enemyManager.GetComponent<EnemyManager>().GetEnemyPosition(),new Vector3(0,0,1),20*Mathf.Deg2Rad);
+                if(bullet[i].GetComponent<Bullet>().note==2)bullet[i].transform.RotateAround(enemyManager.GetComponent<EnemyManager>().GetEnemyPosition(),new Vector3(0,0,1),-20*Mathf.Deg2Rad);
             }
             break;
             case 2:

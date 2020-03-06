@@ -16,16 +16,16 @@ public class Enemy : MonoBehaviour
     public int hp;
     private bool isBlue;
     private int blueCnt;
-    public GameObject enemyManager;
+    public EnemyManager enemyManager;
     private int explodeCnt;
     public int note;
     public GameObject BulletSpawner;
-    public GameObject jiki;
+    public Jiki jiki;
     private bool resetFlag;
     private bool changeFlag;
     private float rad;
     private int cnt2;
-    public GameObject bulletManager;
+    public BulletManager bulletManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,11 +71,11 @@ public class Enemy : MonoBehaviour
             break;
         }
         blueCnt=10;
-        enemyManager=GameObject.Find("EnemyManager");
-        bulletManager = GameObject.Find("BulletManager");
+        enemyManager=GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
+        bulletManager = GameObject.Find("BulletManager").GetComponent<BulletManager>();
         explodeCnt=100;
         cnt=0;
-        jiki=GameObject.Find("TegralK1");
+        jiki=GameObject.Find("TegralK1").GetComponent<Jiki>();
         resetFlag=false;
         changeFlag=false;
         rad=180*Mathf.Deg2Rad;
@@ -90,42 +90,42 @@ public class Enemy : MonoBehaviour
                 case 1:
                 Move(1);
                 if(cnt==210){
-                    bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,3,1,30f,1,0,0, 0);
+                    bulletManager.BulletAppear(this.gameObject.transform.position,3,1,30f,1,0,0, 0);
                 }
                 break;
                 case 2:
                 Move(2);
-                if(cnt>=150 && this.gameObject.transform.position.y>=-20 && this.gameObject.transform.position.y<=20)bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,4,120,30f,2,note,0, 0);
+                if(cnt>=150 && this.gameObject.transform.position.y>=-20 && this.gameObject.transform.position.y<=20)bulletManager.BulletAppear(this.gameObject.transform.position,4,120,30f,2,note,0, 0);
                 break;
                 case 3:
                 Move(3);
                 if(cnt==210){
-                    bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position,5,1,30f,3,0,0, 0);
+                    bulletManager.BulletAppear(this.gameObject.transform.position,5,1,30f,3,0,0, 0);
                 }
                 break;
                 case 4:
                 Move(1);
                 if(cnt == 210){
-                    bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position, 201, 1, 30, 0, 0, Mathf.Atan2(jiki.transform.position.y - this.gameObject.transform.position.y, jiki.transform.position.x - this.gameObject.transform.position.x), 30);
+                    bulletManager.BulletAppear(this.gameObject.transform.position, 201, 1, 30, 0, 0, Mathf.Atan2(jiki.transform.position.y - this.gameObject.transform.position.y, jiki.transform.position.x - this.gameObject.transform.position.x), 30);
                 }
                 break;
                 case 5:
                 Move(1);
                 if(cnt >= 180 && cnt < 240){
-                    bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position, 201, 5, 20, 1, 0, cnt * 6 * Mathf.Deg2Rad, 30);
+                    bulletManager.BulletAppear(this.gameObject.transform.position, 201, 5, 20, 1, 0, cnt * 6 * Mathf.Deg2Rad, 30);
                 }
                 break;
                 case 6:
                 Move(6);
                 if(cnt % 23 == 0){
-                    bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position, 9, 1, 20, 3, 0, Mathf.PI, 0.5f);
+                    bulletManager.BulletAppear(this.gameObject.transform.position, 9, 1, 20, 3, 0, Mathf.PI, 0.5f);
                 }
                 break;
                 case 7:
                 Move(3);
                 if(cnt == 210){
                     for(int i = 0; i < 12; i ++){
-                        bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position, 201, 1, 30, 2, 0, Mathf.Atan2(jiki.gameObject.transform.position.y - this.gameObject.transform.position.y, jiki.gameObject.transform.position.x - this.gameObject.transform.position.y) + Mathf.Deg2Rad * i * 30, 20);
+                        bulletManager.BulletAppear(this.gameObject.transform.position, 201, 1, 30, 2, 0, Mathf.Atan2(jiki.gameObject.transform.position.y - this.gameObject.transform.position.y, jiki.gameObject.transform.position.x - this.gameObject.transform.position.y) + Mathf.Deg2Rad * i * 30, 20);
                     }
                 }
                 break;
@@ -136,39 +136,39 @@ public class Enemy : MonoBehaviour
                         case 240:
                         float rad0 = Random.Range(0, 2 * Mathf.PI);
                         for(int i = 0; i < 12; i ++){
-                            bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position, 8, 1, 30, 1, 1, i * Mathf.Deg2Rad * 30 + rad0, 0);
+                            bulletManager.BulletAppear(this.gameObject.transform.position, 8, 1, 30, 1, 1, i * Mathf.Deg2Rad * 30 + rad0, 0);
                         }
                         break;
                         case 360:
                         rad0 = Random.Range(0, 2 * Mathf.PI);
                         for(int i = 0; i < 6; i ++){
                             for(int j = 0; j < 7; j++){
-                                bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position, 10, 1, 16 + j * 2, 1, 1, i * Mathf.Deg2Rad * 60 + rad0, 0);
+                                bulletManager.BulletAppear(this.gameObject.transform.position, 10, 1, 16 + j * 2, 1, 1, i * Mathf.Deg2Rad * 60 + rad0, 0);
                             }
                         }
                         rad0 = Random.Range(0, 2 * Mathf.PI);
                         for(int i = 0; i < 6; i ++){
                             for(int j = 0; j < 7; j++){
-                                bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position, 10, 1, 16 + j * 3, 2, -1, i * Mathf.Deg2Rad * 60 + rad0 + 30 * Mathf.Deg2Rad, 0);
+                                bulletManager.BulletAppear(this.gameObject.transform.position, 10, 1, 16 + j * 3, 2, -1, i * Mathf.Deg2Rad * 60 + rad0 + 30 * Mathf.Deg2Rad, 0);
                             }
                         }
                         break;
                         case 0:
                         rad0 = Random.Range(0, 2 * Mathf.PI);
                         for(int i = 0; i < 12; i ++){
-                            bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position, 8, 1, 30, 1, -1, i * Mathf.Deg2Rad * 30 + rad0, 0);
+                            bulletManager.BulletAppear(this.gameObject.transform.position, 8, 1, 30, 1, -1, i * Mathf.Deg2Rad * 30 + rad0, 0);
                         }
                         break;
                         case 120:
                         rad0 = Random.Range(0, 2 * Mathf.PI);
                         for(int i = 0; i < 6; i ++){
                             for(int j = 0; j < 7; j++){
-                                bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position, 10, 1, 16 + j * 2, 1, -1, i * Mathf.Deg2Rad * 60 + rad0, 0);
+                                bulletManager.BulletAppear(this.gameObject.transform.position, 10, 1, 16 + j * 2, 1, -1, i * Mathf.Deg2Rad * 60 + rad0, 0);
                             }
                         }
                         for(int i = 0; i < 6; i ++){
                             for(int j = 0; j < 7; j++){
-                                bulletManager.GetComponent<BulletManager>().BulletAppear(this.gameObject.transform.position, 10, 1, 16 + j * 3, 2, 1, i * Mathf.Deg2Rad * 60 + rad0 + 30 * Mathf.Deg2Rad, 0);
+                                bulletManager.BulletAppear(this.gameObject.transform.position, 10, 1, 16 + j * 3, 2, 1, i * Mathf.Deg2Rad * 60 + rad0 + 30 * Mathf.Deg2Rad, 0);
                             }
                         }
                         break;
@@ -182,57 +182,57 @@ public class Enemy : MonoBehaviour
                         if(cnt2<600)hp=700;
                         if(cnt==300){
                             GameObject b1=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
-                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b1);
+                            bulletManager.bulletSpawner.Add(b1);
                             b1.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
                             b1.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
                             b1.GetComponent<BulletSpawner>().type=1;
-                            b1.GetComponent<BulletSpawner>().interval=3;
+                            b1.GetComponent<BulletSpawner>().interval=2;
                             b1.GetComponent<BulletSpawner>().note=1;
                             GameObject b2=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
-                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b2);
+                            bulletManager.bulletSpawner.Add(b2);
                             b2.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
                             b2.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
                             b2.GetComponent<BulletSpawner>().type=1;
-                            b2.GetComponent<BulletSpawner>().interval=3;
+                            b2.GetComponent<BulletSpawner>().interval=2;
                             b2.GetComponent<BulletSpawner>().note=2;
                             GameObject b3=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
-                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b3);
+                            bulletManager.bulletSpawner.Add(b3);
                             b3.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
                             b3.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
                             b3.GetComponent<BulletSpawner>().type=1;
-                            b3.GetComponent<BulletSpawner>().interval=3;
+                            b3.GetComponent<BulletSpawner>().interval=2;
                             b3.GetComponent<BulletSpawner>().note=3;
                             GameObject b4=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
-                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b4);
+                            bulletManager.bulletSpawner.Add(b4);
                             b4.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
                             b4.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
                             b4.GetComponent<BulletSpawner>().type=1;
-                            b4.GetComponent<BulletSpawner>().interval=3;
+                            b4.GetComponent<BulletSpawner>().interval=2;
                             b4.GetComponent<BulletSpawner>().note=4;
                         }else if(cnt>600){
-                            bulletManager.GetComponent<BulletManager>().BulletMove(1);
+                            bulletManager.BulletMove(1);
                         }
-                        if(jiki.GetComponent<Jiki>().hitCnt<60 || jiki.GetComponent<Jiki>().bombCnt<180)resetFlag=true;
-                        if(resetFlag && jiki.GetComponent<Jiki>().hitCnt>=60 && jiki.GetComponent<Jiki>().bombCnt>=180){
+                        if(jiki.hitCnt<60 || jiki.bombCnt<180)resetFlag=true;
+                        if(resetFlag && jiki.hitCnt>=60 && jiki.bombCnt>=180){
                             cnt=299;
                             resetFlag=false;
                         }
                         if(cnt2 > 2400)hp =350;
                     }else{
                         if(!changeFlag){
-                            bulletManager.GetComponent<BulletManager>().BulletDelete();
+                            bulletManager.BulletDelete();
                             GameObject b=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
-                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b);
-                            b.GetComponent<BulletSpawner>().boxX=this.gameObject.transform.position.x-1.7696286f;
-                            b.GetComponent<BulletSpawner>().boxY=this.gameObject.transform.position.y+17.489627f;
+                            bulletManager.bulletSpawner.Add(b);
+                            b.GetComponent<BulletSpawner>().boxX=this.gameObject.transform.position.x - 10;
+                            b.GetComponent<BulletSpawner>().boxY=this.gameObject.transform.position.y + 10;
                             b.GetComponent<BulletSpawner>().type=2;
                             b.GetComponent<BulletSpawner>().interval=3;
                             changeFlag=true;
                             cnt2=0;
                         }
                         if(cnt2<300)hp=350;
-                        if(jiki.GetComponent<Jiki>().hitCnt<60 || jiki.GetComponent<Jiki>().bombCnt<180)resetFlag=true;
-                        if(resetFlag && jiki.GetComponent<Jiki>().hitCnt>=60 && jiki.GetComponent<Jiki>().bombCnt>=180){
+                        if(jiki.hitCnt<60 || jiki.bombCnt<180)resetFlag=true;
+                        if(resetFlag && jiki.hitCnt>=60 && jiki.bombCnt>=180){
                             changeFlag=false;
                             resetFlag=false;
                         }
@@ -245,64 +245,64 @@ public class Enemy : MonoBehaviour
                 if(cnt >= 300){
                     if(hp > 2100){
                         if(cnt2 < 600)hp = 2450;
-                        if(cnt % 600 == 300){
+                        if(cnt % 300 == 0){
                             GameObject b1=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
-                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b1);
+                            bulletManager.bulletSpawner.Add(b1);
                             b1.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
                             b1.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
                             b1.GetComponent<BulletSpawner>().type=3;
-                            b1.GetComponent<BulletSpawner>().interval=3;
+                            b1.GetComponent<BulletSpawner>().interval=1;
                             b1.GetComponent<BulletSpawner>().note=1;
                             GameObject b2=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
-                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b2);
+                            bulletManager.bulletSpawner.Add(b2);
                             b2.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
                             b2.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
                             b2.GetComponent<BulletSpawner>().type=3;
-                            b2.GetComponent<BulletSpawner>().interval=3;
+                            b2.GetComponent<BulletSpawner>().interval=1;
                             b2.GetComponent<BulletSpawner>().note=2;
                             GameObject b3=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
-                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b3);
+                            bulletManager.bulletSpawner.Add(b3);
                             b3.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
                             b3.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
                             b3.GetComponent<BulletSpawner>().type=3;
-                            b3.GetComponent<BulletSpawner>().interval=3;
+                            b3.GetComponent<BulletSpawner>().interval=1;
                             b3.GetComponent<BulletSpawner>().note=3;
                             GameObject b4=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
-                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b4);
+                            bulletManager.bulletSpawner.Add(b4);
                             b4.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
                             b4.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
                             b4.GetComponent<BulletSpawner>().type=3;
-                            b4.GetComponent<BulletSpawner>().interval=3;
+                            b4.GetComponent<BulletSpawner>().interval=1;
                             b4.GetComponent<BulletSpawner>().note=4;   
                         }
-                        if(cnt % 600 == 0){
+                        if(cnt % 300 == 150){
                             GameObject b1=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
-                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b1);
+                            bulletManager.bulletSpawner.Add(b1);
                             b1.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
                             b1.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
                             b1.GetComponent<BulletSpawner>().type=3;
-                            b1.GetComponent<BulletSpawner>().interval=3;
+                            b1.GetComponent<BulletSpawner>().interval=1;
                             b1.GetComponent<BulletSpawner>().note=5;
                             GameObject b2=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
-                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b2);
+                            bulletManager.bulletSpawner.Add(b2);
                             b2.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
                             b2.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
                             b2.GetComponent<BulletSpawner>().type=3;
-                            b2.GetComponent<BulletSpawner>().interval=3;
+                            b2.GetComponent<BulletSpawner>().interval=1;
                             b2.GetComponent<BulletSpawner>().note=6;
                             GameObject b3=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
-                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b3);
+                            bulletManager.bulletSpawner.Add(b3);
                             b3.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
                             b3.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
                             b3.GetComponent<BulletSpawner>().type=3;
-                            b3.GetComponent<BulletSpawner>().interval=3;
+                            b3.GetComponent<BulletSpawner>().interval=1;
                             b3.GetComponent<BulletSpawner>().note=7;
                             GameObject b4=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
-                            bulletManager.GetComponent<BulletManager>().bulletSpawner.Add(b4);
+                            bulletManager.bulletSpawner.Add(b4);
                             b4.GetComponent<BulletSpawner>().x0=this.gameObject.transform.position.x;
                             b4.GetComponent<BulletSpawner>().y0=this.gameObject.transform.position.y;
                             b4.GetComponent<BulletSpawner>().type=3;
-                            b4.GetComponent<BulletSpawner>().interval=3;
+                            b4.GetComponent<BulletSpawner>().interval=1;
                             b4.GetComponent<BulletSpawner>().note=8;
                         }
                     }
@@ -315,12 +315,12 @@ public class Enemy : MonoBehaviour
         }else{
             GetComponent<Renderer>().material.shader=Shader.Find("Particles/Standard Unlit");
         }
-        if(hp<=0 && explodeCnt>=100){
+        if(hp<=0 && explodeCnt>=10){
             explodeCnt=0;
             if(type>200){
                 animator.SetTrigger("BossExplode");
                 this.transform.localScale=new Vector3(30f,30f,1f);
-                Invoke("ChangeScene",1f);
+                Invoke("ChangeScene",1.5f);
             }else{
                 animator.SetTrigger("Explode");
             }
@@ -329,11 +329,11 @@ public class Enemy : MonoBehaviour
             GetComponent<AudioSource>().Play();
         }
         if((this.gameObject.transform.position.x<-80 || this.gameObject.transform.position.y>25 || this.gameObject.transform.position.y<-25 || this.gameObject.transform.position.x>80) && cnt>200){
-            enemyManager.GetComponent<EnemyManager>().enemy.Remove(this.gameObject);
+            enemyManager.enemy.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
         if(explodeCnt==48){
-            enemyManager.GetComponent<EnemyManager>().enemy.Remove(this.gameObject);
+            enemyManager.enemy.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
         cnt++;
@@ -343,14 +343,14 @@ public class Enemy : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D col){
         if(col.gameObject.tag=="JBullet" && this.gameObject.transform.position.x<=45 && this.gameObject.transform.position.x>=-45 && this.gameObject.transform.position.y>=-20 && this.gameObject.transform.position.y<=20 && hp>0){
-            if(jiki.GetComponent<Jiki>().bombCnt<180){
+            if(jiki.bombCnt<180){
                 if(cnt%10==0)hp--;
             }else{
                 hp--;
             }
             blueCnt=0;
             if(col.gameObject.GetComponent<Bullet>().type!=3){
-                bulletManager.GetComponent<BulletManager>().bullet.Remove(col.gameObject);
+                bulletManager.bullet.Remove(col.gameObject);
                 Destroy(col.gameObject);
             }
         }
