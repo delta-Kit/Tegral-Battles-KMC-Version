@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletSpawner : MonoBehaviour
 {
-    public float x0,y0;
+    public float x0,y0, rad;
     public int type,interval;
     private int cnt;
     public BulletManager bulletManager;
@@ -92,6 +92,17 @@ public class BulletSpawner : MonoBehaviour
                 Destroy(this.gameObject);
                 bulletManager.BulletMove(2);
             }
+            break;
+            case 4:
+            if(cnt == 0)this.gameObject.transform.position = new Vector3(x0, y0, 0);
+            if(cnt < 60){
+                rad += 1.5f * Mathf.Deg2Rad;
+                this.transform.position += new Vector3(0.2f * Mathf.Cos(rad), 0.2f * Mathf.Sin(rad), 0);
+            }else{
+                rad = Mathf.Atan2(y0 - this.gameObject.transform.position.y, x0 - this.gameObject.transform.position.x) - 90 * Mathf.Deg2Rad;
+                this.transform.position += new Vector3(0.4f * Mathf.Cos(rad), 0.4f * Mathf.Sin(rad), 0);
+            }
+            bulletManager.BulletAppear(this.gameObject.transform.position, 4, interval, 8, 4, 0, rad + 180 * Mathf.Deg2Rad, 0.5f);
             break;
         }
         cnt++;

@@ -56,7 +56,7 @@ public class BulletManager : MonoBehaviour
                 break;
                 case 4:
                 if(cnt%interval==note){
-                    BulletCreate(pos,4,v,color,Mathf.Atan2(jiki.transform.position.y-pos.y,jiki.transform.position.x-pos.x),0.5f,true,0);
+                    BulletCreate(pos,4,v,color,rad,0.5f,true,0);
                     GetComponent<AudioSource>().PlayOneShot(spawn[1]);
                 }
                 break;

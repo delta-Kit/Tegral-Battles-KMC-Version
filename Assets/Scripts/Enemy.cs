@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     private int explodeCnt;
     public int note;
     public GameObject BulletSpawner;
-    public Jiki jiki;
+    public GameObject jiki;
     private bool resetFlag;
     private bool changeFlag;
     private float rad;
@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
             hp=700;
             break;
             case 202:
-            hp = 2450;
+            hp = 2100;
             break;
         }
         blueCnt=10;
@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
         bulletManager = GameObject.Find("BulletManager").GetComponent<BulletManager>();
         explodeCnt=100;
         cnt=0;
-        jiki=GameObject.Find("TegralK1").GetComponent<Jiki>();
+        jiki=GameObject.Find("TegralK1");
         resetFlag=false;
         changeFlag=false;
         rad=180*Mathf.Deg2Rad;
@@ -95,7 +95,7 @@ public class Enemy : MonoBehaviour
                 break;
                 case 2:
                 Move(2);
-                if(cnt>=150 && this.gameObject.transform.position.y>=-20 && this.gameObject.transform.position.y<=20)bulletManager.BulletAppear(this.gameObject.transform.position,4,120,30f,2,note,0, 0);
+                if(cnt>=150 && this.gameObject.transform.position.y>=-20 && this.gameObject.transform.position.y<=20)bulletManager.BulletAppear(this.gameObject.transform.position,4,120,30f,2,note,Mathf.Atan2(jiki.transform.position.y - this.gameObject.transform.position.y, jiki.transform.position.x - this.gameObject.transform.position.x), 0);
                 break;
                 case 3:
                 Move(3);
@@ -212,8 +212,8 @@ public class Enemy : MonoBehaviour
                         }else if(cnt>600){
                             bulletManager.BulletMove(1);
                         }
-                        if(jiki.hitCnt<60 || jiki.bombCnt<180)resetFlag=true;
-                        if(resetFlag && jiki.hitCnt>=60 && jiki.bombCnt>=180){
+                        if(jiki.GetComponent<Jiki>().hitCnt<60 || jiki.GetComponent<Jiki>().bombCnt<180)resetFlag=true;
+                        if(resetFlag && jiki.GetComponent<Jiki>().hitCnt>=60 && jiki.GetComponent<Jiki>().bombCnt>=180){
                             cnt=299;
                             resetFlag=false;
                         }
@@ -231,8 +231,8 @@ public class Enemy : MonoBehaviour
                             cnt2=0;
                         }
                         if(cnt2<300)hp=350;
-                        if(jiki.hitCnt<60 || jiki.bombCnt<180)resetFlag=true;
-                        if(resetFlag && jiki.hitCnt>=60 && jiki.bombCnt>=180){
+                        if(jiki.GetComponent<Jiki>().hitCnt<60 || jiki.GetComponent<Jiki>().bombCnt<180)resetFlag=true;
+                        if(resetFlag && jiki.GetComponent<Jiki>().hitCnt>=60 && jiki.GetComponent<Jiki>().bombCnt>=180){
                             changeFlag=false;
                             resetFlag=false;
                         }
@@ -305,6 +305,43 @@ public class Enemy : MonoBehaviour
                             b4.GetComponent<BulletSpawner>().interval=1;
                             b4.GetComponent<BulletSpawner>().note=8;
                         }
+                        if(jiki.GetComponent<Jiki>().hitCnt<60 || jiki.GetComponent<Jiki>().bombCnt<180)resetFlag=true;
+                        if(resetFlag && jiki.GetComponent<Jiki>().hitCnt>=60 && jiki.GetComponent<Jiki>().bombCnt>=180)resetFlag=false;
+                        if(cnt2 > 2100)hp = 2100;
+                    }else if(hp > 1750){
+                        if(!changeFlag){
+                            bulletManager.BulletDelete();
+                            GameObject b1 =Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
+                            bulletManager.bulletSpawner.Add(b1);
+                            b1.GetComponent<BulletSpawner>().y0 = b1.GetComponent<BulletSpawner>().boxY = this.gameObject.transform.position.y;
+                            b1.GetComponent<BulletSpawner>().x0 = b1.GetComponent<BulletSpawner>().boxX = this.gameObject.transform.position.x;
+                            b1.GetComponent<BulletSpawner>().type= 4;
+                            b1.GetComponent<BulletSpawner>().interval= 3;
+                            b1.GetComponent<BulletSpawner>().rad = Mathf.Atan2(jiki.transform.position.y - this.gameObject.transform.position.y, jiki.transform.position.x - this.gameObject.transform.position.x);
+                            GameObject b2 =Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
+                            bulletManager.bulletSpawner.Add(b2);
+                            b2.GetComponent<BulletSpawner>().y0 = b2.GetComponent<BulletSpawner>().boxY = this.gameObject.transform.position.y;
+                            b2.GetComponent<BulletSpawner>().x0 = b2.GetComponent<BulletSpawner>().boxX = this.gameObject.transform.position.x;
+                            b2.GetComponent<BulletSpawner>().type= 4;
+                            b2.GetComponent<BulletSpawner>().interval= 3;
+                            b2.GetComponent<BulletSpawner>().rad = Mathf.Atan2(jiki.transform.position.y - this.gameObject.transform.position.y, jiki.transform.position.x - this.gameObject.transform.position.x) + 120 * Mathf.Deg2Rad;
+                            GameObject b3 =Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
+                            bulletManager.bulletSpawner.Add(b3);
+                            b3.GetComponent<BulletSpawner>().y0 = b3.GetComponent<BulletSpawner>().boxY = this.gameObject.transform.position.y;
+                            b3.GetComponent<BulletSpawner>().x0 = b3.GetComponent<BulletSpawner>().boxX = this.gameObject.transform.position.x;
+                            b3.GetComponent<BulletSpawner>().type= 4;
+                            b3.GetComponent<BulletSpawner>().interval= 3;
+                            b3.GetComponent<BulletSpawner>().rad = Mathf.Atan2(jiki.transform.position.y - this.gameObject.transform.position.y, jiki.transform.position.x - this.gameObject.transform.position.x) + 240 * Mathf.Deg2Rad;
+                            changeFlag=true;
+                            cnt2=0;
+                        }
+                        if(cnt2<300)hp=2100;
+                        if(jiki.GetComponent<Jiki>().hitCnt<60 || jiki.GetComponent<Jiki>().bombCnt<180)resetFlag=true;
+                        if(resetFlag && jiki.GetComponent<Jiki>().hitCnt>=60 && jiki.GetComponent<Jiki>().bombCnt>=180){
+                            changeFlag=false;
+                            resetFlag=false;
+                        }
+                        if(cnt2 > 2100)hp = 1750;
                     }
                 }
                 break;
@@ -343,7 +380,7 @@ public class Enemy : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D col){
         if(col.gameObject.tag=="JBullet" && this.gameObject.transform.position.x<=45 && this.gameObject.transform.position.x>=-45 && this.gameObject.transform.position.y>=-20 && this.gameObject.transform.position.y<=20 && hp>0){
-            if(jiki.bombCnt<180){
+            if(jiki.GetComponent<Jiki>().bombCnt<180){
                 if(cnt%10==0)hp--;
             }else{
                 hp--;
