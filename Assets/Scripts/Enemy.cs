@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
             hp=700;
             break;
             case 202:
-            hp = 2100;
+            hp = 1750;
             break;
         }
         blueCnt=10;
@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
         cnt=0;
         jiki=GameObject.Find("TegralK1");
         resetFlag=false;
-        changeFlag=false;
+        changeFlag = true;
         rad=180*Mathf.Deg2Rad;
         cnt2=0;
     }
@@ -342,6 +342,25 @@ public class Enemy : MonoBehaviour
                             resetFlag=false;
                         }
                         if(cnt2 > 2100)hp = 1750;
+                    }else if(hp > 1400){
+                        if(changeFlag){
+                            bulletManager.BulletDelete();
+                            changeFlag = false;
+                            cnt2 = 0;
+                            GameObject b = Instantiate(BulletSpawner, this.gameObject.transform.position,Quaternion.identity);
+                            bulletManager.bulletSpawner.Add(b);
+                            b.GetComponent<BulletSpawner>().boxX = this.gameObject.transform.position.x;
+                            b.GetComponent<BulletSpawner>().boxY = this.gameObject.transform.position.y;
+                            b.GetComponent<BulletSpawner>().type = 5;
+                            b.GetComponent<BulletSpawner>().interval = 1;
+                        }
+                        if(cnt2 < 300)hp = 1750;
+                        if(jiki.GetComponent<Jiki>().hitCnt<60 || jiki.GetComponent<Jiki>().bombCnt<180)resetFlag=true;
+                        if(resetFlag && jiki.GetComponent<Jiki>().hitCnt>=60 && jiki.GetComponent<Jiki>().bombCnt>=180){
+                            changeFlag = true;
+                            resetFlag=false;
+                        }
+                        if(cnt > 2100)hp = 1400;
                     }
                 }
                 break;

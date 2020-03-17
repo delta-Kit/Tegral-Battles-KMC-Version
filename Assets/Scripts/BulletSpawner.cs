@@ -6,7 +6,7 @@ public class BulletSpawner : MonoBehaviour
 {
     public float x0,y0, rad;
     public int type,interval;
-    private int cnt;
+    public int cnt;
     public BulletManager bulletManager;
     public int note;
     public float boxX,boxY;
@@ -103,6 +103,19 @@ public class BulletSpawner : MonoBehaviour
                 this.transform.position += new Vector3(0.4f * Mathf.Cos(rad), 0.4f * Mathf.Sin(rad), 0);
             }
             bulletManager.BulletAppear(this.gameObject.transform.position, 4, interval, 8, 4, 0, rad + 180 * Mathf.Deg2Rad, 0.5f);
+            break;
+            case 5:
+            float p;
+            theta = Mathf.Deg2Rad * cnt * 6;
+            if(cnt % 720 < 240){
+                p = 0.3871f;
+            }else if(cnt % 720 < 480){
+                p = 0.7233f;
+            }else{
+                p = 1.5237f;
+            }
+            this.gameObject.transform.position = new Vector3(boxX, boxY, 0) + 7 * new Vector3(p * Mathf.Cos(1f / Mathf.Sqrt(p * p * p) * theta) - Mathf.Cos(theta), p * Mathf.Sin(1f / Mathf.Sqrt(p * p * p) * theta) - Mathf.Sin(theta), 0);
+            if(cnt % 240 < 180)bulletManager.BulletAppear(this.gameObject.transform.position, 7, interval, 0, 2, 60, Mathf.Atan2(1f / Mathf.Sqrt(p) * Mathf.Cos(1f / Mathf.Sqrt(p * p * p) * theta) - Mathf.Cos(theta), -1f / Mathf.Sqrt(p) * Mathf.Sin(1f / Mathf.Sqrt(p * p * p) * theta) + Mathf.Sin(theta)), 0.5f);
             break;
         }
         cnt++;

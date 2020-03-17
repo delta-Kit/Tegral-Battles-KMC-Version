@@ -180,7 +180,10 @@ public class Bullet : MonoBehaviour
             }
             break;
             case 7:
-            if(cnt>=note)v=8f;
+            if(cnt>=note){
+                v=8f;
+                bulletSpriteRenderer.sprite=bullet[4];
+            }
             break;
             case 8:
             if(cnt < 60)rad += Mathf.Deg2Rad * note * 1.5f;
