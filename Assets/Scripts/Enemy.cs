@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
             hp=700;
             break;
             case 202:
-            hp = 1750;
+            hp = 1400;
             break;
         }
         blueCnt=10;
@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
         cnt=0;
         jiki=GameObject.Find("TegralK1");
         resetFlag=false;
-        changeFlag = true;
+        changeFlag = false;
         rad=180*Mathf.Deg2Rad;
         cnt2=0;
     }
@@ -360,7 +360,36 @@ public class Enemy : MonoBehaviour
                             changeFlag = true;
                             resetFlag=false;
                         }
-                        if(cnt > 2100)hp = 1400;
+                        if(cnt2 > 2100)hp = 1400;
+                    }else if(hp > 1050){
+                        if(!changeFlag){
+                            bulletManager.BulletDelete();
+                            changeFlag = true;
+                            cnt2 = 0;
+                        }
+                        for(int i = 0; i < 360; i += 3){
+                            float box1 = Mathf.Log(2 + Mathf.Cos(Mathf.Deg2Rad * i));
+                            float box2 = Mathf.Log(2 + Mathf.Sin(Mathf.Deg2Rad * i));
+                            float r = Mathf.Sqrt(box1 * box1 + box2 * box2);
+                            float theta = Mathf.Atan2(box2, box1) + Mathf.Deg2Rad * 135;
+                            float posX = -r * Mathf.Cos(theta) + 0.1f;
+                            float posY = r * Mathf.Sin(theta) / 2;
+                            r = Mathf.Sqrt(posX * posX + posY * posY);
+                            theta = Mathf.Atan2(posY, posX) + Mathf.Atan2(jiki.transform.position.y - this.gameObject.transform.position.y, jiki.transform.position.x - this.gameObject.transform.position.x);
+                            float x1 = r * Mathf.Cos(theta);
+                            float y1 = r * Mathf.Sin(theta);
+                            float angle2 = Mathf.Atan2(y1, x1);
+                            bulletManager.BulletAppear(this.gameObject.transform.position + 8 * new Vector3(x1, y1, 0), 6, 120, 20 * Dist(new Vector3(0, 0, 0), new Vector3(x1, y1, 0)), 4, 0, angle2, 0.5f);
+                        }
+                        for(int i = 0; i < 12; i ++){
+                            bulletManager.BulletAppear(this.gameObject.transform.position, 6, 110, 20, 1, note, Mathf.Deg2Rad * i * 30, 0.5f);
+                        }
+                        if(cnt2 < 300)hp = 1400;
+                        if(resetFlag && jiki.GetComponent<Jiki>().hitCnt>=60 && jiki.GetComponent<Jiki>().bombCnt>=180){
+                            changeFlag = false;
+                            resetFlag=false;
+                        }
+                        if(cnt2 > 2100)hp = 1050;
                     }
                 }
                 break;
@@ -466,5 +495,9 @@ public class Enemy : MonoBehaviour
     }
     void ChangeScene(){
         SceneManager.LoadScene("Clear");
+    }
+
+    float Dist(Vector3 x1, Vector3 x2){
+        return Mathf.Sqrt((x1.x - x2.x) * (x1.x - x2.x) + (x1.y - x2.y) * (x1.y - x2.y));
     }
 }
