@@ -110,10 +110,10 @@ MonoBehaviour:
     y: 30
     width: 1536
     height: 731
-  m_MinSize: {x: 911, y: 424}
-  m_MaxSize: {x: 22006, y: 10024}
+  m_MinSize: {x: 909, y: 424}
+  m_MaxSize: {x: 22004, y: 10000}
   vertical: 1
-  controlID: 20493
+  controlID: 1356
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -137,10 +137,10 @@ MonoBehaviour:
     y: 0
     width: 1536
     height: 731
-  m_MinSize: {x: 911, y: 424}
-  m_MaxSize: {x: 22006, y: 10024}
+  m_MinSize: {x: 909, y: 424}
+  m_MaxSize: {x: 22004, y: 10000}
   vertical: 0
-  controlID: 20494
+  controlID: 1357
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 424}
   m_MaxSize: {x: 4002, y: 8024}
   vertical: 1
-  controlID: 20495
+  controlID: 1358
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -597,8 +597,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 480f0000
-      m_LastClickedID: 3912
+      m_SelectedIDs: ba0b0000
+      m_LastClickedID: 0
       m_ExpandedIDs: d6fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -661,19 +661,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Ruccho/Water-RW/Scripts
+    - Assets
   m_ViewMode: 1
   m_StartGridSize: 46
   m_LastFolders:
-  - Assets/Ruccho/Water-RW/Scripts
+  - Assets
   m_LastFoldersGridSize: 46
   m_LastProjectPath: C:\Users\fukik\Tegral Battles KMC Version
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: e20b0000
-    m_LastClickedID: 3042
+    m_SelectedIDs: 4a0b0000
+    m_LastClickedID: 2890
     m_ExpandedIDs: 000000004a0b0000800b00003a0c0000f20c00005c0d0000980e0000a60e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -754,7 +754,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 322}
     m_GridSize: 46
   m_DirectoriesAreaWidth: 110
 --- !u!114 &19

@@ -367,6 +367,7 @@ public class Enemy : MonoBehaviour
                             changeFlag = true;
                             cnt2 = 0;
                         }
+                        Move(8);
                         for(int i = 0; i < 360; i += 3){
                             float box1 = Mathf.Log(2 + Mathf.Cos(Mathf.Deg2Rad * i));
                             float box2 = Mathf.Log(2 + Mathf.Sin(Mathf.Deg2Rad * i));
@@ -490,6 +491,32 @@ public class Enemy : MonoBehaviour
             break;
             case 6:
             rg.velocity = new Vector2(0, vy);
+            break;
+            case 7:
+            if(this.gameObject.transform.position.x < 9){
+                if(this.gameObject.transform.position.y < -1){
+                    rg.velocity = new Vector2(5, 5);
+                }else if(this.gameObject.transform.position.y > 1){
+                    rg.velocity = new Vector2(5, -5);
+                }else{
+                    rg.velocity = new Vector2(5, 0);
+                }
+            }
+            if(this.gameObject.transform.position.x > 11){
+                if(this.gameObject.transform.position.y < -1){
+                    rg.velocity = new Vector2(-5, 5);
+                }else if(this.gameObject.transform.position.y > 1){
+                    rg.velocity = new Vector2(-5, -5);
+                }else{
+                    rg.velocity = new Vector2(-5, 0);
+                }
+            }
+            break;
+            case 8:
+            if(cnt2 % 960 < 60 || (cnt2 % 960 >= 720 && cnt2 % 960 < 780))rg.velocity = new Vector2(0, 15 * Mathf.Sin((Mathf.Deg2Rad * cnt2 % 60) * 3));
+            if((cnt2 % 960 >= 240 && cnt2 % 960 < 300) || (cnt2 % 960 >= 480 && cnt2 % 960 < 540)){
+                rg.velocity = new Vector2(0,-15 * Mathf.Sin((Mathf.Deg2Rad * cnt2 % 60) * 3));
+            }
             break;
         }
     }
