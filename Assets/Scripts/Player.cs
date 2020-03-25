@@ -11,15 +11,17 @@ public class Player : MonoBehaviour
     public EnemyManager enemyManager;
     protected static int stage;
     public AudioClip[] bgm = new AudioClip[8];
+    public GameObject back;
     // Start is called before the first frame update
     void Start()
     {
-        stage = 2;
+        stage = 1;
         data=Resources.Load("data") as Entity_Sheet1;
-        cnt = 2300;
+        cnt = 0;
         enemyManager = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
         gameObject.GetComponent<AudioSource>().clip = bgm[stage];
         GetComponent<AudioSource>().Play();
+        back.GetComponent<SetImage>().SetBack(stage);
     }
 
     // Update is called once per frame

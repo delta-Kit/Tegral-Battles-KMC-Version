@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts\EnemyManager.cs" />
      <Compile Include="Assets\Scripts\Jiki.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\SetImage.cs" />
      <Compile Include="Assets\Scripts\Title.cs" />
      <Compile Include="Assets\Terasurware\Classes\Entity_Sheet1.cs" />
      <None Include="Assets\Ruccho\Water-RW\Shaders\Water-RW.shader" />

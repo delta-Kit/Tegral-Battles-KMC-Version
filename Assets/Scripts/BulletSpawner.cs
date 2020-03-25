@@ -40,8 +40,8 @@ public class BulletSpawner : MonoBehaviour
                 this.transform.position=new Vector3(x0- r *Mathf.Cos(theta) * 30,y0- r *Mathf.Sin(theta) * 30,0);
                 break;
             }
-            if(cnt%(interval*2)==0)bulletManager.BulletAppear(this.gameObject.transform.position,6,5,0,2,1,0, 0);
-            if(cnt%(interval*2)==interval)bulletManager.BulletAppear(this.gameObject.transform.position,6,5,0,2,2,0, 0);
+            if(cnt%(interval*2)==0)bulletManager.BulletAppear(this.gameObject.transform.position,6,5,0,2,1,0, 0.5f);
+            if(cnt%(interval*2)==interval)bulletManager.BulletAppear(this.gameObject.transform.position,6,5,0,2,2,0, 0.5f);
             if(cnt>300)Destroy(this.gameObject);
             break;
             case 2:                    //ローレンツ・アトラクター

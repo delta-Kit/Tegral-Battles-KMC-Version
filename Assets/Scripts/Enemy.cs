@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour
             hp = 300;
             break;
             case 201:
-            hp=700;
+            hp=1500;
             break;
             case 202:
             hp = 1400;
@@ -178,8 +178,8 @@ public class Enemy : MonoBehaviour
                 case 201:
                 Move(4);
                 if(cnt>=300){
-                    if(hp>350){
-                        if(cnt2<600)hp=700;
+                    if(hp>750){
+                        if(cnt2<600)hp=1500;
                         if(cnt==300){
                             GameObject b1=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
                             bulletManager.bulletSpawner.Add(b1);
@@ -230,7 +230,7 @@ public class Enemy : MonoBehaviour
                             changeFlag=true;
                             cnt2=0;
                         }
-                        if(cnt2<300)hp=350;
+                        if(cnt2<600)hp = 750;
                         if(jiki.GetComponent<Jiki>().hitCnt<60 || jiki.GetComponent<Jiki>().bombCnt<180)resetFlag=true;
                         if(resetFlag && jiki.GetComponent<Jiki>().hitCnt>=60 && jiki.GetComponent<Jiki>().bombCnt>=180){
                             changeFlag=false;
@@ -401,12 +401,12 @@ public class Enemy : MonoBehaviour
         }else{
             GetComponent<Renderer>().material.shader=Shader.Find("Particles/Standard Unlit");
         }
-        if(hp<=0 && explodeCnt>=10){
+        if(hp<=0 && explodeCnt >= 100){
             explodeCnt=0;
             if(type>200){
                 animator.SetTrigger("BossExplode");
                 this.transform.localScale=new Vector3(30f,30f,1f);
-                Invoke("ChangeScene",1.5f);
+                Invoke("ChangeScene",1.0f);
             }else{
                 animator.SetTrigger("Explode");
             }
@@ -418,9 +418,16 @@ public class Enemy : MonoBehaviour
             enemyManager.enemy.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
-        if(explodeCnt==48){
-            enemyManager.enemy.Remove(this.gameObject);
-            Destroy(this.gameObject);
+        if(type > 200){
+            if(explodeCnt == 95){
+                enemyManager.enemy.Remove(this.gameObject);
+                Destroy(this.gameObject);
+            }
+        }else{
+            if(explodeCnt==48){
+                enemyManager.enemy.Remove(this.gameObject);
+                Destroy(this.gameObject);
+            }
         }
         cnt++;
         cnt2++;
