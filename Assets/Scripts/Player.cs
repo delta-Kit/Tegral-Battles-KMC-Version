@@ -15,9 +15,9 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stage = 1;
+        stage = 2;
         data=Resources.Load("data") as Entity_Sheet1;
-        cnt = 0;
+        cnt = 2400;
         enemyManager = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
         gameObject.GetComponent<AudioSource>().clip = bgm[stage];
         GetComponent<AudioSource>().Play();

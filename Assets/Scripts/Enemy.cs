@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
             hp=1500;
             break;
             case 202:
-            hp = 1400;
+            hp = 700;
             break;
         }
         blueCnt=10;
@@ -380,7 +380,7 @@ public class Enemy : MonoBehaviour
                             float x1 = r * Mathf.Cos(theta);
                             float y1 = r * Mathf.Sin(theta);
                             float angle2 = Mathf.Atan2(y1, x1);
-                            bulletManager.BulletAppear(this.gameObject.transform.position + 8 * new Vector3(x1, y1, 0), 6, 120, 20 * Dist(new Vector3(0, 0, 0), new Vector3(x1, y1, 0)), 4, 0, angle2, 0.5f);
+                            bulletManager.BulletAppear(this.gameObject.transform.position + 8 * new Vector3(x1, y1, 0), 6, 120, 20 * Dist(x1, y1), 4, 0, angle2, 0.5f);
                         }
                         for(int i = 0; i < 12; i ++){
                             bulletManager.BulletAppear(this.gameObject.transform.position, 6, 110, 20, 1, note, Mathf.Deg2Rad * i * 30, 0.5f);
@@ -391,6 +391,48 @@ public class Enemy : MonoBehaviour
                             resetFlag=false;
                         }
                         if(cnt2 > 2100)hp = 1050;
+                    }else if(hp > 700){
+                        if(changeFlag){
+                            bulletManager.BulletDelete();
+                            changeFlag = false;
+                            cnt2 = 0;
+                            GameObject b = Instantiate(BulletSpawner, this.gameObject.transform.position,Quaternion.identity);
+                            bulletManager.bulletSpawner.Add(b);
+                            b.GetComponent<BulletSpawner>().boxX = this.gameObject.transform.position.x;
+                            b.GetComponent<BulletSpawner>().boxY = this.gameObject.transform.position.y;
+                            b.GetComponent<BulletSpawner>().type = 5;
+                            b.GetComponent<BulletSpawner>().interval = 1;
+                            b.GetComponent<BulletSpawner>().note = 1;
+                        }
+                        if(cnt2 < 300)hp = 1050;
+                        if(jiki.GetComponent<Jiki>().hitCnt<60 || jiki.GetComponent<Jiki>().bombCnt<180)resetFlag=true;
+                        if(resetFlag && jiki.GetComponent<Jiki>().hitCnt>=60 && jiki.GetComponent<Jiki>().bombCnt>=180){
+                            changeFlag = true;
+                            resetFlag=false;
+                        }
+                        if(cnt2 > 2100)hp = 700;
+                    }else if(hp > 350){
+                        if(!changeFlag){
+                            bulletManager.BulletDelete();
+                            changeFlag = true;
+                            cnt2 = 0;
+                        }
+                        Move(8);
+                        float rot = Random.Range(0, 360) * Mathf.Deg2Rad;
+                        for(int i = 0; i < 720; i += 10){
+                            float x0 = 0.6f * Mathf.Cos(i * Mathf.Deg2Rad) + 0.2f * Mathf.Cos(1.5f * i * Mathf.Deg2Rad);
+                            float y0 = 0.6f * Mathf.Sin(i * Mathf.Deg2Rad) - 0.2f * Mathf.Sin(1.5f * i * Mathf.Deg2Rad);
+                            float r = Dist(x0, y0);
+                            float theta = Mathf.Atan2(y0, x0);
+                            float x1 = r * Mathf.Cos(theta + rot), y1 = r * Mathf.Sin(theta + rot);
+                            bulletManager.BulletAppear(this.gameObject.transform.position + new Vector3(x1, y1, 0), 6, 120, 15 * Dist(x1, y1), 3, 0, Mathf.Atan2(y1, x1), 0.5f);
+                        }
+                        if(cnt2 < 300)hp = 700;
+                        if(resetFlag && jiki.GetComponent<Jiki>().hitCnt>=60 && jiki.GetComponent<Jiki>().bombCnt>=180){
+                            changeFlag = false;
+                            resetFlag=false;
+                        }
+                        if(cnt2 > 2100)hp = 350;
                     }
                 }
                 break;
@@ -531,7 +573,7 @@ public class Enemy : MonoBehaviour
         SceneManager.LoadScene("Clear");
     }
 
-    float Dist(Vector3 x1, Vector3 x2){
-        return Mathf.Sqrt((x1.x - x2.x) * (x1.x - x2.x) + (x1.y - x2.y) * (x1.y - x2.y));
+    float Dist(float x, float y){
+        return Mathf.Sqrt(x * x + y * y);
     }
 }

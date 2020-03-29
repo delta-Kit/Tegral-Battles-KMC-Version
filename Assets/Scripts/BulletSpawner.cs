@@ -105,17 +105,33 @@ public class BulletSpawner : MonoBehaviour
             bulletManager.BulletAppear(this.gameObject.transform.position, 4, interval, 8, 4, 0, rad + 180 * Mathf.Deg2Rad, 0.5f);
             break;
             case 5:
-            float p;
+            float p = 0;
             theta = Mathf.Deg2Rad * cnt * 6;
-            if(cnt % 720 < 240){
-                p = 0.3871f;
-            }else if(cnt % 720 < 480){
-                p = 0.7233f;
-            }else{
-                p = 1.5237f;
+            switch(note){
+                case 0:
+                if(cnt % 720 < 240){
+                    p = 0.3871f;
+                }else if(cnt % 720 < 480){
+                    p = 0.7233f;
+                }else{
+                    p = 1.5237f;
+                }
+                this.gameObject.transform.position = new Vector3(boxX, boxY, 0) + 7 * new Vector3(p * Mathf.Cos(1f / Mathf.Sqrt(p * p * p) * theta) - Mathf.Cos(theta), p * Mathf.Sin(1f / Mathf.Sqrt(p * p * p) * theta) - Mathf.Sin(theta), 0);
+                break;
+                case 1:
+                if(cnt % 1000 < 240){
+                    p = 5.2026f;
+                    this.gameObject.transform.position = new Vector3(boxX, boxY, 0) + new Vector3(p * Mathf.Cos(1f / Mathf.Sqrt(p * p * p) * theta * 5) - Mathf.Cos(theta * 5), p * Mathf.Sin(1f / Mathf.Sqrt(p * p * p) * theta * 5) - Mathf.Sin(theta * 5), 0);
+                }else if(cnt % 1000 < 480){
+                    p = 9.5549f;
+                    this.gameObject.transform.position = new Vector3(boxX, boxY, 0) + new Vector3(p * Mathf.Cos(1f / Mathf.Sqrt(p * p * p) * theta * 7) - Mathf.Cos(theta * 7), p * Mathf.Sin(1f / Mathf.Sqrt(p * p * p) * theta * 7) - Mathf.Sin(theta * 7), 0);
+                }else{
+                    p = 19.2184f;
+                    this.gameObject.transform.position = new Vector3(boxX, boxY, 0) + new Vector3(p * Mathf.Cos(1f / Mathf.Sqrt(p * p * p) * theta * 10) - Mathf.Cos(theta * 10), p * Mathf.Sin(1f / Mathf.Sqrt(p * p * p) * theta * 10) - Mathf.Sin(theta * 10), 0);
+                }
+                break;
             }
-            this.gameObject.transform.position = new Vector3(boxX, boxY, 0) + 7 * new Vector3(p * Mathf.Cos(1f / Mathf.Sqrt(p * p * p) * theta) - Mathf.Cos(theta), p * Mathf.Sin(1f / Mathf.Sqrt(p * p * p) * theta) - Mathf.Sin(theta), 0);
-            if(cnt % 240 < 180)bulletManager.BulletAppear(this.gameObject.transform.position, 7, interval, 0, 2, 60, Mathf.Atan2(1f / Mathf.Sqrt(p) * Mathf.Cos(1f / Mathf.Sqrt(p * p * p) * theta) - Mathf.Cos(theta), -1f / Mathf.Sqrt(p) * Mathf.Sin(1f / Mathf.Sqrt(p * p * p) * theta) + Mathf.Sin(theta)), 0.5f);
+            bulletManager.BulletAppear(this.gameObject.transform.position, 7, interval, 0, 2, 60, Mathf.Atan2(1f / Mathf.Sqrt(p) * Mathf.Cos(1f / Mathf.Sqrt(p * p * p) * theta) - Mathf.Cos(theta), -1f / Mathf.Sqrt(p) * Mathf.Sin(1f / Mathf.Sqrt(p * p * p) * theta) + Mathf.Sin(theta)), 0.5f);
             break;
         }
         cnt++;
