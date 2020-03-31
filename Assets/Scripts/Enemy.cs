@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     private bool resetFlag;
     private bool changeFlag;
     private float rad;
-    private int cnt2;
+    public int cnt2;
     public BulletManager bulletManager;
     // Start is called before the first frame update
     void Start()
@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
             hp=1500;
             break;
             case 202:
-            hp = 700;
+            hp = 2450;
             break;
         }
         blueCnt=10;
@@ -392,14 +392,15 @@ public class Enemy : MonoBehaviour
                         }
                         if(cnt2 > 2100)hp = 1050;
                     }else if(hp > 700){
+                        Move(7);
                         if(changeFlag){
                             bulletManager.BulletDelete();
                             changeFlag = false;
                             cnt2 = 0;
                             GameObject b = Instantiate(BulletSpawner, this.gameObject.transform.position,Quaternion.identity);
                             bulletManager.bulletSpawner.Add(b);
-                            b.GetComponent<BulletSpawner>().boxX = this.gameObject.transform.position.x;
-                            b.GetComponent<BulletSpawner>().boxY = this.gameObject.transform.position.y;
+                            b.GetComponent<BulletSpawner>().boxX = 10;
+                            b.GetComponent<BulletSpawner>().boxY = 0;
                             b.GetComponent<BulletSpawner>().type = 5;
                             b.GetComponent<BulletSpawner>().interval = 1;
                             b.GetComponent<BulletSpawner>().note = 1;
@@ -433,6 +434,27 @@ public class Enemy : MonoBehaviour
                             resetFlag=false;
                         }
                         if(cnt2 > 2100)hp = 350;
+                    }else{
+                        Move(7);
+                        if(changeFlag){
+                            bulletManager.BulletDelete();
+                            changeFlag = false;
+                            cnt2 = 0;
+                            GameObject b = Instantiate(BulletSpawner, this.gameObject.transform.position,Quaternion.identity);
+                            bulletManager.bulletSpawner.Add(b);
+                            b.GetComponent<BulletSpawner>().boxX = 10;
+                            b.GetComponent<BulletSpawner>().boxY = 0;
+                            b.GetComponent<BulletSpawner>().type = 5;
+                            b.GetComponent<BulletSpawner>().interval = 1;
+                            b.GetComponent<BulletSpawner>().note = 2;
+                        }
+                        if(cnt2 < 300)hp = 350;
+                        if(jiki.GetComponent<Jiki>().hitCnt<60 || jiki.GetComponent<Jiki>().bombCnt<180)resetFlag=true;
+                        if(resetFlag && jiki.GetComponent<Jiki>().hitCnt>=60 && jiki.GetComponent<Jiki>().bombCnt>=180){
+                            changeFlag = true;
+                            resetFlag=false;
+                        }
+                        if(cnt2 > 2100)hp = 0;
                     }
                 }
                 break;
@@ -542,24 +564,10 @@ public class Enemy : MonoBehaviour
             rg.velocity = new Vector2(0, vy);
             break;
             case 7:
-            if(this.gameObject.transform.position.x < 9){
-                if(this.gameObject.transform.position.y < -1){
-                    rg.velocity = new Vector2(5, 5);
-                }else if(this.gameObject.transform.position.y > 1){
-                    rg.velocity = new Vector2(5, -5);
-                }else{
-                    rg.velocity = new Vector2(5, 0);
-                }
-            }
-            if(this.gameObject.transform.position.x > 11){
-                if(this.gameObject.transform.position.y < -1){
-                    rg.velocity = new Vector2(-5, 5);
-                }else if(this.gameObject.transform.position.y > 1){
-                    rg.velocity = new Vector2(-5, -5);
-                }else{
-                    rg.velocity = new Vector2(-5, 0);
-                }
-            }
+            if(this.gameObject.transform.position.x < 9)this.gameObject.transform.position += new Vector3(0.1f, 0, 0);
+            if(this.gameObject.transform.position.x > 11)this.gameObject.transform.position -= new Vector3(0.1f, 0, 0);
+            if(this.gameObject.transform.position.y < -1)this.gameObject.transform.position += new Vector3(0, 0.1f, 0);
+            if(this.gameObject.transform.position.y > 1)this.gameObject.transform.position -= new Vector3(0, 0.1f, 0);
             break;
             case 8:
             if(cnt2 % 960 < 60 || (cnt2 % 960 >= 720 && cnt2 % 960 < 780))rg.velocity = new Vector2(0, 15 * Mathf.Sin((Mathf.Deg2Rad * cnt2 % 60) * 3));

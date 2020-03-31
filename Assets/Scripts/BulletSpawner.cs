@@ -130,6 +130,15 @@ public class BulletSpawner : MonoBehaviour
                     this.gameObject.transform.position = new Vector3(boxX, boxY, 0) + new Vector3(p * Mathf.Cos(1f / Mathf.Sqrt(p * p * p) * theta * 10) - Mathf.Cos(theta * 10), p * Mathf.Sin(1f / Mathf.Sqrt(p * p * p) * theta * 10) - Mathf.Sin(theta * 10), 0);
                 }
                 break;
+                case 2:
+                if(cnt % 1200 < 700){
+                    p = 30.1104f;
+                    this.gameObject.transform.position = new Vector3(boxX, boxY, 0) + 0.6f * new Vector3(p * Mathf.Cos(1f / Mathf.Sqrt(p * p * p) * theta * 15) - Mathf.Cos(theta * 15), p * Mathf.Sin(1f / Mathf.Sqrt(p * p * p) * theta * 15) - Mathf.Sin(theta * 15), 0);
+                }else{
+                    p = 4;
+                    this.gameObject.transform.position = new Vector3(boxX, boxY, 0) + 3 * new Vector3(p * Mathf.Cos(1f / Mathf.Sqrt(p * p * p) * theta) - Mathf.Cos(theta), p * Mathf.Sin(1f / Mathf.Sqrt(p * p * p) * theta) - Mathf.Sin(theta), 0);
+                }
+                break;
             }
             bulletManager.BulletAppear(this.gameObject.transform.position, 7, interval, 0, 2, 60, Mathf.Atan2(1f / Mathf.Sqrt(p) * Mathf.Cos(1f / Mathf.Sqrt(p * p * p) * theta) - Mathf.Cos(theta), -1f / Mathf.Sqrt(p) * Mathf.Sin(1f / Mathf.Sqrt(p * p * p) * theta) + Mathf.Sin(theta)), 0.5f);
             break;
