@@ -53,8 +53,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Ruccho\Water-RW\Sample\ForceMovement.cs" />
-     <Compile Include="Assets\Ruccho\Water-RW\Scripts\WaterRWaver.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\BulletManager.cs" />
      <Compile Include="Assets\Scripts\BulletSpawner.cs" />
@@ -68,7 +66,6 @@
      <Compile Include="Assets\Scripts\SetImage.cs" />
      <Compile Include="Assets\Scripts\Title.cs" />
      <Compile Include="Assets\Terasurware\Classes\Entity_Sheet1.cs" />
-     <None Include="Assets\Ruccho\Water-RW\Shaders\Water-RW.shader" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/admin/Tegral-Battles-KMC-Version/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>

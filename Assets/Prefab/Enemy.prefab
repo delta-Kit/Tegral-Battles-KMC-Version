@@ -154,16 +154,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   sigmaK1: {fileID: 0}
-  cnt: 0
   vx: 0
   vy: 0
   hp: 0
   enemyManager: {fileID: 0}
-  game: {fileID: 0}
   note: 0
   BulletSpawner: {fileID: 1488441461587280474, guid: 20080114e80254a4baccec609722ba02,
     type: 3}
   jiki: {fileID: 0}
+  cnt2: 0
+  bulletManager: {fileID: 0}
+  _material:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 88ca9f9f36d1e2d45982a6e4e8d9372d, type: 2}
 --- !u!82 &191083446297208610
 AudioSource:
   m_ObjectHideFlags: 0

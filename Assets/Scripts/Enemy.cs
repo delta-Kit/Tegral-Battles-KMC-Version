@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
     private float rad;
     public int cnt2;
     public BulletManager bulletManager;
+    public Material[] _material; 
     // Start is called before the first frame update
     void Start()
     {
@@ -461,9 +462,9 @@ public class Enemy : MonoBehaviour
             }
         }
         if(blueCnt>5){
-            GetComponent<Renderer>().material.shader=Shader.Find("Unlit/Transparent Cutout");
+            this.GetComponent<Renderer>().material=_material[0]; 
         }else{
-            GetComponent<Renderer>().material.shader=Shader.Find("Particles/Standard Unlit");
+            this.GetComponent<Renderer>().material=_material[1]; 
         }
         if(hp<=0 && explodeCnt >= 100){
             explodeCnt=0;
