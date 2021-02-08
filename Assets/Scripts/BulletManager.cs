@@ -6,7 +6,7 @@ public class BulletManager : MonoBehaviour
 {   public GameObject Bullet;
     public List<GameObject> bullet;
     public int j;
-    public GameObject jiki;
+    public Jiki jiki;
     private int cnt;
     public GameObject effect;
     public AudioClip[] spawn=new AudioClip[3];
@@ -27,6 +27,7 @@ public class BulletManager : MonoBehaviour
     void Start()
     {
         cnt=0;
+        jiki=GameObject.Find("TegralK1").GetComponent<Jiki>();
     }
 
     // Update is called once per frame
@@ -35,7 +36,7 @@ public class BulletManager : MonoBehaviour
         cnt++;   
     }
     public void BulletAppear(Vector3 pos,int type,int interval,float v,int color,int note,float rad, float r){
-        if(jiki.GetComponent<Jiki>().bombCnt>=180 || type==2){
+        if(jiki.bombCnt>=180 || type==2){
             switch(type){
                 case 1:
                 if(cnt%interval==0){
@@ -136,7 +137,7 @@ public class BulletManager : MonoBehaviour
             }
             break;
             case 2:
-            for(int i = 0; i < bullet.Count; i ++){
+            for(int i = 0; i < bullet.Count; i++){
                 if(bullet[i].GetComponent<Rigidbody2D>().velocity == new Vector2(0, 0))bullet[i].GetComponent<Bullet>().v = 20f;
             }
             break;
