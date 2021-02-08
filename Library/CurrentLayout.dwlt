@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 474}
+  m_MinSize: {x: 950, y: 498}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 1080
-  m_MinSize: {x: 950, y: 474}
+  m_MinSize: {x: 950, y: 498}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -110,10 +110,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 1030
-  m_MinSize: {x: 911, y: 424}
-  m_MaxSize: {x: 22006, y: 10000}
+  m_MinSize: {x: 917, y: 448}
+  m_MaxSize: {x: 22012, y: 10024}
   vertical: 1
-  controlID: 28417
+  controlID: 128
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -137,10 +137,10 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 1030
-  m_MinSize: {x: 911, y: 424}
-  m_MaxSize: {x: 22006, y: 10000}
+  m_MinSize: {x: 917, y: 448}
+  m_MaxSize: {x: 22012, y: 10024}
   vertical: 0
-  controlID: 28418
+  controlID: 129
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -162,10 +162,10 @@ MonoBehaviour:
     y: 0
     width: 1009
     height: 1030
-  m_MinSize: {x: 202, y: 424}
-  m_MaxSize: {x: 4002, y: 8024}
+  m_MinSize: {x: 202, y: 448}
+  m_MaxSize: {x: 4002, y: 8048}
   vertical: 1
-  controlID: 28419
+  controlID: 130
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -589,17 +589,17 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1011
-    y: 22
+    x: 1009
+    y: 30
     width: 251
-    height: 1006
+    height: 1010
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: b60b0000
       m_LastClickedID: 0
-      m_ExpandedIDs: de3afafff03afaff2e3cfaff343cfaff3a3cfaff523cfaffb0b0faffc2b0faff04b2faff0eb2faff18b2faff20b2faff40eafaff52eafaff94ebfaff9eebfaffa8ebfaffb0ebfaffd600fbffe800fbffee00fbfff600fbfffe00fbff0601fbff9802fbffaa02fbffec03fbfff603fbff0004fbff0804fbffc83bfcffda3bfcff1c3dfcff263dfcff303dfcff383dfcff3c52fcff4e52fcff9053fcff9a53fcffa453fcffac53fcff4a60fcff5c60fcff9e61fcffa861fcffb261fcffba61fcff2ae7fcff3ce7fcff7ee8fcff88e8fcff92e8fcff9ae8fcff92fbfcffa4fbfcffaafbfcffb2fbfcffbafbfcffc2fbfcff06fdfcff18fdfcff5afefcff64fefcff6efefcff78fefcffca09fdffdc09fdff1e0bfdff280bfdff320bfdff3a0bfdffb816fdffca16fdff0c18fdff1618fdff2018fdff2818fdff002cfdff122cfdff542dfdff5e2dfdff682dfdff702dfdff8437fdff9637fdffd838fdffe238fdffec38fdfff438fdff3642fdff4842fdff8a43fdff9443fdff9e43fdffa643fdff104efdff224efdff604ffdff664ffdff6c4ffdff724ffdffe05bfdff965cfdffa85cfdffe65dfdffea5dfdfff05dfdfffe5dfdff16f9ffff
+      m_ExpandedIDs: b4fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -644,10 +644,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1266
-    y: 22
+    x: 1264
+    y: 30
     width: 306
-    height: 1006
+    height: 1010
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SearchFilter:
     m_NameFilter: 
@@ -661,20 +661,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefab
+    - Assets
   m_ViewMode: 1
   m_StartGridSize: 46
   m_LastFolders:
-  - Assets/Prefab
+  - Assets
   m_LastFoldersGridSize: 46
   m_LastProjectPath: /Users/admin/Tegral-Battles-KMC-Version
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 4e300000
-    m_LastClickedID: 12366
-    m_ExpandedIDs: 00000000382f00006e2f000028300000e03000004a3100008a3200009832000000ca9a3b
+    m_SelectedIDs: 480b0000
+    m_LastClickedID: 2888
+    m_ExpandedIDs: 00000000480b00007c0b0000e00c0000740e0000820e0000b42c0000b62c000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -702,7 +702,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000382f00006e2f000028300000e03000004a3100008a3200009832000000ca9a3b
+    m_ExpandedIDs: 00000000480b00007c0b0000e00c0000740e0000820e0000b42c0000b62c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -729,7 +729,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300007428000082280000a22800006c0b00004e0b00004e390000223b0000000a000030300000040a0000842e0000902e00006c2e0000682e0000f80b00008c0900008c360000040d0000780e0000bc0c0000be290000b229000038280000242b0000880e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

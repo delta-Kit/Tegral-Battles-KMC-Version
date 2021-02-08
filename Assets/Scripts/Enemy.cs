@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     private bool changeFlag;
     private float rad;
     public int cnt2;
+    public int cnt3;
     public BulletManager bulletManager;
     public Material[] _material; 
     // Start is called before the first frame update
@@ -81,6 +82,7 @@ public class Enemy : MonoBehaviour
         changeFlag = false;
         rad=180*Mathf.Deg2Rad;
         cnt2=0;
+        cnt3 = 0;
     }
 
     // Update is called once per frame
@@ -496,6 +498,7 @@ public class Enemy : MonoBehaviour
         }
         cnt++;
         cnt2++;
+        cnt3++;
         blueCnt++;
         explodeCnt++;
     }
