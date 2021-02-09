@@ -15,13 +15,14 @@ public class BulletManager : MonoBehaviour
     public void BulletCreate(Vector3 pos,int type,float v,int color,float rad,float r,bool isCircle,int note){
         GameObject b=Instantiate(Bullet,pos,Quaternion.identity);
         bullet.Add(b);
-        b.GetComponent<Bullet>().type=type;
-        b.GetComponent<Bullet>().v=v;
-        b.GetComponent<Bullet>().color=color;
-        b.GetComponent<Bullet>().rad=rad;
-        b.GetComponent<Bullet>().r=r;
-        b.GetComponent<Bullet>().isCircle=isCircle;
-        b.GetComponent<Bullet>().note=note;
+        Bullet b2 = b.GetComponent<Bullet>();
+        b2.type=type;
+        b2.v=v;
+        b2.color=color;
+        b2.rad=rad;
+        b2.r=r;
+        b2.isCircle=isCircle;
+        b2.note=note;
     }
     // Start is called before the first frame update
     void Start()

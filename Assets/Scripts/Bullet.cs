@@ -159,7 +159,7 @@ public class Bullet : MonoBehaviour
             break;
             case 3:
             if(cnt>60){
-                r=Mathf.Pow(2f,(float)cnt/15);
+                r = Mathf.Pow(2f,(float)cnt/15);
                 if(r>2000){
                     bulletManager.bullet.Remove(this.gameObject);
                     Destroy(this.gameObject);
