@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     {
         stage = 2;
         data=Resources.Load("data") as Entity_Sheet1;
-        cnt = 0;
+        cnt = 2400;
         enemyManager = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
         gameObject.GetComponent<AudioSource>().clip = bgm[stage];
         GetComponent<AudioSource>().Play();

@@ -8,13 +8,13 @@ public class BulletManager : MonoBehaviour
     public int j;
     public Jiki jiki;
     private int cnt;
+    private int num;
     public GameObject effect;
     public AudioClip[] spawn=new AudioClip[3];
     public GameObject enemyManager;
     public List<GameObject> bulletSpawner;
-    public void BulletCreate(Vector3 pos,int type,float v,int color,float rad,float r,bool isCircle,int note){
-        GameObject b=Instantiate(Bullet,pos,Quaternion.identity);
-        bullet.Add(b);
+    public void BulletCreate(Vector3 pos, int type, float v, int color, float rad, float r, bool isCircle, int note){
+        GameObject b = bullet[num];
         Bullet b2 = b.GetComponent<Bullet>();
         b2.type=type;
         b2.v=v;
@@ -23,12 +23,22 @@ public class BulletManager : MonoBehaviour
         b2.r=r;
         b2.isCircle=isCircle;
         b2.note=note;
+        b.gameObject.transform.position = pos;
+        b.gameObject.SetActive(true);
+        num++;
+        num %= bullet.Count;
     }
     // Start is called before the first frame update
     void Start()
     {
-        cnt=0;
-        jiki=GameObject.Find("TegralK1").GetComponent<Jiki>();
+        cnt = 0;
+        num = 0;
+        for(int i = 0; i < 10000; i++){
+            GameObject b = Instantiate(Bullet, new Vector3(1000, 0, 0), Quaternion.identity);
+            bullet.Add(b);
+            b.gameObject.SetActive(false);
+        }
+        jiki = GameObject.Find("TegralK1").GetComponent<Jiki>();
     }
 
     // Update is called once per frame
@@ -112,7 +122,8 @@ public class BulletManager : MonoBehaviour
     public void BulletDelete(){
         int bulletNum=bullet.Count;
         int bulletSpawnerNum=bulletSpawner.Count;
-        j=0;
+        for(int i = 0; i < bullet.Count; i++)bullet[i].gameObject.SetActive(false);
+        /*j=0;
         for(int i=0;i<bulletNum;i++){
             GameObject box=bullet[j];
             if(box.tag=="Bullet"){
@@ -122,7 +133,7 @@ public class BulletManager : MonoBehaviour
             }else{
                 j++;
             }
-        }
+        }*/
         for(int i=0;i<bulletSpawnerNum;i++){
             GameObject box=bulletSpawner[0];
             bulletSpawner.RemoveAt(0);

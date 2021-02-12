@@ -21,26 +21,32 @@ public class Bullet : MonoBehaviour
     public int color;
     public BulletManager bulletManager;
     public int note;
+    CircleCollider2D circle;
+    BoxCollider2D box;
+    CapsuleCollider2D cupsule;
     // Start is called before the first frame update
     void Start()
     {
-        rg=this.gameObject.GetComponent<Rigidbody2D>();
-        bulletSpriteRenderer=gameObject.GetComponent<SpriteRenderer>();
-        isAdditive=true;
-        transform.rotation=Quaternion.Euler(0,0,rad/Mathf.Deg2Rad);
+        rg = this.gameObject.GetComponent<Rigidbody2D>();
+        bulletSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        isAdditive = true;
+        transform.rotation = Quaternion.Euler(0,0,rad / Mathf.Deg2Rad);
+        circle = this.gameObject.GetComponent<CircleCollider2D>();
+        box = this.gameObject.GetComponent<BoxCollider2D>();
+        cupsule = this.gameObject.GetComponent<CapsuleCollider2D>();
         if(type > 200){
-            this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            this.gameObject.GetComponent<CapsuleCollider2D>().enabled = true;
-            this.gameObject.GetComponent<CapsuleCollider2D>().size = new Vector2(24, 1);
+            circle.enabled = false;
+            box.enabled = false;
+            cupsule.enabled = true;
+            cupsule.size = new Vector2(24, 1);
         }
         else if(isCircle){
-            this.gameObject.GetComponent<CircleCollider2D>().enabled=true;
-            this.gameObject.GetComponent<BoxCollider2D>().enabled=false;
-            this.gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+            circle.enabled=true;
+            box.enabled=false;
+            cupsule.enabled = false;
             switch(type){
                 case 3:
-                this.gameObject.GetComponent<CircleCollider2D>().radius=16;
+                circle.radius=16;
                 break;
                 case 4:
                 case 5:
@@ -48,19 +54,19 @@ public class Bullet : MonoBehaviour
                 case 7:
                 case 8:
                 case 9:
-                this.gameObject.GetComponent<CircleCollider2D>().radius=2;
+                circle.radius=2;
                 break;
             }
         }else{
-            this.gameObject.GetComponent<CircleCollider2D>().enabled=false;
-            this.gameObject.GetComponent<BoxCollider2D>().enabled=true;
-            this.gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+            circle.enabled=false;
+            box.enabled=true;
+            cupsule.enabled = false;
             switch(type){
                 case 1:
-                this.gameObject.GetComponent<BoxCollider2D>().size=new Vector2(4,2);
+                box.size=new Vector2(4,2);
                 break;
                 case 2:
-                this.gameObject.GetComponent<BoxCollider2D>().size=new Vector2(12,16);
+                box.size=new Vector2(12,16);
                 break;
             }
         }
@@ -103,7 +109,7 @@ public class Bullet : MonoBehaviour
         enemyManager = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
         switch(type){
             case 3:
-            this.transform.localScale=new Vector3(r/16,r/16,1f);
+            this.transform.localScale=new Vector3(r * 0.0625f, r * 0.0625f, 1f);
             break;
             case 4:
             case 5:
@@ -114,7 +120,7 @@ public class Bullet : MonoBehaviour
             this.transform.localScale=new Vector3(r/2,r/2,1f);
             break;
             case 201:
-            this.transform.localScale = new Vector3(1 / this.gameObject.GetComponent<CapsuleCollider2D>().size.x, 0.3f, 1f);
+            this.transform.localScale = new Vector3(1 / cupsule.size.x, 0.3f, 1f);
             break;
         }
         bulletManager=GameObject.Find("BulletManager").GetComponent<BulletManager>();
@@ -158,12 +164,9 @@ public class Bullet : MonoBehaviour
             }
             break;
             case 3:
-            if(cnt>60){
-                r = Mathf.Pow(2f,(float)cnt/15);
-                if(r>2000){
-                    bulletManager.bullet.Remove(this.gameObject);
-                    Destroy(this.gameObject);
-                }
+            if(cnt > 60){
+                r *= 1.05f;
+                if(r > 2000)this.gameObject.SetActive(false);
             }
             break;
             case 5:
@@ -176,7 +179,7 @@ public class Bullet : MonoBehaviour
                     bulletManager.BulletAppear(this.gameObject.transform.position, 9, 1, v, 2, 0, rad + Mathf.Deg2Rad * (180 + i * 8) + Random.Range(-0.1f, 0.1f), 0.5f);
                 }
                 bulletManager.bullet.Remove(this.gameObject);
-                Destroy(this.gameObject);
+                this.gameObject.SetActive(false);
             }
             break;
             case 7:
@@ -202,8 +205,7 @@ public class Bullet : MonoBehaviour
     }
     private void Delete(float size){
         if(this.gameObject.transform.position.x<-45*size || this.gameObject.transform.position.x>45*size || this.gameObject.transform.position.y<-21*size || this.gameObject.transform.position.y>21*size){
-            bulletManager.bullet.Remove(this.gameObject);
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 }
