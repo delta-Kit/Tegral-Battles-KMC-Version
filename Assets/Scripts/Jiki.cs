@@ -55,7 +55,7 @@ public class Jiki : MonoBehaviour
             }
             hitCircle.SetActive(true);
         }else{
-             if(Input.GetAxisRaw("Horizontal")!=0 && Input.GetAxisRaw("Vertical")!=0){
+            if(Input.GetAxisRaw("Horizontal")!=0 && Input.GetAxisRaw("Vertical")!=0){
                 walkSpeed=(float)1/(float)Math.Sqrt(2);
             }else{
                 walkSpeed=1f;
@@ -85,10 +85,10 @@ public class Jiki : MonoBehaviour
         }
         if(bombCnt<60)bulletManager.BulletAppear(bombPosition,2,5,0,102,0,0, 0);
         if(bombCnt==180)bulletManager.BulletDelete();
-        if(this.gameObject.transform.position.x<-43)this.gameObject.transform.position=new Vector3(-43,this.gameObject.transform.position.y,0);
-        if(this.gameObject.transform.position.x>43)this.gameObject.transform.position=new Vector3(43,this.gameObject.transform.position.y,0);
-        if(this.gameObject.transform.position.y<-17)this.gameObject.transform.position=new Vector3(this.gameObject.transform.position.x,-17,0);
-        if(this.gameObject.transform.position.y>17)this.gameObject.transform.position=new Vector3(this.gameObject.transform.position.x,17,0);
+        if(this.gameObject.transform.position.x < -34.4f)this.gameObject.transform.position = new Vector3(-34.4f, this.gameObject.transform.position.y, 0);
+        if(this.gameObject.transform.position.x > 34.4f)this.gameObject.transform.position = new Vector3(34.4f, this.gameObject.transform.position.y, 0);
+        if(this.gameObject.transform.position.y < -18.3f)this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, -18.3f, 0);
+        if(this.gameObject.transform.position.y > 18.3f)this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, 18.3f, 0);
         hitCircle.transform.position=this.gameObject.transform.position;
         if(hitCnt<60){
             hitEffect.SetActive(true);

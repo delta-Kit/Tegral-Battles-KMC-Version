@@ -529,7 +529,7 @@ public class Enemy : MonoBehaviour
     private void Move(int typeM){
         switch(typeM){
             case 1:
-            if(cnt<180){
+            if(cnt < 150){
                 rg.velocity=new Vector2(-8,0);
             }else if(cnt<240){
                 rg.velocity=new Vector2(0,0);
