@@ -111,9 +111,9 @@ MonoBehaviour:
     width: 1920
     height: 1030
   m_MinSize: {x: 913, y: 448}
-  m_MaxSize: {x: 22008, y: 10024}
+  m_MaxSize: {x: 22008, y: 10000}
   vertical: 1
-  controlID: 12484
+  controlID: 2709
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -138,9 +138,9 @@ MonoBehaviour:
     width: 1920
     height: 1030
   m_MinSize: {x: 913, y: 448}
-  m_MaxSize: {x: 22008, y: 10024}
+  m_MaxSize: {x: 22008, y: 10000}
   vertical: 0
-  controlID: 12485
+  controlID: 2710
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 448}
   m_MaxSize: {x: 4002, y: 8048}
   vertical: 1
-  controlID: 12486
+  controlID: 2711
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -597,9 +597,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 0e0f0000
-      m_LastClickedID: 3854
-      m_ExpandedIDs: d6fbffffe60e0000
+      m_SelectedIDs: e00c0000
+      m_LastClickedID: 0
+      m_ExpandedIDs: d6fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -661,19 +661,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Sprites
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 46
   m_LastFolders:
-  - Assets/Sprites
+  - Assets/Scripts
   m_LastFoldersGridSize: 46
   m_LastProjectPath: /Users/admin/Tegral-Battles-KMC-Version
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 820e0000
-    m_LastClickedID: 3714
+    m_SelectedIDs: e00c0000
+    m_LastClickedID: 3296
     m_ExpandedIDs: 00000000480b00007c0b0000e00c0000820e0000ac2c0000ae2c000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0

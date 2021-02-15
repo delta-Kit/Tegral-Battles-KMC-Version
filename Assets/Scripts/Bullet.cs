@@ -166,7 +166,7 @@ public class Bullet : MonoBehaviour
             case 3:
             if(cnt > 60){
                 r *= 1.05f;
-                if(r > 2000)this.gameObject.SetActive(false);
+                if(r > 80)this.gameObject.SetActive(false);
             }
             break;
             case 5:

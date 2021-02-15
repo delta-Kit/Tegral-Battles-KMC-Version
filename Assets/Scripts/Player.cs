@@ -15,9 +15,10 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60; //FPSを60に設定
         stage = 2;
         data=Resources.Load("data") as Entity_Sheet1;
-        cnt = 0;
+        cnt = 2300;
         enemyManager = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
         gameObject.GetComponent<AudioSource>().clip = bgm[stage];
         GetComponent<AudioSource>().Play();
