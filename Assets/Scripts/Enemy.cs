@@ -22,8 +22,8 @@ public class Enemy : MonoBehaviour
     public int note;
     public GameObject BulletSpawner;
     public Jiki jiki;
-    private bool resetFlag;
     private bool changeFlag;
+    private bool resetFlag;
     private float rad;
     public int cnt2;
     public BulletManager bulletManager;
@@ -51,22 +51,22 @@ public class Enemy : MonoBehaviour
         switch(type){
             case 1:
             case 4:
-            hp=20;
+            hp = 20;
             break;
             case 2:
             case 6:
-            hp=10;
+            hp = 10;
             break;
             case 3:
             case 5:
             case 7:
-            hp=30;
+            hp = 30;
             break;
             case 101:
             hp = 300;
             break;
             case 201:
-            hp=1500;
+            hp = 1500;
             break;
             case 202:
             hp = 2450;
@@ -78,8 +78,8 @@ public class Enemy : MonoBehaviour
         explodeCnt=100;
         cnt=0;
         jiki=GameObject.Find("TegralK1").GetComponent<Jiki>();
-        resetFlag=false;
         changeFlag = false;
+        resetFlag = false;
         rad=180*Mathf.Deg2Rad;
         cnt2=0;
     }
@@ -179,7 +179,7 @@ public class Enemy : MonoBehaviour
                 break;
                 case 201:
                 Move(4);
-                if(cnt>=300){
+                if(cnt>=300){               //スワスティカ・カーブ
                     if(hp>750){
                         if(cnt2<600)hp=1500;
                         Action spawn = () => {
@@ -212,18 +212,18 @@ public class Enemy : MonoBehaviour
                             b4.GetComponent<BulletSpawner>().interval=2;
                             b4.GetComponent<BulletSpawner>().note=4;
                         };
-                        if(cnt==300){
+                        if(jiki.GetComponent<Jiki>().hitCnt < 60 || jiki.GetComponent<Jiki>().bombCnt < 180)resetFlag = true;
+                        if(resetFlag && jiki.GetComponent<Jiki>().hitCnt >= 60 && jiki.GetComponent<Jiki>().bombCnt >= 180){
+                            cnt = 300;
+                            resetFlag = false;
+                        }
+                        if(cnt == 300){
                             spawn();
                         }else if(cnt>600){
                             bulletManager.BulletMove(1);
                         }
-                        if(jiki.hitCnt<60 || jiki.bombCnt<180)resetFlag=true;
-                        if(resetFlag && jiki.hitCnt>=60 && jiki.bombCnt>=180){
-                            spawn();
-                            resetFlag=false;
-                        }
                         if(cnt2 > 2400)hp =350;
-                    }else{
+                    }else{              //ローレンツ・アトラクター
                         Action spawn = () => {
                             GameObject b=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
                             bulletManager.bulletSpawner.Add(b);
@@ -239,11 +239,7 @@ public class Enemy : MonoBehaviour
                             cnt2=0;
                         }
                         if(cnt2<600)hp = 750;
-                        if(jiki.hitCnt<60 || jiki.bombCnt<180)resetFlag=true;
-                        if(resetFlag && jiki.hitCnt>=60 && jiki.bombCnt>=180){
-                            spawn();
-                            resetFlag=false;
-                        }
+                        if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
                         if(cnt2 > 2100)hp = 0;
                     }
                 }
@@ -251,7 +247,7 @@ public class Enemy : MonoBehaviour
                 case 202:
                 Move(4);
                 if(cnt >= 300){
-                    if(hp > 2100){
+                    if(hp > 2100){             //プラネット・オービット（マーキュリー／ビーナス）
                         if(cnt2 < 600)hp = 2450;
                         if(cnt % 300 == 0){
                             GameObject b1=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
@@ -313,10 +309,8 @@ public class Enemy : MonoBehaviour
                             b4.GetComponent<BulletSpawner>().interval=1;
                             b4.GetComponent<BulletSpawner>().note=8;
                         }
-                        if(jiki.hitCnt<60 || jiki.bombCnt<180)resetFlag=true;
-                        if(resetFlag && jiki.hitCnt>=60 && jiki.bombCnt>=180)resetFlag=false;
                         if(cnt2 > 2100)hp = 2100;
-                    }else if(hp > 1750){
+                    }else if(hp > 1750){                //人魂の舞
                         Action spawn = () => {
                             GameObject b1 =Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
                             bulletManager.bulletSpawner.Add(b1);
@@ -347,13 +341,9 @@ public class Enemy : MonoBehaviour
                             cnt2=0;
                         }
                         if(cnt2<300)hp=2100;
-                        if(jiki.hitCnt<60 || jiki.bombCnt<180)resetFlag=true;
-                        if(resetFlag && jiki.hitCnt>=60 && jiki.bombCnt>=180){
-                            spawn();
-                            resetFlag=false;
-                        }
+                        if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
                         if(cnt2 > 2100)hp = 1750;
-                    }else if(hp > 1400){
+                    }else if(hp > 1400){                //プラネット・オービット（マーズ）
                         Action spawn = () => {
                             GameObject b = Instantiate(BulletSpawner, this.gameObject.transform.position,Quaternion.identity);
                             bulletManager.bulletSpawner.Add(b);
@@ -369,13 +359,9 @@ public class Enemy : MonoBehaviour
                             cnt2 = 0;
                         }
                         if(cnt2 < 300)hp = 1750;
-                        if(jiki.hitCnt<60 || jiki.bombCnt<180)resetFlag=true;
-                        if(resetFlag && jiki.hitCnt>=60 && jiki.bombCnt>=180){
-                            spawn();
-                            resetFlag=false;
-                        }
+                        if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
                         if(cnt2 > 2100)hp = 1400;
-                    }else if(hp > 1050){
+                    }else if(hp > 1050){            //エッグショット
                         if(!changeFlag){
                             bulletManager.BulletDelete();
                             changeFlag = true;
@@ -400,9 +386,8 @@ public class Enemy : MonoBehaviour
                             bulletManager.BulletAppear(this.gameObject.transform.position, 6, 110, 20, 1, note, Mathf.Deg2Rad * i * 30, 0.5f);
                         }
                         if(cnt2 < 300)hp = 1400;
-                        if(resetFlag && jiki.hitCnt>=60 && jiki.bombCnt>=180)resetFlag=false;
                         if(cnt2 > 2100)hp = 1050;
-                    }else if(hp > 700){
+                    }else if(hp > 700){             //プラネット・オービット（ジュピター）
                         Move(7);
                         Action spawn = () => {
                             GameObject b = Instantiate(BulletSpawner, this.gameObject.transform.position,Quaternion.identity);
@@ -413,20 +398,15 @@ public class Enemy : MonoBehaviour
                             b.GetComponent<BulletSpawner>().interval = 1;
                             b.GetComponent<BulletSpawner>().note = 1;
                         };
+                        if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
                         if(changeFlag){
                             bulletManager.BulletDelete();
-                            spawn();
                             changeFlag = false;
                             cnt2 = 0;
                         }
                         if(cnt2 < 300)hp = 1050;
-                        if(jiki.hitCnt<60 || jiki.bombCnt<180)resetFlag=true;
-                        if(resetFlag && jiki.hitCnt>=60 && jiki.bombCnt>=180){
-                            spawn();
-                            resetFlag=false;
-                        }
                         if(cnt2 > 2100)hp = 700;
-                    }else if(hp > 350){
+                    }else if(hp > 350){             //星形花火
                         if(!changeFlag){
                             bulletManager.BulletDelete();
                             changeFlag = true;
@@ -443,9 +423,8 @@ public class Enemy : MonoBehaviour
                             bulletManager.BulletAppear(this.gameObject.transform.position + new Vector3(x1, y1, 0), 6, 120, 15 * Dist(x1, y1), 3, 0, Mathf.Atan2(y1, x1), 0.5f);
                         }
                         if(cnt2 < 300)hp = 700;
-                        if(resetFlag && jiki.hitCnt>=60 && jiki.bombCnt>=180)resetFlag=false;
                         if(cnt2 > 2100)hp = 350;
-                    }else{
+                    }else{              //プラネット・オービット（サタン）
                         Move(7);
                         Action spawn = () => {
                             GameObject b = Instantiate(BulletSpawner, this.gameObject.transform.position,Quaternion.identity);
@@ -463,11 +442,7 @@ public class Enemy : MonoBehaviour
                             cnt2 = 0;
                         }
                         if(cnt2 < 300)hp = 350;
-                        if(jiki.hitCnt<60 || jiki.bombCnt<180)resetFlag=true;
-                        if(resetFlag && jiki.hitCnt>=60 && jiki.bombCnt>=180){
-                            spawn();
-                            resetFlag=false;
-                        }
+                        if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
                         if(cnt2 > 2100)hp = 0;
                     }
                 }
@@ -529,7 +504,7 @@ public class Enemy : MonoBehaviour
     private void Move(int typeM){
         switch(typeM){
             case 1:
-            if(cnt < 150){
+            if(cnt < 180){
                 rg.velocity=new Vector2(-8,0);
             }else if(cnt<240){
                 rg.velocity=new Vector2(0,0);
@@ -557,7 +532,7 @@ public class Enemy : MonoBehaviour
             }
             break;
             case 4:
-            if(cnt<300){
+            if(cnt<250){
                 rg.velocity=new Vector2(-vx,0);
             }else{
                 rg.velocity=new Vector2(0,0);

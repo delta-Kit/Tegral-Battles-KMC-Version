@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System;
 using System.IO;
 using UnityEditor;
 using System.Xml.Serialization;
@@ -11,7 +10,7 @@ using NPOI.SS.UserModel;
 public class data_importer : AssetPostprocessor {
 	private static readonly string filePath = "Assets/data.xls";
 	private static readonly string exportPath = "Assets/Resources/data.asset";
-	private static readonly string[] sheetNames = { "Sheet1", "Sheet2", "Sheet3" };
+	private static readonly string[] sheetNames = { "Sheet1","Sheet2","Sheet3", };
 	
 	static void OnPostprocessAllAssets (string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
 	{
@@ -51,13 +50,13 @@ public class data_importer : AssetPostprocessor {
 						
 						Entity_Sheet1.Param p = new Entity_Sheet1.Param ();
 						
-						cell = row.GetCell(0); p.time = (int)(cell == null ? 0 : cell.NumericCellValue);
-						cell = row.GetCell(1); p.type = (int)(cell == null ? 0 : cell.NumericCellValue);
-						cell = row.GetCell(2); p.x = (int)(cell == null ? 0 : cell.NumericCellValue);
-						cell = row.GetCell(3); p.y = (int)(cell == null ? 0 : cell.NumericCellValue);
-						cell = row.GetCell(4); p.vx = (int)(cell == null ? 0 : cell.NumericCellValue);
-						cell = row.GetCell(5); p.vy = (int)(cell == null ? 0 : cell.NumericCellValue);
-						cell = row.GetCell(6); p.note = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(0); p.time = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(1); p.type = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(2); p.x = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(3); p.y = (float)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(4); p.vx = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(5); p.vy = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(6); p.note = (int)(cell == null ? 0 : cell.NumericCellValue);
 						s.list.Add (p);
 					}
 					data.sheets.Add(s);

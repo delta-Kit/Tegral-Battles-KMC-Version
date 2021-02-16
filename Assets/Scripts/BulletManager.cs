@@ -5,7 +5,6 @@ using UnityEngine;
 public class BulletManager : MonoBehaviour
 {   public GameObject Bullet;
     public List<GameObject> bullet;
-    public int j;
     public Jiki jiki;
     private int cnt;
     private int num;
@@ -14,35 +13,25 @@ public class BulletManager : MonoBehaviour
     public GameObject enemyManager;
     public List<GameObject> bulletSpawner;
     public void BulletCreate(Vector3 pos, int type, float v, int color, float rad, float r, bool isCircle, int note){
-        GameObject b = bullet[num];
-        Bullet b2 = b.GetComponent<Bullet>();
-        b2.type=type;
-        b2.v=v;
-        b2.color=color;
-        b2.rad=rad;
-        b2.r=r;
-        b2.isCircle=isCircle;
-        b2.note=note;
-        b.gameObject.transform.position = pos;
-        b.gameObject.SetActive(true);
-        num++;
-        num %= bullet.Count;
+        GameObject b=Instantiate(Bullet,pos,Quaternion.identity);
+        bullet.Add(b);
+        b.GetComponent<Bullet>().type=type;
+        b.GetComponent<Bullet>().v=v;
+        b.GetComponent<Bullet>().color=color;
+        b.GetComponent<Bullet>().rad=rad;
+        b.GetComponent<Bullet>().r=r;
+        b.GetComponent<Bullet>().isCircle=isCircle;
+        b.GetComponent<Bullet>().note=note;
     }
     // Start is called before the first frame update
     void Start()
     {
-        cnt = 0;
-        num = 0;
-        for(int i = 0; i < 10000; i++){
-            GameObject b = Instantiate(Bullet, new Vector3(1000, 0, 0), Quaternion.identity);
-            bullet.Add(b);
-            b.gameObject.SetActive(false);
-        }
-        jiki = GameObject.Find("TegralK1").GetComponent<Jiki>();
+        cnt=0;
+        jiki=GameObject.Find("TegralK1").GetComponent<Jiki>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         cnt++;   
     }
@@ -122,20 +111,19 @@ public class BulletManager : MonoBehaviour
     public void BulletDelete(){
         int bulletNum=bullet.Count;
         int bulletSpawnerNum=bulletSpawner.Count;
-        for(int i = 0; i < bullet.Count; i++)bullet[i].gameObject.SetActive(false);
-        /*j=0;
-        for(int i=0;i<bulletNum;i++){
-            GameObject box=bullet[j];
-            if(box.tag=="Bullet"){
+        int j = 0;
+        for(int i = 0;i < bulletNum; i++){
+            GameObject box = bullet[j];
+            if(box.tag == "Bullet"){
                 bullet.RemoveAt(j);
                 Destroy(box);
-                GameObject e=Instantiate(effect,box.transform.position,Quaternion.identity);
+                GameObject e = Instantiate(effect,box.transform.position,Quaternion.identity);
             }else{
                 j++;
             }
-        }*/
-        for(int i=0;i<bulletSpawnerNum;i++){
-            GameObject box=bulletSpawner[0];
+        }
+        for(int i = 0; i < bulletSpawnerNum; i++){
+            GameObject box = bulletSpawner[0];
             bulletSpawner.RemoveAt(0);
             Destroy(box);
         }

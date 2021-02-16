@@ -16,11 +16,11 @@ public class Entity_Sheet1 : ScriptableObject
 	[System.SerializableAttribute]
 	public class Param
 	{
-
+		
 		public int time;
 		public int type;
-		public int x;
-		public int y;
+		public float x;
+		public float y;
 		public int vx;
 		public int vy;
 		public int note;

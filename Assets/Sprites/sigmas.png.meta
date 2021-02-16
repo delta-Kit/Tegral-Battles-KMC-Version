@@ -6,6 +6,8 @@ TextureImporter:
     21300002: sigmas_1
     21300004: sigmas_2
     21300006: sigmas_3
+    21300008: sigmas_4
+    21300010: sigmas_5
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -103,6 +105,46 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 1200
+        width: 600
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76c67e466bb6ef8408a110252a5b1d39
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sigmas_1
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1200
+        width: 600
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26ecfd8af80fd51438c575a82e4142f1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sigmas_2
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 600
         width: 600
         height: 600
@@ -113,13 +155,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b49954df67efa0e4ab258479e34cfae0
+      spriteID: 44ab804b98c4bb24892943d3997dfd4c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sigmas_1
+      name: sigmas_3
       rect:
         serializedVersion: 2
         x: 600
@@ -133,13 +175,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f5ca788db67c2c4fa2378e0c6d0fa31
+      spriteID: 2edce07a328a25f4b89e72d3b41ea41b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sigmas_2
+      name: sigmas_4
       rect:
         serializedVersion: 2
         x: 0
@@ -153,13 +195,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46be76a70e7045249b13fc62d373ab28
+      spriteID: 81d3e22b8cbb36041bdc9edd23acb309
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sigmas_3
+      name: sigmas_5
       rect:
         serializedVersion: 2
         x: 600
@@ -173,7 +215,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2af84889f5b0acf488efa2dc73491652
+      spriteID: 729b412f52c233440910245e231a75aa
       vertices: []
       indices: 
       edges: []

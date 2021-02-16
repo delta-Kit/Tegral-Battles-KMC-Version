@@ -20,7 +20,7 @@ public class BulletSpawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         switch(type){
             case 1:                   //Swastika curve
