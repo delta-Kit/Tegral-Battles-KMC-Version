@@ -127,7 +127,7 @@ public class Enemy : MonoBehaviour
                 Move(3);
                 if(cnt == 210){
                     for(int i = 0; i < 12; i ++){
-                        bulletManager.BulletAppear(this.gameObject.transform.position, 201, 1, 30, 2, 0, Mathf.Atan2(jiki.gameObject.transform.position.y - this.gameObject.transform.position.y, jiki.gameObject.transform.position.x - this.gameObject.transform.position.y) + Mathf.Deg2Rad * i * 30, 20);
+                        bulletManager.BulletAppear(this.gameObject.transform.position, 201, 1, 30, 2, 0, Mathf.Atan2(jiki.gameObject.transform.position.y - this.gameObject.transform.position.y, jiki.gameObject.transform.position.x - this.gameObject.transform.position.x) + Mathf.Deg2Rad * i * 30, 20);
                     }
                 }
                 break;
