@@ -13,21 +13,32 @@ public class BulletManager : MonoBehaviour
     public GameObject enemyManager;
     public List<GameObject> bulletSpawner;
     public void BulletCreate(Vector3 pos, int type, float v, int color, float rad, float r, bool isCircle, int note){
-        GameObject b=Instantiate(Bullet,pos,Quaternion.identity);
-        bullet.Add(b);
-        b.GetComponent<Bullet>().type=type;
-        b.GetComponent<Bullet>().v=v;
-        b.GetComponent<Bullet>().color=color;
-        b.GetComponent<Bullet>().rad=rad;
-        b.GetComponent<Bullet>().r=r;
-        b.GetComponent<Bullet>().isCircle=isCircle;
-        b.GetComponent<Bullet>().note=note;
+        if(num < bullet.Count){
+            GameObject b = bullet[num];
+            Bullet b2 = b.GetComponent<Bullet>();
+            b2.type = type;
+            b2.v = v;
+            b2.color = color;
+            b2.rad = rad;
+            b2.r = r;
+            b2.isCircle = isCircle;
+            b2.note = note;
+            b.gameObject.transform.position = pos;
+            b.SetActive(true);
+            num++;
+        }
     }
     // Start is called before the first frame update
     void Start()
     {
-        cnt=0;
+        cnt = 0;
+        num = 0;
         jiki=GameObject.Find("TegralK1").GetComponent<Jiki>();
+        for(int i = 0; i < 10000; i++){
+            GameObject b = Instantiate(Bullet, new Vector3(1000, 0, 0), Quaternion.identity);
+            b.SetActive(false);
+            bullet.Add(b);
+        }
     }
 
     // Update is called once per frame
@@ -35,7 +46,7 @@ public class BulletManager : MonoBehaviour
     {
         cnt++;   
     }
-    public void BulletAppear(Vector3 pos,int type,int interval,float v,int color,int note,float rad, float r){
+    public void BulletAppear(Vector3 pos, int type, int interval, float v, int color, int note, float rad, float r){
         if(jiki.bombCnt>=180 || type==2){
             switch(type){
                 case 1:
@@ -99,6 +110,14 @@ public class BulletManager : MonoBehaviour
                     GetComponent<AudioSource>().PlayOneShot(spawn[1]);
                 }
                 break;
+                case 11:
+                BulletCreate(pos, 8, v, color, rad, 0.5f, true, note);
+                GetComponent<AudioSource>().PlayOneShot(spawn[1]);
+                break;
+                case 12:
+                BulletCreate(pos, 10, v, color, rad, 0.5f, true, note);
+                GetComponent<AudioSource>().PlayOneShot(spawn[1]);
+                break;
                 case 201:
                 if(cnt % interval == 0){
                     BulletCreate(pos, 201, v, color, rad, r, false, 0);
@@ -111,16 +130,8 @@ public class BulletManager : MonoBehaviour
     public void BulletDelete(){
         int bulletNum=bullet.Count;
         int bulletSpawnerNum=bulletSpawner.Count;
-        int j = 0;
         for(int i = 0;i < bulletNum; i++){
-            GameObject box = bullet[j];
-            if(box.tag == "Bullet"){
-                bullet.RemoveAt(j);
-                Destroy(box);
-                GameObject e = Instantiate(effect,box.transform.position,Quaternion.identity);
-            }else{
-                j++;
-            }
+            if(bullet[i].tag == "Bullet")bullet[i].SetActive(false);
         }
         for(int i = 0; i < bulletSpawnerNum; i++){
             GameObject box = bulletSpawner[0];

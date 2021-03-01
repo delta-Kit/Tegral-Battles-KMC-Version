@@ -60,9 +60,13 @@ public class Enemy : MonoBehaviour
             case 3:
             case 5:
             case 7:
+            case 8:
+            case 9:
+            case 10:
             hp = 30;
             break;
             case 101:
+            case 102:
             hp = 300;
             break;
             case 201:
@@ -97,7 +101,9 @@ public class Enemy : MonoBehaviour
                 break;
                 case 2:
                 Move(2);
-                if(cnt>=150 && this.gameObject.transform.position.y>=-20 && this.gameObject.transform.position.y<=20)bulletManager.BulletAppear(this.gameObject.transform.position,4,120,30f,2,note,Mathf.Atan2(jiki.transform.position.y - this.gameObject.transform.position.y, jiki.transform.position.x - this.gameObject.transform.position.x), 0);
+                if(cnt >= 150 && this.gameObject.transform.position.y >= -20 && this.gameObject.transform.position.y <= 20){
+                    bulletManager.BulletAppear(this.gameObject.transform.position,4,120,30f,2,note,Mathf.Atan2(jiki.transform.position.y - this.gameObject.transform.position.y, jiki.transform.position.x - this.gameObject.transform.position.x), 0);
+                }
                 break;
                 case 3:
                 Move(3);
@@ -128,6 +134,35 @@ public class Enemy : MonoBehaviour
                 if(cnt == 210){
                     for(int i = 0; i < 12; i ++){
                         bulletManager.BulletAppear(this.gameObject.transform.position, 201, 1, 30, 2, 0, Mathf.Atan2(jiki.gameObject.transform.position.y - this.gameObject.transform.position.y, jiki.gameObject.transform.position.x - this.gameObject.transform.position.x) + Mathf.Deg2Rad * i * 30, 20);
+                    }
+                }
+                break;
+                case 8:
+                Move(3);
+                if(cnt == 210){
+                    bulletManager.BulletAppear(this.gameObject.transform.position, 201, 1, 30, 2, 0, Mathf.Atan2(jiki.gameObject.transform.position.y - this.gameObject.transform.position.y, jiki.gameObject.transform.position.x - this.gameObject.transform.position.x), 20);
+                }
+                break;
+                case 9:
+                Move(3);
+                if(cnt == 210){
+                    float rad0 = UnityEngine.Random.Range(0, 2 * Mathf.PI);
+                    for(int i = 0; i < 24; i ++){
+                        bulletManager.BulletAppear(this.gameObject.transform.position, 12, 1, 30, 1, 1, i * Mathf.Deg2Rad * 15 + rad0, 0);
+                    }
+                }
+                if(cnt == 222){
+                    float rad0 = UnityEngine.Random.Range(0, 2 * Mathf.PI);
+                    for(int i = 0; i < 24; i ++){
+                        bulletManager.BulletAppear(this.gameObject.transform.position, 12, 1, 30, 1, -1, i * Mathf.Deg2Rad * 15 + rad0, 0);
+                    }
+                }
+                break;
+                case 10:
+                Move(1);
+                if(cnt == 210){
+                    for(int i = 1; i <= 5; i++){
+                        bulletManager.BulletAppear(this.gameObject.transform.position, 4, 1, 20f + 2 * i, 2, note, Mathf.Atan2(jiki.transform.position.y - this.gameObject.transform.position.y, jiki.transform.position.x - this.gameObject.transform.position.x), 0);
                     }
                 }
                 break;
@@ -174,6 +209,16 @@ public class Enemy : MonoBehaviour
                             }
                         }
                         break;
+                    }
+                }
+                break;
+                case 102:
+                Move(5);
+                if(cnt >= 240 && cnt < 840){
+                    if(cnt % 50 == 0){
+                        for(int i = 0; i <= 24; i++)bulletManager.BulletAppear(this.gameObject.transform.position, 11, 1, 15, 1, 1, Mathf.Deg2Rad * i * 15, 20);
+                    }else if(cnt % 50 == 25){
+                        for(int i = 0; i <= 24; i++)bulletManager.BulletAppear(this.gameObject.transform.position, 11, 1, 15, 1, -1, Mathf.Deg2Rad * i * 15, 20);
                     }
                 }
                 break;

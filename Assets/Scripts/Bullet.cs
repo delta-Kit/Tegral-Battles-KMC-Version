@@ -54,6 +54,7 @@ public class Bullet : MonoBehaviour
                 case 7:
                 case 8:
                 case 9:
+                case 10:
                 circle.radius=2;
                 break;
             }
@@ -97,6 +98,7 @@ public class Bullet : MonoBehaviour
             case 7:
             case 8:
             case 9:
+            case 10:
             case 201:
             this.gameObject.tag="Bullet";
             break;
@@ -117,6 +119,7 @@ public class Bullet : MonoBehaviour
             case 7:
             case 8:
             case 9:
+            case 10:
             this.transform.localScale=new Vector3(r/2,r/2,1f);
             break;
             case 201:
@@ -142,6 +145,7 @@ public class Bullet : MonoBehaviour
             case 6:
             case 7:
             case 8:
+            case 10:
             Delete(1);
             break;
             case 9:
@@ -178,7 +182,6 @@ public class Bullet : MonoBehaviour
                 for(int i = -3; i <= 3; i ++){
                     bulletManager.BulletAppear(this.gameObject.transform.position, 9, 1, v, 2, 0, rad + Mathf.Deg2Rad * (180 + i * 8) + Random.Range(-0.1f, 0.1f), 0.5f);
                 }
-                bulletManager.bullet.Remove(this.gameObject);
                 this.gameObject.SetActive(false);
             }
             break;
@@ -190,6 +193,13 @@ public class Bullet : MonoBehaviour
             break;
             case 8:
             if(cnt < 60)rad += Mathf.Deg2Rad * note * 1.5f;
+            break;
+            case 10:
+            if(cnt < 60)rad += note * Mathf.Deg2Rad;
+            if(cnt == 40){
+                bulletManager.BulletAppear(this.gameObject.transform.position, 201, 1, 30, 2, 0, rad + Mathf.Deg2Rad * 180, 20);
+                this.gameObject.SetActive(false);
+            }
             break;
         }
         rg.velocity=new Vector2(v*Mathf.Cos(rad),v*Mathf.Sin(rad));
