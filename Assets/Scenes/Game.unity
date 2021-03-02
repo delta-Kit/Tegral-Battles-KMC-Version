@@ -88,7 +88,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 6d9e741810401cd45b67dd55b726bd3b,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -1043,6 +1044,7 @@ MonoBehaviour:
   Bullet: {fileID: 6407479619480030722, guid: 82d75277fdef6b84192d909fc3cb53e3, type: 3}
   bullet: []
   jiki: {fileID: 0}
+  jikiG: {fileID: 0}
   effect: {fileID: 3767500257566148616, guid: 8eecf3eb1f7e3264bae94288ba65f532, type: 3}
   spawn:
   - {fileID: 8300000, guid: e1e265bece6f6524d820e5c41235034c, type: 3}

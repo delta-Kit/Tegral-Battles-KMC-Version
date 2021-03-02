@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
     private bool isAdditive;
     Quaternion rot;
     public EnemyManager enemyManager;
-    private int cnt;
+    public int cnt;
     public int color;
     public BulletManager bulletManager;
     public int note;
@@ -55,6 +55,7 @@ public class Bullet : MonoBehaviour
                 case 8:
                 case 9:
                 case 10:
+                case 11:
                 circle.radius=2;
                 break;
             }
@@ -99,6 +100,7 @@ public class Bullet : MonoBehaviour
             case 8:
             case 9:
             case 10:
+            case 11:
             case 201:
             this.gameObject.tag="Bullet";
             break;
@@ -120,6 +122,7 @@ public class Bullet : MonoBehaviour
             case 8:
             case 9:
             case 10:
+            case 11:
             this.transform.localScale=new Vector3(r/2,r/2,1f);
             break;
             case 201:
@@ -146,6 +149,7 @@ public class Bullet : MonoBehaviour
             case 7:
             case 8:
             case 10:
+            case 11:
             Delete(1);
             break;
             case 9:
@@ -200,6 +204,9 @@ public class Bullet : MonoBehaviour
                 bulletManager.BulletAppear(this.gameObject.transform.position, 201, 1, 30, 2, 0, rad + Mathf.Deg2Rad * 180, 20);
                 this.gameObject.SetActive(false);
             }
+            break;
+            case 11:
+            if(cnt < note)v += 0.2f;
             break;
         }
         rg.velocity=new Vector2(v*Mathf.Cos(rad),v*Mathf.Sin(rad));

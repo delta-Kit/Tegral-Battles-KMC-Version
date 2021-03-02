@@ -25,6 +25,9 @@ public class SetImage : MonoBehaviour
             case 2:
             this.GetComponent<Image>().sprite = Resources.Load<Sprite>("back2");
             break;
+            case 3:
+            this.GetComponent<Image>().sprite = Resources.Load<Sprite>("back3");
+            break;
         }
     }
 }

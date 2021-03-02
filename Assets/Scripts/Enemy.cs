@@ -21,31 +21,38 @@ public class Enemy : MonoBehaviour
     private int explodeCnt;
     public int note;
     public GameObject BulletSpawner;
+    public GameObject jikiG;
     public Jiki jiki;
     private bool changeFlag;
     private bool resetFlag;
     private float rad;
-    public int cnt2;
+    private int cnt2;
     public BulletManager bulletManager;
-    public Material[] _material; 
+    public Material[] _material;
+    public GameObject effect;
+    public float[] cx = new float[10], cy = new float[10];
+    private float jx, jy;
     // Start is called before the first frame update
     void Start()
     {
-        rg=this.gameObject.GetComponent<Rigidbody2D>();
-        enemySpriteRenderer=gameObject.GetComponent<SpriteRenderer>();
-        if(type<100){
-            this.gameObject.GetComponent<CircleCollider2D>().radius=2;
-        }else if(type<200){
-            this.gameObject.GetComponent<CircleCollider2D>().radius=2.5f;
-            this.transform.localScale=new Vector3(1.25f,1.25f,1f);
+        rg = this.gameObject.GetComponent<Rigidbody2D>();
+        enemySpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        if(type < 100){
+            this.gameObject.GetComponent<CircleCollider2D>().radius = 2;
+        }else if(type < 200){
+            this.gameObject.GetComponent<CircleCollider2D>().radius = 2.5f;
+            this.transform.localScale = new Vector3(1.25f, 1.25f, 1f);
         }else{
-            this.gameObject.GetComponent<CircleCollider2D>().radius=3;
-            this.transform.localScale=new Vector3(1.5f,1.5f,1f);
+            this.gameObject.GetComponent<CircleCollider2D>().radius = 3;
+            this.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
         }
-        animator=GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         switch(type){
             case 202:
             animator.SetTrigger("Move2");
+            break;
+            case 203:
+            animator.SetTrigger("Move3");
             break;
         }
         switch(type){
@@ -73,19 +80,21 @@ public class Enemy : MonoBehaviour
             hp = 1500;
             break;
             case 202:
-            hp = 2450;
+            case 203:
+            hp = 1400;
             break;
         }
-        blueCnt=10;
-        enemyManager=GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
+        blueCnt = 10;
+        enemyManager = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
         bulletManager = GameObject.Find("BulletManager").GetComponent<BulletManager>();
-        explodeCnt=100;
-        cnt=0;
-        jiki=GameObject.Find("TegralK1").GetComponent<Jiki>();
+        explodeCnt = 100;
+        cnt = 0;
+        jikiG = GameObject.Find("TegralK1");
+        jiki = jikiG.GetComponent<Jiki>();
         changeFlag = false;
         resetFlag = false;
-        rad=180*Mathf.Deg2Rad;
-        cnt2=0;
+        rad = 180 * Mathf.Deg2Rad;
+        cnt2 = 0;
     }
 
     // Update is called once per frame
@@ -153,8 +162,8 @@ public class Enemy : MonoBehaviour
                 }
                 if(cnt == 222){
                     float rad0 = UnityEngine.Random.Range(0, 2 * Mathf.PI);
-                    for(int i = 0; i < 24; i ++){
-                        bulletManager.BulletAppear(this.gameObject.transform.position, 12, 1, 30, 1, -1, i * Mathf.Deg2Rad * 15 + rad0, 0);
+                    for(int i = 0; i < 12; i ++){
+                        bulletManager.BulletAppear(this.gameObject.transform.position, 12, 1, 30, 1, -1, i * Mathf.Deg2Rad * 30 + rad0, 0);
                     }
                 }
                 break;
@@ -226,6 +235,11 @@ public class Enemy : MonoBehaviour
                 Move(4);
                 if(cnt>=300){               //スワスティカ・カーブ
                     if(hp>750){
+                        if(!changeFlag){
+                            bulletManager.BulletDelete();
+                            changeFlag = true;
+                            cnt2 = 0;
+                        }
                         if(cnt2<600)hp=1500;
                         Action spawn = () => {
                             GameObject b1=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
@@ -257,8 +271,8 @@ public class Enemy : MonoBehaviour
                             b4.GetComponent<BulletSpawner>().interval=2;
                             b4.GetComponent<BulletSpawner>().note=4;
                         };
-                        if(jiki.GetComponent<Jiki>().hitCnt < 60 || jiki.GetComponent<Jiki>().bombCnt < 180)resetFlag = true;
-                        if(resetFlag && jiki.GetComponent<Jiki>().hitCnt >= 60 && jiki.GetComponent<Jiki>().bombCnt >= 180){
+                        if(jiki.hitCnt < 60 || jiki.bombCnt < 180)resetFlag = true;
+                        if(resetFlag && jiki.hitCnt >= 60 && jiki.bombCnt >= 180){
                             cnt = 300;
                             resetFlag = false;
                         }
@@ -277,11 +291,11 @@ public class Enemy : MonoBehaviour
                             b.GetComponent<BulletSpawner>().type=2;
                             b.GetComponent<BulletSpawner>().interval=3;
                         };
-                        if(!changeFlag){
+                        if(changeFlag){
                             bulletManager.BulletDelete();
                             spawn();
-                            changeFlag=true;
-                            cnt2=0;
+                            changeFlag = false;
+                            cnt2 = 0;
                         }
                         if(cnt2<600)hp = 750;
                         if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
@@ -293,6 +307,11 @@ public class Enemy : MonoBehaviour
                 Move(4);
                 if(cnt >= 300){
                     if(hp > 2100){             //プラネット・オービット（マーキュリー／ビーナス）
+                        if(!changeFlag){
+                            bulletManager.BulletDelete();
+                            changeFlag = true;
+                            cnt2 = 0;
+                        }
                         if(cnt2 < 600)hp = 2450;
                         if(cnt % 300 == 0){
                             GameObject b1=Instantiate(BulletSpawner,this.gameObject.transform.position,Quaternion.identity);
@@ -379,11 +398,11 @@ public class Enemy : MonoBehaviour
                             b3.GetComponent<BulletSpawner>().interval= 3;
                             b3.GetComponent<BulletSpawner>().rad = Mathf.Atan2(jiki.transform.position.y - this.gameObject.transform.position.y, jiki.transform.position.x - this.gameObject.transform.position.x) + 240 * Mathf.Deg2Rad;
                         };
-                        if(!changeFlag){
+                        if(changeFlag){
                             bulletManager.BulletDelete();
                             spawn();
-                            changeFlag=true;
-                            cnt2=0;
+                            changeFlag = false;
+                            cnt2 = 0;
                         }
                         if(cnt2<300)hp=2100;
                         if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
@@ -397,19 +416,19 @@ public class Enemy : MonoBehaviour
                             b.GetComponent<BulletSpawner>().type = 5;
                             b.GetComponent<BulletSpawner>().interval = 1;
                         };
-                        if(changeFlag){
+                        if(!changeFlag){
                             bulletManager.BulletDelete();
                             spawn();
-                            changeFlag = false;
+                            changeFlag = true;
                             cnt2 = 0;
                         }
                         if(cnt2 < 300)hp = 1750;
                         if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
                         if(cnt2 > 2100)hp = 1400;
                     }else if(hp > 1050){            //エッグショット
-                        if(!changeFlag){
+                        if(changeFlag){
                             bulletManager.BulletDelete();
-                            changeFlag = true;
+                            changeFlag = false;
                             cnt2 = 0;
                         }
                         Move(8);
@@ -444,17 +463,17 @@ public class Enemy : MonoBehaviour
                             b.GetComponent<BulletSpawner>().note = 1;
                         };
                         if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
-                        if(changeFlag){
+                        if(!changeFlag){
                             bulletManager.BulletDelete();
-                            changeFlag = false;
+                            changeFlag = true;
                             cnt2 = 0;
                         }
                         if(cnt2 < 300)hp = 1050;
                         if(cnt2 > 2100)hp = 700;
                     }else if(hp > 350){             //星形花火
-                        if(!changeFlag){
+                        if(changeFlag){
                             bulletManager.BulletDelete();
-                            changeFlag = true;
+                            changeFlag = false;
                             cnt2 = 0;
                         }
                         Move(8);
@@ -480,10 +499,10 @@ public class Enemy : MonoBehaviour
                             b.GetComponent<BulletSpawner>().interval = 1;
                             b.GetComponent<BulletSpawner>().note = 2;
                         };
-                        if(changeFlag){
+                        if(!changeFlag){
                             bulletManager.BulletDelete();
                             spawn();
-                            changeFlag = false;
+                            changeFlag = true;
                             cnt2 = 0;
                         }
                         if(cnt2 < 300)hp = 350;
@@ -492,12 +511,137 @@ public class Enemy : MonoBehaviour
                     }
                 }
                 break;
+                case 203:
+                Move(4);
+                if(cnt >= 300){
+                    if(hp > 2100){      //ケイオティック・ファンクション1
+                        Action spawn = () => {
+                            GameObject b = Instantiate(BulletSpawner, new Vector3(1000, 0, 0), Quaternion.identity);
+                            bulletManager.bulletSpawner.Add(b);
+                            BulletSpawner bs = b.GetComponent<BulletSpawner>();
+                            bs.boxX = this.gameObject.transform.position.x;
+                            bs.boxY = 0;
+                            bs.type = 6;
+                            bs.interval = 1;
+                            bs.rad = Mathf.Atan2(jiki.gameObject.transform.position.y - this.gameObject.transform.position.y, jiki.gameObject.transform.position.x - this.gameObject.transform.position.x) + Mathf.Deg2Rad * 180;
+                        };
+                        if(!changeFlag){
+                            bulletManager.BulletDelete();
+                            spawn();
+                            changeFlag = true;
+                            cnt2 = 0;
+                        }
+                        if(cnt2 < 300)hp = 2350;
+                        if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
+                        if(cnt2 > 2100)hp = 2100;
+                    }
+                    else if(hp > 1750){
+                        Action spawn = () => {
+                            GameObject b = Instantiate(BulletSpawner, new Vector3(1000, 0, 0), Quaternion.identity);
+                            bulletManager.bulletSpawner.Add(b);
+                            BulletSpawner bs = b.GetComponent<BulletSpawner>();
+                            bs.type = 7;
+                            bs.interval = 1;
+                        };
+                        if(changeFlag){
+                            bulletManager.BulletDelete();
+                            spawn();
+                            changeFlag = false;
+                            cnt2 = 0;
+                        }
+                        if(cnt2 < 300)hp = 2100;
+                        if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
+                        if(cnt2 > 2100)hp = 1750;
+                    }else if(hp > 1400){        //ケイオティック・ファンクション2
+                        Action spawn = () => {
+                            GameObject b = Instantiate(BulletSpawner, new Vector3(1000, 0, 0), Quaternion.identity);
+                            bulletManager.bulletSpawner.Add(b);
+                            BulletSpawner bs = b.GetComponent<BulletSpawner>();
+                            bs.type = 8;
+                            bs.interval = 1;
+                        };
+                        if(!changeFlag){
+                            bulletManager.BulletDelete();
+                            spawn();
+                            changeFlag = true;
+                            cnt2 = 0;
+                        }
+                        if(cnt2 < 300)hp = 1750;
+                        if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
+                        if(cnt2 > 2100)hp = 1400;
+                    }else if(hp > 1050){
+                        if(changeFlag){
+                            bulletManager.BulletDelete();
+                            changeFlag = false;
+                            cnt2 = 0;
+                            cnt = 300;
+                        }
+                        if(jiki.hitCnt < 60 || jiki.bombCnt < 180)resetFlag = true;
+                        if(resetFlag && jiki.hitCnt >= 60 && jiki.bombCnt >= 180){
+                            cnt = 300;
+                            resetFlag = false;
+                        }
+                        int modCnt = (cnt + 200) % 500;
+                        if(modCnt == 0){
+                            jx = jikiG.transform.position.x;
+                            jy = jikiG.transform.position.y;
+                            for(int i = 0; i < 6; i++){
+                                GameObject e = Instantiate(effect, this.gameObject.transform.position + new Vector3(10 * Mathf.Cos(60 * i * Mathf.Deg2Rad), 10 * Mathf.Sin(60 * i * Mathf.Deg2Rad), 0), Quaternion.identity);
+                                e.GetComponent<Effect>().type = 2;
+                                cx[i] = e.transform.position.x;
+                                cy[i] = e.transform.position.y;
+                            }
+                        }else if(modCnt < 75){
+
+                        }else if(modCnt < 147){
+                            for(int i = 0; i < 6; i++){
+                                bulletManager.BulletAppear(new Vector3(cx[i], cy[i], 0) + new Vector3(0.6f * Mathf.Cos(Mathf.Deg2Rad * modCnt * 10) + 0.2f * Mathf.Cos(1.5f * Mathf.Deg2Rad * modCnt * 10), 0.6f * Mathf.Sin(Mathf.Deg2Rad * modCnt * 10) - 0.2f * Mathf.Sin(1.5f * Mathf.Deg2Rad * modCnt * 10)) * 5, 9, 1, 0, 2, i + 1, 0, 0.3f);
+                            }
+                        }else if(modCnt < 200){
+
+                        }else if(modCnt < 500){
+                            if(modCnt % 50 == 0){
+                                for(int i = 0; i < bulletManager.bullet.Count; i++){
+                                    Bullet b = bulletManager.bullet[i].GetComponent<Bullet>();
+                                    if(b.note == (modCnt - 200) / 50 + 1){
+                                        b.v = 20;
+                                        b.rad = Mathf.Atan2(jikiG.transform.position.y - cy[b.note], jikiG.transform.position.x - cx[b.note]);
+                                    }
+                                }
+                            }
+                        }
+                        if(cnt % 60 == 0){
+                            for(int i = 0; i < 12; i++)bulletManager.BulletAppear(this.gameObject.transform.position, 9, 1, 20, 2, 0, Mathf.Deg2Rad * i * 30, 0.5f);
+                        }
+                        if(cnt2 < 300)hp = 1400;
+                        if(cnt2 > 2100)hp = 1050;
+                    }else if(hp > 700){     //ケイオティック・ファンクション3
+                        Action spawn = () => {
+                            GameObject b = Instantiate(BulletSpawner, new Vector3(1000, 0, 0), Quaternion.identity);
+                            bulletManager.bulletSpawner.Add(b);
+                            BulletSpawner bs = b.GetComponent<BulletSpawner>();
+                            bs.type = 9;
+                            bs.interval = 1;
+                            bs.boxX = this.gameObject.transform.position.x;
+                        };
+                        if(!changeFlag){
+                            bulletManager.BulletDelete();
+                            spawn();
+                            changeFlag = true;
+                            cnt2 = 0;
+                        }
+                        if(cnt2 < 300)hp = 1050;
+                        if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
+                        if(cnt2 > 2100)hp = 700;
+                    }
+                }
+                break;
             }
         }
         if(blueCnt>5){
-            this.GetComponent<Renderer>().material=_material[0]; 
+            enemySpriteRenderer.material.color = new Color(1, 1, 1, 1); 
         }else{
-            this.GetComponent<Renderer>().material=_material[1]; 
+            enemySpriteRenderer.material.color = new Color(63f / 255, 63f / 255, 191f / 255, 1);
         }
         if(hp<=0 && explodeCnt >= 100){
             explodeCnt=0;

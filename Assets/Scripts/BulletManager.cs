@@ -6,6 +6,7 @@ public class BulletManager : MonoBehaviour
 {   public GameObject Bullet;
     public List<GameObject> bullet;
     public Jiki jiki;
+    public GameObject jikiG;
     private int cnt;
     private int num;
     public GameObject effect;
@@ -13,7 +14,8 @@ public class BulletManager : MonoBehaviour
     public GameObject enemyManager;
     public List<GameObject> bulletSpawner;
     public void BulletCreate(Vector3 pos, int type, float v, int color, float rad, float r, bool isCircle, int note){
-        if(num < bullet.Count){
+        float jx = pos.x - jikiG.transform.position.x, jy = pos.y - jikiG.transform.position.y;
+        if(num < bullet.Count && jx * jx + jy * jy > 1){
             GameObject b = bullet[num];
             Bullet b2 = b.GetComponent<Bullet>();
             b2.type = type;
@@ -33,7 +35,8 @@ public class BulletManager : MonoBehaviour
     {
         cnt = 0;
         num = 0;
-        jiki=GameObject.Find("TegralK1").GetComponent<Jiki>();
+        jikiG = GameObject.Find("TegralK1");
+        jiki = jikiG.GetComponent<Jiki>();
         for(int i = 0; i < 10000; i++){
             GameObject b = Instantiate(Bullet, new Vector3(1000, 0, 0), Quaternion.identity);
             b.SetActive(false);
@@ -47,7 +50,7 @@ public class BulletManager : MonoBehaviour
         cnt++;   
     }
     public void BulletAppear(Vector3 pos, int type, int interval, float v, int color, int note, float rad, float r){
-        if(jiki.bombCnt>=180 || type==2){
+        if(jiki.bombCnt >= 180 || type == 2){
             switch(type){
                 case 1:
                 if(cnt%interval==0){
@@ -131,7 +134,12 @@ public class BulletManager : MonoBehaviour
         int bulletNum=bullet.Count;
         int bulletSpawnerNum=bulletSpawner.Count;
         for(int i = 0;i < bulletNum; i++){
-            if(bullet[i].tag == "Bullet")bullet[i].SetActive(false);
+            GameObject b = bullet[i];
+            if(b.tag == "Bullet"){
+                b.SetActive(false);
+                GameObject e = Instantiate(effect, b.transform.position, Quaternion.identity);
+                e.GetComponent<Effect>().type = 1;
+            }
         }
         for(int i = 0; i < bulletSpawnerNum; i++){
             GameObject box = bulletSpawner[0];
@@ -139,7 +147,7 @@ public class BulletManager : MonoBehaviour
             Destroy(box);
         }
     }
-    public void BulletMove(int type){;
+    public void BulletMove(int type, int time = 120){
         switch(type){
             case 1:
             for(int i=0;i<bullet.Count;i++){
@@ -150,6 +158,28 @@ public class BulletManager : MonoBehaviour
             case 2:
             for(int i = 0; i < bullet.Count; i++){
                 if(bullet[i].GetComponent<Rigidbody2D>().velocity == new Vector2(0, 0))bullet[i].GetComponent<Bullet>().v = 20f;
+            }
+            break;
+            case 3:
+            for(int i = 0; i < bullet.Count; i++){
+                if(bullet[i].GetComponent<Rigidbody2D>().velocity == new Vector2(0, 0)){
+                    Bullet b = bullet[i].GetComponent<Bullet>();
+                    b.type = 11;
+                    b.cnt = 0;
+                    b.note = time;
+                }
+            }
+            break;
+            case 4:
+            for(int i = 0; i < bullet.Count; i++){
+                float dx = jikiG.transform.position.x - bullet[i].transform.position.x, dy = jikiG.transform.position.y - bullet[i].transform.position.y;
+                if(bullet[i].GetComponent<Rigidbody2D>().velocity == new Vector2(0, 0) && dx * dx + dy * dy < (cnt - 300) * (cnt - 300)){
+                    Bullet b = bullet[i].GetComponent<Bullet>();
+                    b.type = 11;
+                    b.cnt = 0;
+                    b.rad = Mathf.Atan2(dy, dx);
+                    b.note = time;
+                }
             }
             break;
         }

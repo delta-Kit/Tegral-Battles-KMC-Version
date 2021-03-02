@@ -4,19 +4,38 @@ using UnityEngine;
 
 public class BulletSpawner : MonoBehaviour
 {
-    public float x0,y0, rad;
-    public int type,interval;
+    public float x0, x1, y0, rad;
+    public int type, interval;
     public int cnt;
     public BulletManager bulletManager;
     public int note;
-    public float boxX,boxY;
+    public float boxX, boxY;
     private float vertialZ;
+    private int fact10;
     // Start is called before the first frame update
     void Start()
     {
-        cnt=0;
+        cnt = 0;
         bulletManager = GameObject.Find("BulletManager").GetComponent<BulletManager>();
         vertialZ=-15;
+        fact10 = 1;
+        for(int i = 1; i <= 10; i++)fact10 *= i;
+        switch(type){
+            case 7:
+            x1 = UnityEngine.Random.Range(0, 20);
+            x0 = x1 + Mathf.Sin(Mathf.Deg2Rad * 30.5f) * 0.5f / Mathf.Deg2Rad;
+            y0 = 30.5f;
+            break;
+            case 8:
+            x0 = 40;
+            x1 = 0.01f * UnityEngine.Random.Range(0, 100);
+            y0 = 1 / Mathf.Sin(Gamma((x0 + x1) * 0.125f));
+            break;
+            case 9:
+            x0 = 40;
+            x1 = 0.01f * UnityEngine.Random.Range(0, 100);
+            break;
+        }
     }
 
     // Update is called once per frame
@@ -142,7 +161,66 @@ public class BulletSpawner : MonoBehaviour
             }
             bulletManager.BulletAppear(this.gameObject.transform.position, 7, interval, 0, 2, 60, Mathf.Atan2(1f / Mathf.Sqrt(p) * Mathf.Cos(1f / Mathf.Sqrt(p * p * p) * theta) - Mathf.Cos(theta), -1f / Mathf.Sqrt(p) * Mathf.Sin(1f / Mathf.Sqrt(p * p * p) * theta) + Mathf.Sin(theta)), 0.5f);
             break;
+            case 6:     //ケイオティック・ファンクション1
+            x0 = boxX + 30 - cnt;
+            y0 = Mathf.Sin(x0 * x0 + Mathf.PI) + Mathf.Tan(x0 * Mathf.Pow(2, x0));
+            r = Mathf.Sqrt((x0 - boxX) * (x0 - boxX) + y0 * y0);
+            float rad1 = Mathf.Atan2(y0, x0);
+            this.gameObject.transform.position = new Vector3(boxX, boxY, 0) + new Vector3(r * Mathf.Cos(rad + rad1), r * Mathf.Sin(rad + rad1), 0);
+            float rad0 = UnityEngine.Random.Range(0, 2 * Mathf.PI);
+            bulletManager.BulletAppear(this.gameObject.transform.position, 4, interval, 0, 2, 0, rad0, 0.5f);
+            if(cnt > 180){
+                bulletManager.BulletMove(3);
+                bulletManager.bulletSpawner.RemoveAt(0);
+                Destroy(this.gameObject);
+            }
+            break;
+            case 7:
+            if(cnt < 60){
+                if(y0 != 0)bulletManager.BulletAppear(new Vector3(x0, y0, 0), 4, interval, 0, 2, 0, 0, 0.5f);
+            }else{
+                bulletManager.BulletMove(4);
+                bulletManager.bulletSpawner.RemoveAt(0);
+                Destroy(this.gameObject);
+            }
+            x0 = x1 - Mathf.Sin(Mathf.Deg2Rad * y0 * 9) * 15 / Mathf.Deg2Rad / y0 / 9;
+            y0--;
+            break;
+            case 8:     //ケイオティック・ファンクション2
+            if(cnt < 180){
+                if(y0 < 30){
+                    bulletManager.BulletAppear(new Vector3(x0, y0, 0), 4, interval, 0, 2, 0, UnityEngine.Random.Range(0, 2 * Mathf.PI), 0.5f);
+                }
+            }else{
+                bulletManager.BulletMove(3, 60);
+                bulletManager.bulletSpawner.RemoveAt(0);
+                Destroy(this.gameObject);
+            }
+            x0--;
+            y0 = 10 / Mathf.Sin(Gamma((x0 + x1) * 0.125f));
+            break;
+            case 9:     //ケイオティック・ファンクション3
+            if(cnt < 180){
+                bulletManager.BulletAppear(new Vector3(y0 + boxX, x0, 0), 4, interval, 0, 2, 0, UnityEngine.Random.Range(0, 2 * Mathf.PI), 0.5f);
+            }else{
+                bulletManager.BulletMove(3);
+                bulletManager.bulletSpawner.RemoveAt(0);
+                Destroy(this.gameObject);
+            }
+            x0--;
+            float sum = 0;
+            for(int i = 1; i <= 10; i++){
+                p = Mathf.Pow((x0 + x1) * 0.4f, i);
+                sum += Mathf.Cos(Mathf.PI * p) / p;
+            }
+            y0 = 1 / sum;
+            break;
         }
         cnt++;
+    }
+    float Gamma(float x){
+        float prod = 1;
+        for(int i = 0; i < 10; i++)prod *= x + i;
+        return fact10 * Mathf.Pow(10, x) / prod;
     }
 }
