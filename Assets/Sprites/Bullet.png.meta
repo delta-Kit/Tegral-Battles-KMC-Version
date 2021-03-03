@@ -2,11 +2,13 @@ fileFormatVersion: 2
 guid: 2694cc7efb1635244ba99a6db9973e9b
 TextureImporter:
   fileIDToRecycleName:
-    21300000: bullet_0
-    21300002: bullet_1
-    21300004: bullet_2
-    21300006: bullet_3
-    21300008: bullet_4
+    21300000: Bullet_0
+    21300002: Bullet_1
+    21300004: Bullet_2
+    21300006: Bullet_3
+    21300008: Bullet_4
+    21300010: Bullet_5
+    21300012: Bullet_6
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -85,22 +87,11 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bullet_0
+      name: Bullet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -114,13 +105,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 089a86338a5bde84893e56f3ecf076ea
+      spriteID: 254bd057711b5e948883ce0bbef0fea4
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bullet_1
+      name: Bullet_1
       rect:
         serializedVersion: 2
         x: 600
@@ -134,13 +125,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e43f62872b60dd42b17c08150ccc0ab
+      spriteID: f3bfdc1a921b8254588d664396d7e5d0
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bullet_2
+      name: Bullet_2
       rect:
         serializedVersion: 2
         x: 1200
@@ -154,13 +145,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d1672f08827ff547aa98294dacdf105
+      spriteID: 14765eec65ff66543ac3b39a9643c000
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bullet_3
+      name: Bullet_3
       rect:
         serializedVersion: 2
         x: 1800
@@ -174,13 +165,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b3cd5949554248419310d4bb149ae09
+      spriteID: 3ab90197cff71e64fb3f6a9248b6ec63
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bullet_4
+      name: Bullet_4
       rect:
         serializedVersion: 2
         x: 2400
@@ -194,7 +185,47 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24f65444671ed60449a90de882b487c8
+      spriteID: d314dc341099d43429593668e87141e4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bullet_5
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 0
+        width: 600
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2ad14f465f753a41bbf4e40780afd5f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bullet_6
+      rect:
+        serializedVersion: 2
+        x: 3600
+        y: 0
+        width: 600
+        height: 600
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d90fc7dda8cea6745a24c0f2143c1d8c
       vertices: []
       indices: 
       edges: []
@@ -202,7 +233,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: def516320cb7fe147b13b6202b5a0c2e
+    spriteID: 8f1be98b7768d514dafe287a7ae7c1ec
     vertices: []
     indices: 
     edges: []

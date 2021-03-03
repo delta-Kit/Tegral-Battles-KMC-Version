@@ -8,40 +8,27 @@ public class BulletManager : MonoBehaviour
     public Jiki jiki;
     public GameObject jikiG;
     private int cnt;
-    private int num;
     public GameObject effect;
     public AudioClip[] spawn=new AudioClip[3];
     public GameObject enemyManager;
     public List<GameObject> bulletSpawner;
     public void BulletCreate(Vector3 pos, int type, float v, int color, float rad, float r, bool isCircle, int note){
-        float jx = pos.x - jikiG.transform.position.x, jy = pos.y - jikiG.transform.position.y;
-        if(num < bullet.Count && jx * jx + jy * jy > 1){
-            GameObject b = bullet[num];
-            Bullet b2 = b.GetComponent<Bullet>();
-            b2.type = type;
-            b2.v = v;
-            b2.color = color;
-            b2.rad = rad;
-            b2.r = r;
-            b2.isCircle = isCircle;
-            b2.note = note;
-            b.gameObject.transform.position = pos;
-            b.SetActive(true);
-            num++;
-        }
+        GameObject b=Instantiate(Bullet,pos,Quaternion.identity);
+        bullet.Add(b);
+        b.GetComponent<Bullet>().type=type;
+        b.GetComponent<Bullet>().v=v;
+        b.GetComponent<Bullet>().color=color;
+        b.GetComponent<Bullet>().rad=rad;
+        b.GetComponent<Bullet>().r=r;
+        b.GetComponent<Bullet>().isCircle=isCircle;
+        b.GetComponent<Bullet>().note=note;
     }
     // Start is called before the first frame update
     void Start()
     {
         cnt = 0;
-        num = 0;
         jikiG = GameObject.Find("TegralK1");
         jiki = jikiG.GetComponent<Jiki>();
-        for(int i = 0; i < 10000; i++){
-            GameObject b = Instantiate(Bullet, new Vector3(1000, 0, 0), Quaternion.identity);
-            b.SetActive(false);
-            bullet.Add(b);
-        }
     }
 
     // Update is called once per frame
@@ -131,14 +118,18 @@ public class BulletManager : MonoBehaviour
         }
     }
     public void BulletDelete(){
-        int bulletNum=bullet.Count;
-        int bulletSpawnerNum=bulletSpawner.Count;
-        for(int i = 0;i < bulletNum; i++){
-            GameObject b = bullet[i];
-            if(b.tag == "Bullet"){
-                b.SetActive(false);
-                GameObject e = Instantiate(effect, b.transform.position, Quaternion.identity);
+        int bulletNum = bullet.Count;
+        int bulletSpawnerNum = bulletSpawner.Count;
+        int j = 0;
+        for(int i = 0; i < bulletNum; i++){
+            GameObject box = bullet[j];
+            if(box.tag == "Bullet" && box.activeSelf){
+                bullet.RemoveAt(j);
+                Destroy(box);
+                GameObject e = Instantiate(effect, box.transform.position, Quaternion.identity);
                 e.GetComponent<Effect>().type = 1;
+            }else{
+                j++;
             }
         }
         for(int i = 0; i < bulletSpawnerNum; i++){

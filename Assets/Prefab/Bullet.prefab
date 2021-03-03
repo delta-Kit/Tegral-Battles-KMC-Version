@@ -172,11 +172,18 @@ MonoBehaviour:
   - {fileID: 21300004, guid: 2694cc7efb1635244ba99a6db9973e9b, type: 3}
   - {fileID: 21300006, guid: 2694cc7efb1635244ba99a6db9973e9b, type: 3}
   - {fileID: 21300008, guid: 2694cc7efb1635244ba99a6db9973e9b, type: 3}
+  - {fileID: 21300010, guid: 2694cc7efb1635244ba99a6db9973e9b, type: 3}
+  - {fileID: 21300012, guid: 2694cc7efb1635244ba99a6db9973e9b, type: 3}
   laser:
   - {fileID: 21300000, guid: e7364c2794055714890aac895f9a1bdb, type: 3}
   - {fileID: 21300002, guid: e7364c2794055714890aac895f9a1bdb, type: 3}
   - {fileID: 21300004, guid: e7364c2794055714890aac895f9a1bdb, type: 3}
+  - {fileID: 21300006, guid: e7364c2794055714890aac895f9a1bdb, type: 3}
+  - {fileID: 21300008, guid: e7364c2794055714890aac895f9a1bdb, type: 3}
+  - {fileID: 21300010, guid: e7364c2794055714890aac895f9a1bdb, type: 3}
+  - {fileID: 21300012, guid: e7364c2794055714890aac895f9a1bdb, type: 3}
   enemyManager: {fileID: 0}
+  cnt: 0
   color: 0
   bulletManager: {fileID: 0}
   note: 0

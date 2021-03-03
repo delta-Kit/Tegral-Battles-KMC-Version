@@ -35,6 +35,9 @@ public class BulletSpawner : MonoBehaviour
             x0 = 40;
             x1 = 0.01f * UnityEngine.Random.Range(0, 100);
             break;
+            case 10:
+            y0 = 30.5f;
+            break;
         }
     }
 
@@ -168,7 +171,7 @@ public class BulletSpawner : MonoBehaviour
             float rad1 = Mathf.Atan2(y0, x0);
             this.gameObject.transform.position = new Vector3(boxX, boxY, 0) + new Vector3(r * Mathf.Cos(rad + rad1), r * Mathf.Sin(rad + rad1), 0);
             float rad0 = UnityEngine.Random.Range(0, 2 * Mathf.PI);
-            bulletManager.BulletAppear(this.gameObject.transform.position, 4, interval, 0, 2, 0, rad0, 0.5f);
+            bulletManager.BulletAppear(this.gameObject.transform.position, 4, interval, 0, 5, 0, rad0, 0.5f);
             if(cnt > 180){
                 bulletManager.BulletMove(3);
                 bulletManager.bulletSpawner.RemoveAt(0);
@@ -177,7 +180,7 @@ public class BulletSpawner : MonoBehaviour
             break;
             case 7:
             if(cnt < 60){
-                if(y0 != 0)bulletManager.BulletAppear(new Vector3(x0, y0, 0), 4, interval, 0, 2, 0, 0, 0.5f);
+                if(y0 != 0)bulletManager.BulletAppear(new Vector3(x0, y0, 0), 4, interval, 0, 6, 0, 0, 0.5f);
             }else{
                 bulletManager.BulletMove(4);
                 bulletManager.bulletSpawner.RemoveAt(0);
@@ -189,7 +192,7 @@ public class BulletSpawner : MonoBehaviour
             case 8:     //ケイオティック・ファンクション2
             if(cnt < 180){
                 if(y0 < 30){
-                    bulletManager.BulletAppear(new Vector3(x0, y0, 0), 4, interval, 0, 2, 0, UnityEngine.Random.Range(0, 2 * Mathf.PI), 0.5f);
+                    bulletManager.BulletAppear(new Vector3(x0, y0, 0), 4, interval, 0, 5, 0, UnityEngine.Random.Range(0, 2 * Mathf.PI), 0.5f);
                 }
             }else{
                 bulletManager.BulletMove(3, 60);
@@ -201,7 +204,7 @@ public class BulletSpawner : MonoBehaviour
             break;
             case 9:     //ケイオティック・ファンクション3
             if(cnt < 180){
-                bulletManager.BulletAppear(new Vector3(y0 + boxX, x0, 0), 4, interval, 0, 2, 0, UnityEngine.Random.Range(0, 2 * Mathf.PI), 0.5f);
+                bulletManager.BulletAppear(new Vector3(y0 + boxX, x0, 0), 4, interval, 0, 6, 0, UnityEngine.Random.Range(0, 2 * Mathf.PI), 0.5f);
             }else{
                 bulletManager.BulletMove(3);
                 bulletManager.bulletSpawner.RemoveAt(0);
@@ -214,6 +217,24 @@ public class BulletSpawner : MonoBehaviour
                 sum += Mathf.Cos(Mathf.PI * p) / p;
             }
             y0 = 1 / sum;
+            break;
+            case 10:
+            if(cnt < 60){
+                if(y0 != 0)bulletManager.BulletAppear(new Vector3(x0, y0, 0), 4, interval, 0, 6, 0, UnityEngine.Random.Range(0, 2 * Mathf.PI), 0.5f);
+            }else{
+                bulletManager.BulletMove(3);
+                bulletManager.bulletSpawner.RemoveAt(0);
+                Destroy(this.gameObject);
+            }
+            x0 = -(Mathf.Cos(Mathf.Deg2Rad * y0 * 9) - 1) * 15 / (Mathf.Deg2Rad * y0 * 9);
+            y0--;
+            break;
+            case 11:
+            if(cnt == 60){
+                bulletManager.BulletAppear(this.gameObject.transform.position, 201, 1, 10, note, 0, UnityEngine.Random.Range(0, 2 * Mathf.PI), 40);
+                bulletManager.bulletSpawner.RemoveAt(0);
+                Destroy(this.gameObject);
+            }
             break;
         }
         cnt++;

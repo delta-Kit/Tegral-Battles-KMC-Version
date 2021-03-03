@@ -104,6 +104,7 @@ public class Jiki : MonoBehaviour
             }
             bomb=3;
             for(int i=0;i<3;i++)bombImage[i].enabled=true;
+            bulletManager.BulletDelete();
         }
         bombCnt++;
         cnt++;
@@ -111,7 +112,6 @@ public class Jiki : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.tag=="Bullet" && hitCnt>180 && bombCnt>180 && !Input.GetKey(KeyCode.I)){
-            bulletManager.BulletDelete();
             hitCnt=0;
             gameObject.GetComponent<AudioSource>().clip=hit;
             GetComponent<AudioSource>().Play();

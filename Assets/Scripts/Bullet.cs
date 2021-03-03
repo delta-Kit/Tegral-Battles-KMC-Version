@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     public bool isCircle;
     public Sprite jBullet2;
     public Sprite jBullet3;
-    public Sprite[] bullet=new Sprite[5], laser = new Sprite[3];
+    public Sprite[] bullet = new Sprite[7], laser = new Sprite[7];
     SpriteRenderer  bulletSpriteRenderer;
     private bool isAdditive;
     Quaternion rot;

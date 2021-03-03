@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour
     public GameObject effect;
     public float[] cx = new float[10], cy = new float[10];
     private float jx, jy;
+    private int fact10;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +49,7 @@ public class Enemy : MonoBehaviour
         }
         animator = GetComponent<Animator>();
         switch(type){
+            case 7:
             case 202:
             animator.SetTrigger("Move2");
             break;
@@ -81,7 +83,7 @@ public class Enemy : MonoBehaviour
             break;
             case 202:
             case 203:
-            hp = 1400;
+            hp = 2350;
             break;
         }
         blueCnt = 10;
@@ -95,6 +97,8 @@ public class Enemy : MonoBehaviour
         resetFlag = false;
         rad = 180 * Mathf.Deg2Rad;
         cnt2 = 0;
+        fact10 = 1;
+        for(int i = 1; i <= 10; i++)fact10 *= i;
     }
 
     // Update is called once per frame
@@ -142,7 +146,9 @@ public class Enemy : MonoBehaviour
                 Move(3);
                 if(cnt == 210){
                     for(int i = 0; i < 12; i ++){
-                        bulletManager.BulletAppear(this.gameObject.transform.position, 201, 1, 30, 2, 0, Mathf.Atan2(jiki.gameObject.transform.position.y - this.gameObject.transform.position.y, jiki.gameObject.transform.position.x - this.gameObject.transform.position.x) + Mathf.Deg2Rad * i * 30, 20);
+                        rad = Mathf.Atan2(jiki.gameObject.transform.position.y - this.gameObject.transform.position.y, jiki.gameObject.transform.position.x - this.gameObject.transform.position.x) + Mathf.Deg2Rad * i * 30;
+                        bulletManager.BulletAppear(this.gameObject.transform.position, 201, 1, 30, 3, 0, rad, 20);
+                        bulletManager.BulletAppear(this.gameObject.transform.position, 201, 1, 30, 4, 0, rad + Mathf.Deg2Rad * UnityEngine.Random.Range(-10, 10), 20);
                     }
                 }
                 break;
@@ -595,10 +601,10 @@ public class Enemy : MonoBehaviour
 
                         }else if(modCnt < 147){
                             for(int i = 0; i < 6; i++){
-                                bulletManager.BulletAppear(new Vector3(cx[i], cy[i], 0) + new Vector3(0.6f * Mathf.Cos(Mathf.Deg2Rad * modCnt * 10) + 0.2f * Mathf.Cos(1.5f * Mathf.Deg2Rad * modCnt * 10), 0.6f * Mathf.Sin(Mathf.Deg2Rad * modCnt * 10) - 0.2f * Mathf.Sin(1.5f * Mathf.Deg2Rad * modCnt * 10)) * 5, 9, 1, 0, 2, i + 1, 0, 0.3f);
+                                bulletManager.BulletAppear(new Vector3(cx[i], cy[i], 0) + new Vector3(0.6f * Mathf.Cos(Mathf.Deg2Rad * modCnt * 10) + 0.2f * Mathf.Cos(1.5f * Mathf.Deg2Rad * modCnt * 10), 0.6f * Mathf.Sin(Mathf.Deg2Rad * modCnt * 10) - 0.2f * Mathf.Sin(1.5f * Mathf.Deg2Rad * modCnt * 10)) * 5, 9, 1, 0, 6, i + 1, 0, 0.3f);
                             }
                         }else if(modCnt < 200){
-
+                            
                         }else if(modCnt < 500){
                             if(modCnt % 50 == 0){
                                 for(int i = 0; i < bulletManager.bullet.Count; i++){
@@ -611,7 +617,7 @@ public class Enemy : MonoBehaviour
                             }
                         }
                         if(cnt % 60 == 0){
-                            for(int i = 0; i < 12; i++)bulletManager.BulletAppear(this.gameObject.transform.position, 9, 1, 20, 2, 0, Mathf.Deg2Rad * i * 30, 0.5f);
+                            for(int i = 0; i < 12; i++)bulletManager.BulletAppear(this.gameObject.transform.position, 9, 1, 20, 5, 0, Mathf.Deg2Rad * i * 30, 0.5f);
                         }
                         if(cnt2 < 300)hp = 1400;
                         if(cnt2 > 2100)hp = 1050;
@@ -633,12 +639,53 @@ public class Enemy : MonoBehaviour
                         if(cnt2 < 300)hp = 1050;
                         if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
                         if(cnt2 > 2100)hp = 700;
+                    }else if(hp > 350){
+                        Action spawn = () => {
+                            GameObject b = Instantiate(BulletSpawner, new Vector3(1000, 0, 0), Quaternion.identity);
+                            bulletManager.bulletSpawner.Add(b);
+                            BulletSpawner bs = b.GetComponent<BulletSpawner>();
+                            bs.type = 10;
+                            bs.interval = 1;
+                        };
+                        if(changeFlag){
+                            bulletManager.BulletDelete();
+                            spawn();
+                            changeFlag = false;
+                            cnt2 = 0;
+                        }
+                        if(cnt2 < 300)hp = 700;
+                        if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
+                        if(cnt2 > 2100)hp = 350;
+                    }else{
+                        if(!changeFlag){
+                            bulletManager.BulletDelete();
+                            changeFlag = true;
+                            cnt2 = 0;
+                            cnt = 300;
+                        }
+                        int modCnt = (cnt - 300) % 360;
+                        if(modCnt % 180 == 0){
+                            cx[0] = -3;
+                            cx[1] = UnityEngine.Random.Range(0, 100) / 10000;
+                        }else if(modCnt % 180 < 80){
+                            cx[0] -= 0.1f;
+                            cy[0] = Mathf.Exp(Gamma(cx[0] + cx[1])) * Mathf.Sin(cx[0] + cx[1]);
+                            if(Mathf.Abs(cy[0]) < 30){
+                                GameObject b = Instantiate(BulletSpawner, new Vector3((cx[0] + 3) * 10 + 40, cy[0] * 10, 0), Quaternion.identity);
+                                bulletManager.bulletSpawner.Add(b);
+                                BulletSpawner bs = b.GetComponent<BulletSpawner>();
+                                bs.type = 11;
+                                bs.note = 3 + modCnt / 180;
+                            }
+                        }
+                        if(cnt2 < 300)hp = 350;
+                        if(cnt2 > 2100)hp = 0;
                     }
                 }
                 break;
             }
         }
-        if(blueCnt>5){
+        if(blueCnt > 5){
             enemySpriteRenderer.material.color = new Color(1, 1, 1, 1); 
         }else{
             enemySpriteRenderer.material.color = new Color(63f / 255, 63f / 255, 191f / 255, 1);
@@ -684,7 +731,7 @@ public class Enemy : MonoBehaviour
                 hp--;
             }
             blueCnt=0;
-            if(col.gameObject.GetComponent<Bullet>().type!=3){
+            if(col.gameObject.GetComponent<Bullet>().type != 3){
                 bulletManager.bullet.Remove(col.gameObject);
                 Destroy(col.gameObject);
             }
@@ -758,8 +805,12 @@ public class Enemy : MonoBehaviour
     void ChangeScene(){
         SceneManager.LoadScene("Clear");
     }
-
     float Dist(float x, float y){
         return Mathf.Sqrt(x * x + y * y);
+    }
+    float Gamma(float x){
+        float prod = 1;
+        for(int i = 0; i < 10; i++)prod *= x + i;
+        return fact10 * Mathf.Pow(10, x) / prod;
     }
 }
