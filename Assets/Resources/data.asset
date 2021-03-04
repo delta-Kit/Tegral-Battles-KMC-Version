@@ -479,14 +479,14 @@ MonoBehaviour:
       note: 90
     - time: 1647
       type: 3
-      x: 35
+      x: 30
       y: 30
       vx: 0
       vy: 7
       note: 0
     - time: 1647
       type: 3
-      x: 35
+      x: 30
       y: -30
       vx: 0
       vy: -7
@@ -507,14 +507,14 @@ MonoBehaviour:
       note: 0
     - time: 1920
       type: 3
-      x: 35
+      x: 30
       y: 30
       vx: 0
       vy: 7
       note: 0
     - time: 1920
       type: 3
-      x: 35
+      x: 30
       y: -30
       vx: 0
       vy: -7

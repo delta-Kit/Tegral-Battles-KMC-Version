@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     {
         Application.targetFrameRate = 60; //FPSを60に設定
         data = Resources.Load("data") as Entity_Sheet1;
-        stage = 3;
+        stage = 1;
         cnt = 0;
         enemyManager = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
         source = gameObject.GetComponent<AudioSource>();
