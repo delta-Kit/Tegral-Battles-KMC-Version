@@ -148,12 +148,12 @@ public class BulletManager : MonoBehaviour
             break;
             case 2:
             for(int i = 0; i < bullet.Count; i++){
-                if(bullet[i].GetComponent<Rigidbody2D>().velocity == new Vector2(0, 0))bullet[i].GetComponent<Bullet>().v = 20f;
+                if(bullet[i].GetComponent<Rigidbody2D>().velocity == new Vector2(0, 0) && bullet[i].tag == "Bullet")bullet[i].GetComponent<Bullet>().v = 20f;
             }
             break;
             case 3:
             for(int i = 0; i < bullet.Count; i++){
-                if(bullet[i].GetComponent<Rigidbody2D>().velocity == new Vector2(0, 0)){
+                if(bullet[i].GetComponent<Rigidbody2D>().velocity == new Vector2(0, 0) && bullet[i].tag == "Bullet"){
                     Bullet b = bullet[i].GetComponent<Bullet>();
                     b.type = 11;
                     b.cnt = 0;
@@ -164,7 +164,7 @@ public class BulletManager : MonoBehaviour
             case 4:
             for(int i = 0; i < bullet.Count; i++){
                 float dx = jikiG.transform.position.x - bullet[i].transform.position.x, dy = jikiG.transform.position.y - bullet[i].transform.position.y;
-                if(bullet[i].GetComponent<Rigidbody2D>().velocity == new Vector2(0, 0) && dx * dx + dy * dy < (cnt - 300) * (cnt - 300)){
+                if(bullet[i].GetComponent<Rigidbody2D>().velocity == new Vector2(0, 0) && dx * dx + dy * dy < (cnt - 300) * (cnt - 300) && bullet[i].tag == "Bullet"){
                     Bullet b = bullet[i].GetComponent<Bullet>();
                     b.type = 11;
                     b.cnt = 0;

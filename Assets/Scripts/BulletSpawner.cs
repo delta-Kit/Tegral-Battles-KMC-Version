@@ -29,10 +29,9 @@ public class BulletSpawner : MonoBehaviour
             case 8:
             x0 = 40;
             x1 = 0.01f * UnityEngine.Random.Range(0, 100);
-            y0 = 1 / Mathf.Sin(Gamma((x0 + x1) * 0.125f));
             break;
             case 9:
-            x0 = 40;
+            x0 = 8;
             x1 = 0.01f * UnityEngine.Random.Range(0, 100);
             break;
             case 10:
@@ -115,7 +114,7 @@ public class BulletSpawner : MonoBehaviour
                 bulletManager.BulletMove(2);
             }
             break;
-            case 4:
+            case 4:     //人魂の舞
             if(cnt == 0)this.gameObject.transform.position = new Vector3(x0, y0, 0);
             if(cnt < 60){
                 rad += 1.5f * Mathf.Deg2Rad;
@@ -202,15 +201,15 @@ public class BulletSpawner : MonoBehaviour
             x0--;
             y0 = 10 / Mathf.Sin(Gamma((x0 + x1) * 0.125f));
             break;
-            case 9:     //ケイオティック・ファンクション3
+            case 9:     //ケイオティック・ファンクション4
             if(cnt < 180){
-                bulletManager.BulletAppear(new Vector3(y0 + boxX, x0, 0), 4, interval, 0, 6, 0, UnityEngine.Random.Range(0, 2 * Mathf.PI), 0.5f);
+                bulletManager.BulletAppear(new Vector3(y0 * 3 + boxX, (x0 + x1) * 3, 0), 4, interval, 0, 6, 0, UnityEngine.Random.Range(0, 2 * Mathf.PI), 0.5f);
             }else{
                 bulletManager.BulletMove(3);
                 bulletManager.bulletSpawner.RemoveAt(0);
                 Destroy(this.gameObject);
             }
-            x0--;
+            x0 -= 0.1f;
             float sum = 0;
             for(int i = 1; i <= 10; i++){
                 p = Mathf.Pow((x0 + x1) * 0.4f, i);
@@ -229,7 +228,7 @@ public class BulletSpawner : MonoBehaviour
             x0 = -(Mathf.Cos(Mathf.Deg2Rad * y0 * 9) - 1) * 15 / (Mathf.Deg2Rad * y0 * 9);
             y0--;
             break;
-            case 11:
+            case 11:        //ケイオティック・ファンクション3
             if(cnt == 60){
                 bulletManager.BulletAppear(this.gameObject.transform.position, 201, 1, 10, note, 0, UnityEngine.Random.Range(0, 2 * Mathf.PI), 40);
                 bulletManager.bulletSpawner.RemoveAt(0);

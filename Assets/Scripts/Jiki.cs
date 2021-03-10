@@ -111,9 +111,9 @@ public class Jiki : MonoBehaviour
         hitCnt++;
     }
     public void OnTriggerEnter2D(Collider2D col){
-        if(col.gameObject.tag=="Bullet" && hitCnt>180 && bombCnt>180 && !Input.GetKey(KeyCode.I)){
-            hitCnt=0;
-            gameObject.GetComponent<AudioSource>().clip=hit;
+        if(col.gameObject.tag == "Bullet" && hitCnt > 180 && bombCnt > 180){
+            hitCnt = 0;
+            gameObject.GetComponent<AudioSource>().clip = hit;
             GetComponent<AudioSource>().Play();
         }
     }
