@@ -1699,7 +1699,7 @@ MonoBehaviour:
       vx: 11
       vy: 0
       note: 0
-    - time: 3220
+    - time: 3500
       type: 203
       x: 60
       y: 0

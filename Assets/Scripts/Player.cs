@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
                     pointer.gameObject.transform.position -= new Vector3(0, 140, 0);
                     up = false;
                 }
-                if(Input.GetKeyDown(KeyCode.Return)){
+                if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Z)){
                     pauseUI.SetActive (false);
                     Time.timeScale = 1f;
                     source.UnPause();
@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
                     pointer.gameObject.transform.position += new Vector3(0, 140, 0);
                     up = true;
                 }
-                if(Input.GetKeyDown(KeyCode.Return)){
+                if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Z)){
                     Time.timeScale = 1f;
                     pause = false;
                     Invoke("ChangeScene", 0);

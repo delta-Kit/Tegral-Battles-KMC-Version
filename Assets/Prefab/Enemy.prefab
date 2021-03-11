@@ -165,7 +165,7 @@ MonoBehaviour:
   jiki: {fileID: 0}
   bulletManager: {fileID: 0}
   _material:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3df880169412743499b2f418cb347049, type: 2}
   - {fileID: 2100000, guid: 88ca9f9f36d1e2d45982a6e4e8d9372d, type: 2}
   effect: {fileID: 3767500257566148616, guid: 8eecf3eb1f7e3264bae94288ba65f532, type: 3}
   cx:

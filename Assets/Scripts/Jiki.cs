@@ -15,10 +15,10 @@ public class Jiki : MonoBehaviour
     private int cnt;
     public int bombCnt;
     private Vector3 bombPosition;
-    private int bomb;
+    protected static int bomb;
     Image[] bombImage=new Image[3];
     public GameObject hitCircle;
-    private int life;
+    protected static int life;
     public int hitCnt;
     public GameObject hitEffect;
     Image[] lifeImage=new Image[5];
@@ -26,22 +26,22 @@ public class Jiki : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rg=GetComponent<Rigidbody2D>();
-        animator=GetComponent<Animator>();
+        rg = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         bulletManager = GameObject.Find("BulletManager").GetComponent<BulletManager>();
-        cnt=0;
-        bombCnt=300;
-        bomb=3;
-        bombImage[0]=GameObject.Find("Bomb1").GetComponent<Image>();
-        bombImage[1]=GameObject.Find("Bomb2").GetComponent<Image>();
-        bombImage[2]=GameObject.Find("Bomb3").GetComponent<Image>();
-        life=6;
-        hitCnt=200;
-        lifeImage[0]=GameObject.Find("Life1").GetComponent<Image>();
-        lifeImage[1]=GameObject.Find("Life2").GetComponent<Image>();
-        lifeImage[2]=GameObject.Find("Life3").GetComponent<Image>();
-        lifeImage[3]=GameObject.Find("Life4").GetComponent<Image>();
-        lifeImage[4]=GameObject.Find("Life5").GetComponent<Image>();
+        cnt = 0;
+        bombCnt = 300;
+        bombImage[0] = GameObject.Find("Bomb1").GetComponent<Image>();
+        bombImage[1] = GameObject.Find("Bomb2").GetComponent<Image>();
+        bombImage[2] = GameObject.Find("Bomb3").GetComponent<Image>();
+        hitCnt = 200;
+        lifeImage[0] = GameObject.Find("Life1").GetComponent<Image>();
+        lifeImage[1] = GameObject.Find("Life2").GetComponent<Image>();
+        lifeImage[2] = GameObject.Find("Life3").GetComponent<Image>();
+        lifeImage[3] = GameObject.Find("Life4").GetComponent<Image>();
+        lifeImage[4] = GameObject.Find("Life5").GetComponent<Image>();
+        if(life > 0)for(int i = life - 1; i < 5; i++)lifeImage[i].enabled = false;
+        for(int i = bomb; i < 3; i++)bombImage[i].enabled = false;
     }
 
     // Update is called once per frame
@@ -119,5 +119,12 @@ public class Jiki : MonoBehaviour
     }
     void ChangeScene(){
         SceneManager.LoadScene("GameOver");
+    }
+    public static KeyValuePair<int, int> GetLifeBomb(){
+        return new KeyValuePair<int, int> (life, bomb);
+    }
+    public static void SetLifeBomb(int Life, int Bomb){
+        life = Life;
+        bomb = Bomb;
     }
 }

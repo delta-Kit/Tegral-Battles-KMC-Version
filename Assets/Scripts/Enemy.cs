@@ -83,7 +83,7 @@ public class Enemy : MonoBehaviour
             break;
             case 202:
             case 203:
-            hp = 2350;
+            hp = 2450;
             break;
         }
         blueCnt = 10;
@@ -270,7 +270,7 @@ public class Enemy : MonoBehaviour
                             changeFlag = true;
                             cnt2 = 0;
                         }
-                        if(cnt2<600)hp = 700;
+                        if(cnt2 < 300)hp = 700;
                         if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
                         if(cnt2 > 2400)hp = 350;
                     }else{              //ローレンツ・アトラクター
@@ -417,7 +417,7 @@ public class Enemy : MonoBehaviour
                             enemyManager.EnemyAppear(8, new Vector3(60, 10, 0), 8, 0, 0);
                             enemyManager.EnemyAppear(8, new Vector3(60, -10, 0), 8, 0, 0);
                         }
-                        if(cnt2<300)hp=2100;
+                        if(cnt2 < 600)hp = 2100;
                         if(bulletManager.bulletSpawner.Count == 0 && jiki.hitCnt>=60 && jiki.bombCnt >= 180)spawn();
                         if(cnt2 > 2100)hp = 1750;
                     }else if(hp > 1400){                //プラネット・オービット（マーズ）
@@ -706,7 +706,7 @@ public class Enemy : MonoBehaviour
             }else{
                 animator.SetTrigger("Explode");
             }
-            GetComponent<Renderer>().material.shader=Shader.Find("Particles/Standard Unlit");
+            this.GetComponent<Renderer>().material=_material[1];
             GetComponent<Renderer>().material.color=Color.white;
             GetComponent<AudioSource>().Play();
         }
